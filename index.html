@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydrogen Studies - Understanding Molecular Hydrogen for Health</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1a4e8a;
+            background: #eef3f9;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #dde8f3;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a4e8a;
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: "⚛";
+            margin-right: 8px;
+            font-size: 28px;
+            color: #548bc4;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1a4e8a;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #548bc4;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #548bc4;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: #1a4e8a;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: #548bc4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 78, 138, 0.15);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #548bc4 0%, #1a4e8a 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="70" r="2.5" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            min-width: 150px;
+            color: #1a4e8a;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .search-container {
+            max-width: 500px;
+            margin: 2rem auto 0;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+            background: #eef3f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1a4e8a;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        /* Featured Articles Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+
+        .article-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(26, 78, 138, 0.07);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 40px rgba(26, 78, 138, 0.12);
+        }
+
+        .article-image {
+            height: 200px;
+            background: linear-gradient(45deg, #dde8f3, #548bc4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-image::before {
+            content: '🧬';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            opacity: 0.3;
+        }
+
+        .article-content {
+            padding: 24px;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: #dde8f3;
+            color: #1a4e8a;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .article-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1a4e8a;
+            line-height: 1.3;
+        }
+
+        .article-excerpt {
+            color: #6b7280;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+
+        /* Topics Section */
+        .topics-section {
+            background: #dde8f3;
+        }
+
+        .alphabet-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 3rem;
+        }
+
+        .alphabet-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #e5e7eb;
+            background: white;
+            color: #6b7280;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .alphabet-btn.active,
+        .alphabet-btn:hover {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .topic-item {
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+        }
+
+        .topic-item:hover {
+            background: #e0e7ff;
+            border-left-color: #2563eb;
+            transform: translateX(5px);
+        }
+
+        /* Charts Section */
+        .charts-section {
+            background: #f4f7fa;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 48px 0 60px 0;
+        }
+        .section-title {
+            color: #2b3a67;
+            font-size: 2.1rem;
+            font-weight: 800;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.01em;
+            text-align: left;
+            padding-left: 32px;
+        }
+        .charts-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-bottom: 30px;
+        }
+        .main-chart-row {
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+        }
+        .main-chart-container {
+            background: #fff;
+            border-radius: 14px;
+            border: 1.5px solid #e5eaf2;
+            box-shadow: none;
+            padding: 40px 40px 18px 40px;
+            margin: 0 auto;
+            max-width: 1000px;
+            width: 100%;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .sub-charts-row {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            align-items: stretch;
+            width: 100%;
+        }
+        .sub-chart-container {
+            background: #fff;
+            border-radius: 14px;
+            border: 1.5px solid #e5eaf2;
+            box-shadow: none;
+            padding: 24px 18px 10px 18px;
+            margin: 0 auto;
+            max-width: 420px;
+            height: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .chart-title {
+            color: #2b3a67;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            letter-spacing: 0.01em;
+            text-align: left;
+        }
+        .chart-header {
+            margin-bottom: 0;
+        }
+        .chart-legend {
+            margin: 18px 0 0 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            justify-content: flex-start;
+        }
+        .legend-item {
+            color: #3a4a5d;
+            font-size: 0.97rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-color {
+            border-radius: 2px;
+            width: 16px;
+            height: 12px;
+            display: inline-block;
+        }
+        .chart-tooltip {
+            display: none !important;
+        }
+        .research-summary {
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: none;
+            padding: 24px 0;
+            margin-top: 30px;
+        }
+        .summary-card {
+            background: transparent;
+            box-shadow: none;
+            border-radius: 10px;
+            padding: 0 0 0 0;
+            transition: none;
+        }
+        .summary-card h4 {
+            color: #7b8a99;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .summary-value {
+            color: #3a4a5d;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        .filter-group label {
+            color: #3a4a5d;
+            font-size: 1rem;
+        }
+        .filter-group select {
+            border: 1.5px solid #e5eaf2;
+            color: #3a4a5d;
+            background: #f8fafc;
+        }
+        @media (max-width: 1100px) {
+            .main-chart-container { max-width: 100%; }
+            .sub-charts-row { flex-direction: column; gap: 24px; }
+            .sub-chart-container { max-width: 100%; height: 260px; }
+        }
+        @media (max-width: 700px) {
+            .section-title { font-size: 1.3rem; padding-left: 10px; }
+            .main-chart-container { padding: 8px 2px 8px 2px; }
+            .chart-title { font-size: 0.98rem; }
+            .legend-item { font-size: 0.85rem; }
+            .sub-chart-container { height: 180px; padding: 8px 2px 8px 2px; }
+            .charts-grid, .main-chart-row, .sub-charts-row { gap: 12px; }
+        }
+        @media (max-width: 480px) {
+            .main-chart-container, .sub-chart-container {
+                min-width: 0;
+                width: 100vw;
+                max-width: 100vw;
+                margin-left: -8px;
+                margin-right: -8px;
+            }
+            .chart-legend { gap: 8px; }
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            max-width: 400px;
+            margin: 2rem auto 0;
+            display: flex;
+            gap: 12px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1f2937;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #f9fafb;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #60a5fa;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .stats-container {
+                gap: 20px;
+            }
+
+            .stat-item {
+                min-width: 120px;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .alphabet-nav {
+                gap: 5px;
+            }
+
+            .alphabet-btn {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        /* Page Transition Effects */
+        .page-content {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Interactive Elements */
+        .interactive {
+            transition: all 0.3s ease;
+        }
+
+        .interactive:hover {
+            transform: scale(1.05);
+        }
+
+        /* Loading Spinner */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .modal-close:hover {
+            color: #1f2937;
+        }
+
+        /* Search Results Styles */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 8px;
+            display: none;
+            z-index: 1000;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .search-result-item {
+            padding: 12px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background-color: #f3f4f6;
+        }
+
+        .search-result-item h4 {
+            color: #1f2937;
+            margin-bottom: 4px;
+            font-size: 1rem;
+        }
+
+        .search-result-item span {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        /* Mobile Menu Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+        }
+
+        /* Header Scroll Effects */
+        .header.scroll-down {
+            transform: translateY(-100%);
+        }
+
+        .header.scroll-up {
+            transform: translateY(0);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">HYDROGEN STUDIES</a>
+            <ul class="nav-links">
+                <li><a href="#studies">All Studies</a></li>
+                <li><a href="#topics">Health Topics</a></li>
+                <li><a href="#systems">Body Systems</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#solutions">Hydrogen Solutions</a></li>
+            </ul>
+            <button class="cta-button">Podcast</button>
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="page-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <h1>Understanding Molecular Hydrogen for Health</h1>
+                <p>We are dedicated to bringing you the latest research on the health benefits of molecular hydrogen. Our mission is to make complex scientific findings accessible, empowering you to enhance your well-being.</p>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <span class="stat-number">1,335</span>
+                        <span class="stat-label">Studies and Counting</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Health Topics</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">12</span>
+                        <span class="stat-label">Body Systems</span>
+                    </div>
+                </div>
+
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search by name, subject, body part, and more...">
+                </div>
+            </div>
+        </section>
+
+        <!-- What is Molecular Hydrogen Section -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">What is Molecular Hydrogen?</h2>
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: center;">
+                    <div style="text-align: center;">
+                        <div style="width: 200px; height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; color: white; font-size: 4rem;">H₂</div>
+                    </div>
+                    <div>
+                        <p style="font-size: 1.1rem; line-height: 1.8; color: #4b5563; margin-bottom: 20px;">Molecular hydrogen is the smallest molecule in the universe, consisting of two hydrogen atoms. This small size allows it to easily penetrate cell membranes, the blood-brain barrier, and subcellular compartments.</p>
+                        <p style="font-size: 1.1rem; line-height: 1.8; color: #4b5563;">Unlike conventional antioxidants, H₂ selectively reduces cytotoxic oxygen radicals while maintaining the beneficial role of oxidative stress in normal cell signaling.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Articles Section -->
+        <section class="section" style="background: #f8fafc;">
+            <div class="container">
+                <h2 class="section-title">Featured Articles</h2>
+                <div class="articles-grid">
+                    <article class="article-card interactive" onclick="openModal('brainObesity')">
+                        <div class="article-image"></div>
+                        <div class="article-content">
+                            <span class="article-category">BRAIN - OBESITY</span>
+                            <h3 class="article-title">Molecular hydrogen modulates brain glutamate/GABA-glutamine cycle in overweight humans</h3>
+                            <p class="article-excerpt">Introduction: We evaluated whether 12-week intake of molecular hydrogen (H2) in 5 overweight adults affects brain levels of the glutamate-glutamine-GABA cycle...</p>
+                            <div class="article-meta">
+                                <span>5 min read</span>
+                                <span>Research</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card interactive" onclick="openModal('brainRadio')">
+                        <div class="article-image"></div>
+                        <div class="article-content">
+                            <span class="article-category">BRAIN - RADIOPROTECTION</span>
+                            <h3 class="article-title">Comprehensive brain tissue metabolomics and biological network technology</h3>
+                            <p class="article-excerpt">Background: Hydrogen-rich water (HRW) has been shown to prevent cognitive impairment caused by ionizing radiation...</p>
+                            <div class="article-meta">
+                                <span>6 min read</span>
+                                <span>Research</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card interactive" onclick="openModal('brainStroke')">
+                        <div class="article-image"></div>
+                        <div class="article-content">
+                            <span class="article-category">BRAIN - STROKE</span>
+                            <h3 class="article-title">Hydrogen rich saline promotes neuronal recovery in mice with cerebral ischemia</h3>
+                            <p class="article-excerpt">This study explored the protective effect and mechanism of hydrogen rich saline (HRS) on the neurological function of mice with cerebral ischemia...</p>
+                            <div class="article-meta">
+                                <span>4 min read</span>
+                                <span>Research</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- A-Z Topics Section -->
+        <section class="section topics-section" id="topics">
+            <div class="container">
+                <h2 class="section-title">A-Z Topics</h2>
+                <p class="section-subtitle">Dive into our extensive A-Z list of topics surrounding hydrogen water research. Each entry provides insights and knowledge to enhance your understanding.</p>
+                
+                <div class="alphabet-nav">
+                    <button class="alphabet-btn active" onclick="filterTopics('A')">A</button>
+                    <button class="alphabet-btn" onclick="filterTopics('B')">B</button>
+                    <button class="alphabet-btn" onclick="filterTopics('C')">C</button>
+                    <button class="alphabet-btn" onclick="filterTopics('D')">D</button>
+                    <button class="alphabet-btn" onclick="filterTopics('E')">E</button>
+                    <button class="alphabet-btn" onclick="filterTopics('F')">F</button>
+                    <button class="alphabet-btn" onclick="filterTopics('G')">G</button>
+                    <button class="alphabet-btn" onclick="filterTopics('H')">H</button>
+                    <button class="alphabet-btn" onclick="filterTopics('I')">I</button>
+                    <button class="alphabet-btn" onclick="filterTopics('J')">J</button>
+                    <button class="alphabet-btn" onclick="filterTopics('K')">K</button>
+                    <button class="alphabet-btn" onclick="filterTopics('L')">L</button>
+                    <button class="alphabet-btn" onclick="filterTopics('M')">M</button>
+                </div>
+
+                <div class="topics-grid" id="topicsGrid">
+                    <div class="topic-item" data-letter="A">Acne</div>
+                    <div class="topic-item" data-letter="A">Acute Kidney Injury</div>
+                    <div class="topic-item" data-letter="A">Acute Respiratory Distress Syndrome</div>
+                    <div class="topic-item" data-letter="A">Acute Tubular Necrosis</div>
+                    <div class="topic-item" data-letter="A">Addiction</div>
+                    <div class="topic-item" data-letter="A">Aflatoxicosis</div>
+                    <div class="topic-item" data-letter="A">Aging</div>
+                    <div class="topic-item" data-letter="A">Alcohol Toxicity</div>
+                    <div class="topic-item" data-letter="A">Alcoholic Liver Disease</div>
+                    <div class="topic-item" data-letter="A">Alkali Burn</div>
+                    <div class="topic-item" data-letter="A">Alzheimer's Disease</div>
+                    <div class="topic-item" data-letter="A">Amyloid Beta Toxicity</div>
+                    <div class="topic-item" data-letter="A">Amyotrophic Lateral Sclerosis</div>
+                    <div class="topic-item" data-letter="A">Anxiety</div>
+                    <div class="topic-item" data-letter="A">Aplastic Anemia</div>
+                    <div class="topic-item" data-letter="A">Asphyxial Encephalopathy</div>
+                    <div class="topic-item" data-letter="A">Asthma</div>
+                    <div class="topic-item" data-letter="A">Atherosclerosis</div>
+                    <div class="topic-item" data-letter="A">Atrophy</div>
+                    <div class="topic-item" data-letter="A">Auditory Neuropathy</div>
+                    <div class="topic-item" data-letter="A">Autism Spectrum Disorder</div>
+                    <div class="topic-item" data-letter="B">Bacterial Infection</div>
+                    <div class="topic-item" data-letter="B">Brain Injury</div>
+                    <div class="topic-item" data-letter="C">Cancer</div>
+                    <div class="topic-item" data-letter="C">Cardiovascular Disease</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Data Section -->
+        <section class="section charts-section">
+            <div class="container">
+                <h2 class="section-title">Research Insights</h2>
+                <div class="research-controls">
+                    <div class="filter-group">
+                        <label>Time Range:</label>
+                        <select id="timeRange" onchange="updateCharts()">
+                            <option value="5">Last 5 Years</option>
+                            <option value="10">Last 10 Years</option>
+                            <option value="all">All Time</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Study Type:</label>
+                        <select id="studyType" onchange="updateCharts()">
+                            <option value="all">All Studies</option>
+                            <option value="clinical">Clinical Trials</option>
+                            <option value="preclinical">Pre-clinical</option>
+                            <option value="review">Reviews</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="charts-grid">
+                    <div class="main-chart-row">
+                        <div class="main-chart-container chart-container">
+                            <div class="chart-header">
+                                <h3 class="chart-title">Study Outcome by Year</h3>
+                                <div class="chart-legend" id="yearlyLegend"></div>
+                            </div>
+                            <canvas id="yearlyChart"></canvas>
+                            <div class="chart-tooltip" id="yearlyTooltip"></div>
+                        </div>
+                    </div>
+                    <div class="sub-charts-row">
+                        <div class="sub-chart-container chart-container">
+                            <div class="chart-header">
+                                <h3 class="chart-title">Top Study Test Subjects</h3>
+                                <div class="chart-legend" id="subjectsLegend"></div>
+                            </div>
+                            <canvas id="subjectsChart"></canvas>
+                            <div class="chart-tooltip" id="subjectsTooltip"></div>
+                        </div>
+                        <div class="sub-chart-container chart-container">
+                            <div class="chart-header">
+                                <h3 class="chart-title">Countries by Total Study Amount</h3>
+                                <div class="chart-legend" id="countriesLegend"></div>
+                            </div>
+                            <canvas id="countriesChart"></canvas>
+                            <div class="chart-tooltip" id="countriesTooltip"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="research-summary">
+                    <div class="summary-card">
+                        <h4>Total Studies</h4>
+                        <div class="summary-value" id="totalStudies">1,335</div>
+                    </div>
+                    <div class="summary-card">
+                        <h4>Average Study Duration</h4>
+                        <div class="summary-value" id="avgDuration">12 months</div>
+                    </div>
+                    <div class="summary-card">
+                        <h4>Success Rate</h4>
+                        <div class="summary-value" id="successRate">78%</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="section newsletter-section">
+            <div class="container">
+                <h2 class="section-title" style="color: white;">Stay Updated on Hydrogen Studies</h2>
+                <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Subscribe to our newsletter for the latest insights and research on molecular hydrogen. Stay informed about how hydrogen can enhance your health.</p>
+                
+                <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                    <button type="submit" class="cta-button">Sign Up</button>
+                </form>
+                
+                <p style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.8;">By clicking Sign Up you're confirming that you agree with our Terms and Conditions.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#studies">All Studies</a></li>
+                        <li><a href="#topics">Health Topics</a></li>
+                        <li><a href="#systems">Body Systems</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#podcast">Podcast</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Explore Options</h3>
+                    <ul class="footer-links">
+                        <li><a href="#bathing">Hydrogen Bathing</a></li>
+                        <li><a href="#benefits">Hydrogen Benefits</a></li>
+                        <li><a href="#inhalation">Hydrogen Inhalation</a></li>
+                        <li><a href="#water">Hydrogen Water</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

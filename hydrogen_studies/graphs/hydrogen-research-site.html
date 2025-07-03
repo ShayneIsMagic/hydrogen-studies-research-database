@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydrogen Studies - Research Database</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0066cc;
+            --secondary-blue: #4da6ff;
+            --accent-teal: #00b8cc;
+            --dark-blue: #003d7a;
+            --light-gray: #f8f9fa;
+            --medium-gray: #6c757d;
+            --dark-gray: #343a40;
+            --white: #ffffff;
+            --border-color: #dee2e6;
+            --success-green: #28a745;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--white);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--accent-teal);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page {
+            display: none;
+            min-height: calc(100vh - 80px);
+            padding: 2rem 0;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--light-gray), var(--white));
+            padding: 4rem 0;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--medium-gray);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--medium-gray);
+            font-weight: 500;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .chart-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .chart-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .chart-controls select,
+        .chart-controls button {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: white;
+            color: var(--dark-gray);
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .chart-controls button {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .chart-controls button:hover {
+            background: var(--dark-blue);
+        }
+
+        .chart-controls button.active {
+            background: var(--dark-blue);
+        }
+
+        .chart-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .chart-tab {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            background: white;
+            color: var(--medium-gray);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .chart-tab.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+        }
+
+        .chart-insights {
+            background: var(--light-gray);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+        }
+
+        .insight-highlight {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .search-button {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Topic Grid */
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .topic-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .topic-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-count {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Study Card */
+        .study-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin: 1rem 0;
+            transition: transform 0.3s ease;
+        }
+
+        .study-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .study-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .study-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        .study-abstract {
+            color: var(--dark-gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .study-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: var(--light-gray);
+            color: var(--primary-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Breadcrumbs */
+        .breadcrumbs {
+            margin-bottom: 2rem;
+            color: var(--medium-gray);
+        }
+
+        .breadcrumbs a {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        /* Getting Started Steps */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .step-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .step-number {
+            background: var(--primary-blue);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+        }
+
+        .step-description {
+            color: var(--medium-gray);
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .chart-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .chart-tabs {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+                width: 100%;
+            }
+
+            .chart-controls {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .study-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showPage('home')">Hydrogen Studies</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#" onclick="showPage('home')" class="nav-link">Home</a></li>
+                    <li><a href="#" onclick="showPage('start')" class="nav-link">Get Started</a></li>
+                    <li><a href="#" onclick="showPage('topics')" class="nav-link">Topics</a></li>
+                    <li><a href="#" onclick="showPage('search')" class="nav-link">Search</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <h1>Hydrogen Studies Database</h1>
+                <p>Explore the latest research on molecular hydrogen and its therapeutic applications. Access peer-reviewed studies, clinical trials, and scientific publications.</p>
+                <a href="#" onclick="showPage('search')" class="cta-button">Start Exploring</a>
+            </section>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">1,284</div>
+                    <div class="stat-label">Total Studies</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">47</div>
+                    <div class="stat-label">Years of Research</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">156</div>
+                    <div class="stat-label">Research Topics</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2025</div>
+                    <div class="stat-label">Last Updated</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h2 class="chart-title">Hydrogen Research Timeline</h2>
+                    <div class="chart-controls">
+                        <select id="yearRange" onchange="updateChart()">
+                            <option value="all">All Time (1888-2024)</option>
+                            <option value="modern" selected>Modern Era (2000-2024)</option>
+                            <option value="recent">Recent (2015-2024)</option>
+                            <option value="peak">Peak Years (2010-2023)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="chart-tabs">
+                    <button class="chart-tab active" onclick="setChartType('line')">Timeline</button>
+                    <button class="chart-tab" onclick="setChartType('bar')">Bar Chart</button>
+                    <button class="chart-tab" onclick="setChartType('area')">Area Chart</button>
+                    <button class="chart-tab" onclick="setChartType('logarithmic')">Log Scale</button>
+                </div>
+                
+                <div class="chart-wrapper">
+                    <canvas id="studiesChart"></canvas>
+                </div>
+                
+                <div class="chart-insights" id="chartInsights">
+                    <strong>Key Insights:</strong> 
+                    <span class="insight-highlight">Peak research activity</span> occurred between 2017-2021 with over 100 studies annually. 
+                    The field shows <span class="insight-highlight">exponential growth</span> starting from 2008.
+                </div>
+            </div>
+        </div>
+
+        <!-- Get Started Page -->
+        <div id="start" class="page">
+            <div class="hero">
+                <h1>Getting Started</h1>
+                <p>Learn how to navigate and make the most of the Hydrogen Studies database</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Explore Topics</h3>
+                    <p class="step-description">Browse through various health conditions and research areas where hydrogen therapy has been studied. Each topic shows the number of available studies.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Search Studies</h3>
+                    <p class="step-description">Use our advanced search to find specific studies by keywords, authors, publication year, or research outcomes.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Read & Analyze</h3>
+                    <p class="step-description">Access full study details including abstracts, methodologies, results, and conclusions. Many studies include links to full papers.</p>
+                </div>
+            </div>
+
+            <div class="search-section">
+                <h2>Quick Search</h2>
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search for studies, topics, or keywords...">
+                    <button class="search-button" onclick="showPage('search')">Search</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Topics Page -->
+        <div id="topics" class="page">
+            <div class="hero">
+                <h1>Research Topics</h1>
+                <p>Explore hydrogen research across various health conditions and applications</p>
+            </div>
+
+            <div class="topic-grid">
+                <div class="topic-card" onclick="showPage('acne-topic')">
+                    <div class="topic-title">Acne</div>
+                    <div class="topic-count">12 studies</div>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-title">Cardiovascular Health</div>
+                    <div class="topic-count">156 studies</div>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-title">Neurological Disorders</div>
+                    <div class="topic-count">89 studies</div>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-title">Diabetes</div>
+                    <div class="topic-count">67 studies</div>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-title">Cancer Research</div>
+                    <div class="topic-count">134 studies</div>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-title">Athletic Performance</div>
+                    <div class="topic-count">43 studies</div>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-title">Kidney Disease</div>
+                    <div class="topic-count">78 studies</div>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-title">Liver Health</div>
+                    <div class="topic-count">95 studies</div>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-title">Inflammation</div>
+                    <div class="topic-count">201 studies</div>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-title">Oxidative Stress</div>
+                    <div class="topic-count">312 studies</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Acne Topic Page -->
+        <div id="acne-topic" class="page">
+            <div class="breadcrumbs">
+                <a href="#" onclick="showPage('topics')">Topics</a> / Acne
+            </div>
+
+            <div class="hero">
+                <h1>Hydrogen Research: Acne</h1>
+                <p>Studies investigating the effects of molecular hydrogen on acne treatment and skin health</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Total Studies</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Clinical Trials</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Lab Studies</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2023</div>
+                    <div class="stat-label">Latest Study</div>
+                </div>
+            </div>
+
+            <div class="study-card">
+                <h3 class="study-title">Hydrogen-rich water improves acne vulgaris in clinical patients: A randomized controlled trial</h3>
+                <div class="study-meta">
+                    <span>Published: 2022</span>
+                    <span>Type: Clinical Trial</span>
+                    <span>Participants: 84</span>
+                </div>
+                <p class="study-abstract">This randomized controlled trial investigated the effects of hydrogen-rich water consumption on acne severity in 84 patients with moderate acne vulgaris over 8 weeks...</p>
+                <div class="study-tags">
+                    <span class="tag">Clinical Trial</span>
+                    <span class="tag">Hydrogen Water</span>
+                    <span class="tag">Skin Health</span>
+                </div>
+            </div>
+
+            <div class="study-card">
+                <h3 class="study-title">Topical hydrogen therapy reduces inflammatory markers in acne-prone skin</h3>
+                <div class="study-meta">
+                    <span>Published: 2021</span>
+                    <span>Type: Laboratory Study</span>
+                    <span>Sample Size: 60</span>
+                </div>
+                <p class="study-abstract">In vitro and ex vivo studies demonstrated that topical hydrogen application significantly reduced inflammatory cytokines and bacterial proliferation in acne lesions...</p>
+                <div class="study-tags">
+                    <span class="tag">Topical Treatment</span>
+                    <span class="tag">Anti-inflammatory</span>
+                    <span class="tag">Laboratory Study</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Page -->
+        <div id="search" class="page">
+            <div class="hero">
+                <h1>Search Studies</h1>
+                <p>Find specific research papers and studies in our comprehensive database</p>
+            </div>
+
+            <div class="search-section">
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Enter keywords, authors, or topics..." value="">
+                    <button class="search-button">Search</button>
+                </div>
+                
+                <div style="margin-top: 2rem;">
+                    <h3>Popular Searches:</h3>
+                    <div class="study-tags" style="margin-top: 1rem;">
+                        <span class="tag">cardiovascular</span>
+                        <span class="tag">inflammation</span>
+                        <span class="tag">oxidative stress</span>
+                        <span class="tag">diabetes</span>
+                        <span class="tag">neuroprotection</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3>Research Trends</h3>
+                <canvas id="searchChart" width="400" height="200"></canvas>
+            </div>
+
+            <div class="study-card">
+                <h3 class="study-title">Hydrogen attenuates endothelial glycocalyx damage associated with partial cardiopulmonary bypass in rats</h3>
+                <div class="study-meta">
+                    <span>Published: 2020</span>
+                    <span>Type: Animal Study</span>
+                    <span>Journal: PLoS One</span>
+                    <span>Authors: Zhang et al.</span>
+                </div>
+                <p class="study-abstract">Background: Cardiopulmonary bypass (CPB) is associated with endothelial glycocalyx damage. This study investigated whether hydrogen could protect the endothelial glycocalyx during partial CPB in rats. Methods: Rats were randomly assigned to control, CPB, or CPB+H2 groups...</p>
+                <div class="study-tags">
+                    <span class="tag">Cardiopulmonary Bypass</span>
+                    <span class="tag">Endothelial Protection</span>
+                    <span class="tag">Animal Study</span>
+                    <span class="tag">Glycocalyx</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Individual Study Page -->
+        <div id="study" class="page">
+            <div class="breadcrumbs">
+                <a href="#" onclick="showPage('search')">Search</a> / Study Details
+            </div>
+
+            <div class="study-card" style="margin-top: 0;">
+                <h1 class="study-title">Hydrogen attenuates endothelial glycocalyx damage associated with partial cardiopulmonary bypass in rats</h1>
+                <div class="study-meta">
+                    <span><strong>Published:</strong> March 15, 2020</span>
+                    <span><strong>Journal:</strong> PLoS One</span>
+                    <span><strong>Authors:</strong> Zhang Y, Liu B, Chen X, Liu H</span>
+                    <span><strong>DOI:</strong> 10.1371/journal.pone.0231928</span>
+                </div>
+                
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Abstract</h3>
+                <p class="study-abstract">
+                    <strong>Background:</strong> Cardiopulmonary bypass (CPB) is associated with endothelial glycocalyx damage. This study investigated whether hydrogen could protect the endothelial glycocalyx during partial CPB in rats.
+                </p>
+                <p class="study-abstract">
+                    <strong>Methods:</strong> Rats were randomly assigned to control, CPB, or CPB+H2 groups. In the CPB and CPB+H2 groups, partial CPB was established. In the CPB+H2 group, hydrogen-rich saline was administered. Endothelial glycocalyx markers, inflammatory factors, and oxidative stress indicators were measured.
+                </p>
+                <p class="study-abstract">
+                    <strong>Results:</strong> CPB significantly increased plasma levels of glycocalyx degradation products and inflammatory markers. Hydrogen treatment significantly attenuated these changes and preserved glycocalyx integrity.
+                </p>
+                <p class="study-abstract">
+                    <strong>Conclusions:</strong> Hydrogen protects endothelial glycocalyx during partial CPB, potentially through its anti-inflammatory and antioxidant properties.
+                </p>
+
+                <div style="margin-top: 2rem;">
+                    <h3 style="margin-bottom: 1rem;">Keywords</h3>
+                    <div class="study-tags">
+                        <span class="tag">Hydrogen therapy</span>
+                        <span class="tag">Cardiopulmonary bypass</span>
+                        <span class="tag">Endothelial glycocalyx</span>
+                        <span class="tag">Inflammation</span>
+                        <span class="tag">Oxidative stress</span>
+                        <span class="tag">Rat model</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Studies data
+        const studiesData = [
+            {year: 1888, studies: 1}, {year: 1969, studies: 1}, {year: 1975, studies: 3},
+            {year: 1978, studies: 1}, {year: 1980, studies: 1}, {year: 1986, studies: 1},
+            {year: 1992, studies: 1}, {year: 1994, studies: 1}, {year: 1995, studies: 2},
+            {year: 1997, studies: 6}, {year: 1998, studies: 3}, {year: 1999, studies: 5},
+            {year: 2000, studies: 6}, {year: 2001, studies: 6}, {year: 2002, studies: 4},
+            {year: 2003, studies: 8}, {year: 2004, studies: 3}, {year: 2005, studies: 4},
+            {year: 2006, studies: 10}, {year: 2007, studies: 5}, {year: 2008, studies: 12},
+            {year: 2009, studies: 22}, {year: 2010, studies: 42}, {year: 2011, studies: 69},
+            {year: 2012, studies: 66}, {year: 2013, studies: 72}, {year: 2014, studies: 66},
+            {year: 2015, studies: 88}, {year: 2016, studies: 74}, {year: 2017, studies: 103},
+            {year: 2018, studies: 113}, {year: 2019, studies: 115}, {year: 2020, studies: 123},
+            {year: 2021, studies: 120}, {year: 2022, studies: 90}, {year: 2023, studies: 87},
+            {year: 2024, studies: 1}
+        ];
+
+        // Sort data by year
+        studiesData.sort((a, b) => a.year - b.year);
+
+        let chart;
+        let currentChartType = 'line';
+        let currentData = [];
+
+        function getFilteredData() {
+            const yearRange = document.getElementById('yearRange').value;
+            let filteredData = [...studiesData];
+            
+            switch(yearRange) {
+                case 'modern':
+                    filteredData = studiesData.filter(d => d.year >= 2000);
+                    break;
+                case 'recent':
+                    filteredData = studiesData.filter(d => d.year >= 2015);
+                    break;
+                case 'peak':
+                    filteredData = studiesData.filter(d => d.year >= 2010 && d.year <= 2023);
+                    break;
+                default:
+                    filteredData = studiesData;
+            }
+            
+            return filteredData;
+        }
+
+        function getChartConfig(type, data) {
+            const colors = {
+                primary: '#0066cc',
+                secondary: '#4da6ff',
+                accent: '#00b8cc',
+                gradient1: 'rgba(0, 102, 204, 0.8)',
+                gradient2: 'rgba(0, 102, 204, 0.1)'
+            };
+
+            const baseConfig = {
+                data: {
+                    labels: data.map(d => d.year),
+                    datasets: [{
+                        label: 'Studies Published',
+                        data: data.map(d => d.studies),
+                        borderColor: colors.primary,
+                        pointBackgroundColor: colors.primary,
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2,
+                        pointRadius: 3,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 102, 204, 0.95)',
+                            titleColor: 'white',
+                            bodyColor: 'white',
+                            borderColor: colors.primary,
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            displayColors: false,
+                            callbacks: {
+                                title: function(context) {
+                                    return `Year ${context[0].label}`;
+                                },
+                                label: function(context) {
+                                    const value = context.parsed.y;
+                                    return `${value} ${value === 1 ? 'study' : 'studies'} published`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.1)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#6c757d'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#6c757d',
+                                maxTicksLimit: 15
+                            }
+                        }
+                    }
+                }
+            };
+
+            switch(type) {
+                case 'line':
+                    return {
+                        type: 'line',
+                        ...baseConfig,
+                        data: {
+                            ...baseConfig.data,
+                            datasets: [{
+                                ...baseConfig.data.datasets[0],
+                                backgroundColor: colors.gradient2,
+                                fill: false,
+                                tension: 0.4
+                            }]
+                        }
+                    };
+
+                case 'bar':
+                    return {
+                        type: 'bar',
+                        ...baseConfig,
+                        data: {
+                            ...baseConfig.data,
+                            datasets: [{
+                                ...baseConfig.data.datasets[0],
+                                backgroundColor: colors.gradient1,
+                                borderWidth: 0,
+                                borderRadius: 4,
+                                borderSkipped: false
+                            }]
+                        }
+                    };
+
+                case 'area':
+                    return {
+                        type: 'line',
+                        ...baseConfig,
+                        data: {
+                            ...baseConfig.data,
+                            datasets: [{
+                                ...baseConfig.data.datasets[0],
+                                backgroundColor: colors.gradient2,
+                                fill: true,
+                                tension: 0.4
+                            }]
+                        }
+                    };
+
+                case 'logarithmic':
+                    return {
+                        type: 'line',
+                        ...baseConfig,
+                        data: {
+                            ...baseConfig.data,
+                            datasets: [{
+                                ...baseConfig.data.datasets[0],
+                                backgroundColor: colors.gradient2,
+                                fill: false,
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            ...baseConfig.options,
+                            scales: {
+                                ...baseConfig.options.scales,
+                                y: {
+                                    ...baseConfig.options.scales.y,
+                                    type: 'logarithmic',
+                                    beginAtZero: false,
+                                    min: 1,
+                                    ticks: {
+                                        ...baseConfig.options.scales.y.ticks,
+                                        callback: function(value) {
+                                            if (value === 1 || value === 10 || value === 100) {
+                                                return value;
+                                            }
+                                            return '';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    };
+
+                default:
+                    return baseConfig;
+            }
+        }
+
+        function updateInsights(data, type) {
+            const insights = document.getElementById('chartInsights');
+            const total = data.reduce((sum, d) => sum + d.studies, 0);
+            const maxYear = data.reduce((max, d) => d.studies > max.studies ? d : max, data[0]);
+            const recentGrowth = data.length > 5 ? 
+                ((data[data.length-1].studies - data[data.length-6].studies) / data[data.length-6].studies * 100) : 0;
+
+            let insightText = `<strong>Analysis:</strong> `;
+            
+            if (type === 'logarithmic') {
+                insightText += `Logarithmic view reveals <span class="insight-highlight">exponential growth patterns</span> and makes early research years more visible. `;
+            }
+            
+            insightText += `Total of <span class="insight-highlight">${total} studies</span> in selected period. `;
+            insightText += `Peak year was <span class="insight-highlight">${maxYear.year}</span> with ${maxYear.studies} studies. `;
+            
+            if (recentGrowth > 0) {
+                insightText += `Recent 5-year growth: <span class="insight-highlight">+${recentGrowth.toFixed(1)}%</span>.`;
+            } else if (recentGrowth < 0) {
+                insightText += `Recent trend shows <span class="insight-highlight">${recentGrowth.toFixed(1)}% decline</span> in publications.`;
+            }
+
+            insights.innerHTML = insightText;
+        }
+
+        function initChart() {
+            currentData = getFilteredData();
+            const ctx = document.getElementById('studiesChart').getContext('2d');
+            const config = getChartConfig(currentChartType, currentData);
+            
+            if (chart) {
+                chart.destroy();
+            }
+            
+            chart = new Chart(ctx, config);
+            updateInsights(currentData, currentChartType);
+        }
+
+        function updateChart() {
+            currentData = getFilteredData();
+            const config = getChartConfig(currentChartType, currentData);
+            
+            chart.data = config.data;
+            chart.options = config.options;
+            chart.update('active');
+            updateInsights(currentData, currentChartType);
+        }
+
+        function setChartType(type) {
+            currentChartType = type;
+            
+            // Update tab appearance
+            document.querySelectorAll('.chart-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Recreate chart with new type
+            initChart();
+        }
+
+        function initSearchChart() {
+            const ctx = document.getElementById('searchChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+                    datasets: [{
+                        label: 'Studies',
+                        data: [115, 123, 120, 90, 87, 1],
+                        backgroundColor: 'rgba(0, 102, 204, 0.7)',
+                        borderColor: '#0066cc',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 102, 204, 0.95)',
+                            titleColor: 'white',
+                            bodyColor: 'white',
+                            borderColor: '#0066cc',
+                            borderWidth: 1,
+                            cornerRadius: 8
+                        }
+                    }
+                }
+            });
+        }
+
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Set active nav link
+            const navMap = {
+                'home': 0,
+                'start': 1,
+                'topics': 2,
+                'acne-topic': 2,
+                'search': 3,
+                'study': 3
+            };
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            if (navMap[pageId] !== undefined) {
+                navLinks[navMap[pageId]].classList.add('active');
+            }
+            
+            // Initialize charts when needed
+            if (pageId === 'home' && !chart) {
+                setTimeout(initChart, 100);
+            }
+            if (pageId === 'search') {
+                setTimeout(initSearchChart, 100);
+            }
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(initChart, 100);
+        });
+    </script>
+</body>
+</html>

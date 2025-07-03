@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Analyzer - Title & Author Count</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .analyze-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .analyze-btn:hover {
+            background: #0056b3;
+        }
+        
+        .analyze-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .results {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .file-stats {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .total-stats {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #2196f3;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .stat-value {
+            color: #007bff;
+            font-weight: 600;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 CSV Analyzer - Title & Author Count</h1>
+        
+        <p style="text-align: center; color: #6c757d; margin-bottom: 30px;">
+            Analyze all three CSV files to get exact counts of titles and authors
+        </p>
+        
+        <button id="analyzeBtn" class="analyze-btn" onclick="analyzeCSVFiles()">
+            <span id="analyzeText">🔍 Analyze All CSV Files</span>
+        </button>
+        
+        <div id="results" class="results">
+            <h3>Analysis Results</h3>
+            <div id="fileResults"></div>
+            <div id="totalResults" class="total-stats"></div>
+        </div>
+        
+        <div id="error" class="error" style="display: none;"></div>
+    </div>
+
+    <!-- Load Papa Parse for CSV processing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    
+    <script>
+        const csvFiles = [
+            '../Hydrogen Research Database - Primary.csv',
+            '../Hydrogen Research Database - Engineering.csv',
+            '../Hydrogen Research Database - Secondary, Tertiary.csv'
+        ];
+        
+        let isAnalyzing = false;
+        
+        async function analyzeCSVFiles() {
+            if (isAnalyzing) return;
+            
+            isAnalyzing = true;
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            const analyzeText = document.getElementById('analyzeText');
+            const results = document.getElementById('results');
+            const error = document.getElementById('error');
+            
+            analyzeBtn.disabled = true;
+            analyzeText.innerHTML = '<span class="loading"></span>Analyzing CSV Files...';
+            
+            results.style.display = 'none';
+            error.style.display = 'none';
+            
+            try {
+                const fileResults = [];
+                let totalTitles = 0;
+                let totalAuthors = 0;
+                let totalStudies = 0;
+                
+                for (const csvFile of csvFiles) {
+                    const sourceName = getSourceName(csvFile);
+                    console.log(`Analyzing ${sourceName}...`);
+                    
+                    const csvData = await loadCSVFile(csvFile);
+                    if (csvData) {
+                        const analysis = analyzeCSVData(csvData, sourceName);
+                        fileResults.push(analysis);
+                        
+                        totalTitles += analysis.titles;
+                        totalAuthors += analysis.authors;
+                        totalStudies += analysis.studies;
+                        
+                        console.log(`${sourceName}: ${analysis.studies} studies, ${analysis.titles} titles, ${analysis.authors} authors`);
+                    }
+                }
+                
+                displayResults(fileResults, {
+                    totalStudies,
+                    totalTitles,
+                    totalAuthors
+                });
+                
+            } catch (err) {
+                console.error('Analysis error:', err);
+                showError(`Error: ${err.message}`);
+            } finally {
+                isAnalyzing = false;
+                analyzeBtn.disabled = false;
+                analyzeText.innerHTML = '🔍 Analyze All CSV Files';
+            }
+        }
+        
+        async function loadCSVFile(csvFile) {
+            try {
+                console.log(`Loading ${csvFile}...`);
+                const response = await fetch(csvFile);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const csvData = await response.text();
+                console.log(`${csvFile} loaded successfully (${csvData.length} characters)`);
+                
+                return csvData;
+            } catch (error) {
+                console.error(`Error loading ${csvFile}:`, error);
+                return null;
+            }
+        }
+        
+        function analyzeCSVData(csvData, sourceName) {
+            try {
+                if (typeof Papa === 'undefined') {
+                    throw new Error('Papa Parse not available');
+                }
+
+                const results = Papa.parse(csvData, {
+                    header: true,
+                    skipEmptyLines: true,
+                    transform: (value, field) => {
+                        if (typeof value === 'string') {
+                            value = value.trim();
+                            if (value.startsWith('"') && value.endsWith('"')) {
+                                value = value.slice(1, -1);
+                            }
+                        }
+                        return value;
+                    }
+                });
+
+                if (results.errors.length > 0) {
+                    console.warn(`CSV parsing warnings for ${sourceName}:`, results.errors);
+                }
+
+                const studies = results.data.filter(row => {
+                    const title = extractField(row, ['Title', 'title']);
+                    return title && title.trim() !== '';
+                });
+
+                let totalAuthors = 0;
+                const uniqueTitles = new Set();
+                const uniqueAuthors = new Set();
+
+                studies.forEach(study => {
+                    const title = extractField(study, ['Title', 'title']);
+                    if (title) {
+                        uniqueTitles.add(title.toLowerCase().trim());
+                    }
+                    
+                    // Count all authors
+                    const firstAuthor = extractField(study, ['First Author', 'FirstAuthor', 'firstAuthor']);
+                    const lastAuthor = extractField(study, ['Last Author', 'LastAuthor', 'lastAuthor']);
+                    const otherAuthors = parseAuthors(extractField(study, ['Other Authors', 'OtherAuthors', 'otherAuthors']));
+                    
+                    if (firstAuthor) {
+                        uniqueAuthors.add(firstAuthor.toLowerCase().trim());
+                        totalAuthors++;
+                    }
+                    if (lastAuthor) {
+                        uniqueAuthors.add(lastAuthor.toLowerCase().trim());
+                        totalAuthors++;
+                    }
+                    otherAuthors.forEach(author => {
+                        if (author) {
+                            uniqueAuthors.add(author.toLowerCase().trim());
+                            totalAuthors++;
+                        }
+                    });
+                });
+
+                return {
+                    sourceName,
+                    studies: studies.length,
+                    titles: uniqueTitles.size,
+                    authors: uniqueAuthors.size,
+                    totalAuthorEntries: totalAuthors
+                };
+
+            } catch (error) {
+                console.error(`Error analyzing ${sourceName}:`, error);
+                return {
+                    sourceName,
+                    studies: 0,
+                    titles: 0,
+                    authors: 0,
+                    totalAuthorEntries: 0,
+                    error: error.message
+                };
+            }
+        }
+        
+        function extractField(row, fieldNames) {
+            for (const fieldName of fieldNames) {
+                if (row[fieldName] !== undefined && row[fieldName] !== null) {
+                    return String(row[fieldName]).trim();
+                }
+            }
+            return '';
+        }
+        
+        function parseAuthors(authorsStr) {
+            if (!authorsStr) return [];
+            
+            return authorsStr
+                .split(/[;,\n]/)
+                .map(author => author.trim())
+                .filter(author => author && author.length > 0);
+        }
+        
+        function getSourceName(csvFile) {
+            if (csvFile.includes('Primary')) return 'Primary';
+            if (csvFile.includes('Engineering')) return 'Engineering';
+            if (csvFile.includes('Secondary')) return 'Secondary/Tertiary';
+            return 'Unknown';
+        }
+        
+        function displayResults(fileResults, totals) {
+            const fileResultsDiv = document.getElementById('fileResults');
+            const totalResultsDiv = document.getElementById('totalResults');
+            
+            // Display individual file results
+            fileResultsDiv.innerHTML = '';
+            fileResults.forEach(result => {
+                const fileStat = document.createElement('div');
+                fileStat.className = 'file-stats';
+                fileStat.innerHTML = `
+                    <h4>📄 ${result.sourceName}</h4>
+                    <div class="stat-row">
+                        <span class="stat-label">Total Studies:</span>
+                        <span class="stat-value">${result.studies}</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Unique Titles:</span>
+                        <span class="stat-value">${result.titles}</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Unique Authors:</span>
+                        <span class="stat-value">${result.authors}</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Total Author Entries:</span>
+                        <span class="stat-value">${result.totalAuthorEntries}</span>
+                    </div>
+                `;
+                fileResultsDiv.appendChild(fileStat);
+            });
+            
+            // Display totals
+            totalResultsDiv.innerHTML = `
+                <h3>📊 Grand Totals</h3>
+                <div class="stat-row">
+                    <span class="stat-label">Total Studies:</span>
+                    <span class="stat-value">${totals.totalStudies}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Total Unique Titles:</span>
+                    <span class="stat-value">${totals.totalTitles}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Total Unique Authors:</span>
+                    <span class="stat-value">${totals.totalAuthors}</span>
+                </div>
+            `;
+            
+            document.getElementById('results').style.display = 'block';
+        }
+        
+        function showError(message) {
+            const error = document.getElementById('error');
+            error.innerHTML = message;
+            error.style.display = 'block';
+        }
+        
+        // Auto-initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('CSV Analyzer loaded');
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Data Loader - Hydrogen Studies</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.4.1/papaparse.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0066cc;
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            color: #6c757d;
+            font-weight: 500;
+        }
+        button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        .progress {
+            background: #e9ecef;
+            border-radius: 5px;
+            height: 20px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        .progress-bar {
+            background: #0066cc;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .status.loading {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .download-section {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #b3d9ff;
+        }
+        .json-preview {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Combined Data Loader</h1>
+        <p>This tool loads all three CSV files (Primary, Engineering, Secondary/Tertiary), combines them, removes duplicates, and creates a JSON file for the dashboard.</p>
+        
+        <button onclick="loadAndCombineData()" id="loadButton">Load All CSV Files & Create JSON</button>
+        <button onclick="loadJSONData()" id="jsonButton">Load Combined JSON Data</button>
+        <button onclick="clearResults()">Clear Results</button>
+    </div>
+
+    <div id="progressContainer" style="display: none;">
+        <div class="container">
+            <h3>Processing Progress</h3>
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div id="progressText">Starting...</div>
+        </div>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+        let combinedData = null;
+
+        async function loadAndCombineData() {
+            const loadButton = document.getElementById('loadButton');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const resultsDiv = document.getElementById('results');
+
+            loadButton.disabled = true;
+            progressContainer.style.display = 'block';
+            resultsDiv.innerHTML = '';
+
+            const csvFiles = [
+                '../Hydrogen Research Database - Primary.csv',
+                '../Hydrogen Research Database - Engineering.csv',
+                '../Hydrogen Research Database - Secondary, Tertiary.csv'
+            ];
+
+            let allStudies = [];
+            let processedFiles = 0;
+
+            try {
+                for (const csvFile of csvFiles) {
+                    progressText.textContent = `Loading ${csvFile}...`;
+                    progressBar.style.width = `${(processedFiles / csvFiles.length) * 100}%`;
+
+                    const response = await fetch(csvFile);
+                    if (!response.ok) {
+                        throw new Error(`Failed to load ${csvFile}: ${response.status}`);
+                    }
+
+                    const csvData = await response.text();
+                    const studies = processCSVData(csvData, csvFile);
+                    allStudies = allStudies.concat(studies);
+
+                    processedFiles++;
+                    progressText.textContent = `Loaded ${csvFile} (${studies.length} studies)`;
+                    progressBar.style.width = `${(processedFiles / csvFiles.length) * 100}%`;
+                }
+
+                progressText.textContent = 'Removing duplicates...';
+                const uniqueStudies = removeDuplicates(allStudies);
+
+                progressText.textContent = 'Creating JSON...';
+                combinedData = uniqueStudies;
+
+                // Create downloadable JSON
+                const jsonData = JSON.stringify(uniqueStudies, null, 2);
+                const blob = new Blob([jsonData], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+
+                progressBar.style.width = '100%';
+                progressText.textContent = 'Complete!';
+
+                displayResults(uniqueStudies, url);
+                showStatus('Data loaded and combined successfully!', 'success');
+
+            } catch (error) {
+                console.error('Error:', error);
+                showStatus(`Error: ${error.message}`, 'error');
+                progressText.textContent = 'Error occurred';
+            } finally {
+                loadButton.disabled = false;
+            }
+        }
+
+        function processCSVData(csvData, sourceName) {
+            if (typeof Papa === 'undefined') {
+                throw new Error('Papa Parse not available');
+            }
+
+            const results = Papa.parse(csvData, {
+                header: true,
+                skipEmptyLines: true,
+                transform: (value, field) => {
+                    if (typeof value === 'string') {
+                        value = value.trim();
+                        if (value.startsWith('"') && value.endsWith('"')) {
+                            value = value.slice(1, -1);
+                        }
+                    }
+                    return value;
+                }
+            });
+
+            if (results.errors.length > 0) {
+                console.warn(`CSV parsing warnings for ${sourceName}:`, results.errors);
+            }
+
+            const studies = results.data.map((row, index) => {
+                return normalizeStudy(row, index, sourceName);
+            }).filter(study => study.title && study.title.trim() !== '');
+
+            console.log(`${sourceName}: ${studies.length} valid studies processed`);
+            return studies;
+        }
+
+        function normalizeStudy(row, index, sourceName) {
+            const study = {
+                id: `${sourceName}_${index + 1}`,
+                title: extractField(row, ['Title', 'title']),
+                year: parseYear(extractField(row, ['Publish Year', 'Year', 'year'])),
+                journal: extractField(row, ['Journal', 'journal']),
+                doi: extractField(row, ['DOI/PMID/Link', 'DOI', 'doi', 'Link']),
+                abstract: extractField(row, ['Abstract', 'abstract']),
+                designation: extractField(row, ['Designation', 'designation', 'Rank', 'rank']),
+                topic: extractField(row, ['Primary Topic', 'Topic', 'topic', 'PrimaryTopic']),
+                country: extractField(row, ['Country', 'country']),
+                firstAuthor: extractField(row, ['First Author', 'FirstAuthor', 'firstAuthor']),
+                otherAuthors: parseAuthors(extractField(row, ['Other Authors', 'OtherAuthors', 'otherAuthors'])),
+                lastAuthor: extractField(row, ['Last Author', 'LastAuthor', 'lastAuthor']),
+                sourceType: sourceName,
+                allAuthors: []
+            };
+
+            // Combine all authors
+            study.allAuthors = [
+                study.firstAuthor,
+                ...study.otherAuthors,
+                study.lastAuthor
+            ].filter(author => author && author.trim());
+
+            return study;
+        }
+
+        function extractField(row, fieldNames) {
+            for (const fieldName of fieldNames) {
+                if (row[fieldName] !== undefined && row[fieldName] !== null) {
+                    return String(row[fieldName]).trim();
+                }
+            }
+            return '';
+        }
+
+        function parseYear(yearStr) {
+            if (!yearStr || yearStr.trim() === '') return null;
+            
+            const cleanYear = yearStr.toString().trim();
+            let year = parseInt(cleanYear);
+            
+            if (isNaN(year)) {
+                const yearMatch = cleanYear.match(/\b(19|20)\d{2}\b/);
+                if (yearMatch) {
+                    year = parseInt(yearMatch[0]);
+                }
+            }
+            
+            if (isNaN(year) || year < 1800 || year > new Date().getFullYear() + 1) {
+                return null;
+            }
+            
+            return year;
+        }
+
+        function parseAuthors(authorsStr) {
+            if (!authorsStr) return [];
+            
+            return authorsStr
+                .split(/[;,\n]/)
+                .map(author => author.trim())
+                .filter(author => author && author.length > 0);
+        }
+
+        function removeDuplicates(studies) {
+            const seen = new Set();
+            const uniqueStudies = [];
+
+            studies.forEach(study => {
+                const key = createStudyKey(study);
+                if (!seen.has(key)) {
+                    seen.add(key);
+                    uniqueStudies.push(study);
+                }
+            });
+
+            return uniqueStudies;
+        }
+
+        function createStudyKey(study) {
+            const title = (study.title || '').toLowerCase().trim();
+            const year = study.year || '';
+            const firstAuthor = (study.firstAuthor || '').toLowerCase().trim();
+            
+            return `${title}_${year}_${firstAuthor}`;
+        }
+
+        function displayResults(studies, downloadUrl) {
+            const resultsDiv = document.getElementById('results');
+            
+            // Calculate statistics
+            const stats = calculateStatistics(studies);
+            
+            let html = `
+                <div class="container">
+                    <h2>Combined Data Results</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">${stats.totalStudies}</div>
+                            <div class="stat-label">Total Studies</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${stats.uniqueTitles}</div>
+                            <div class="stat-label">Unique Titles</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${stats.uniqueAuthors}</div>
+                            <div class="stat-label">Unique Authors</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${stats.withHyperlinks}</div>
+                            <div class="stat-label">With Hyperlinks</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${stats.topicsCount}</div>
+                            <div class="stat-label">Topics</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${stats.countriesCount}</div>
+                            <div class="stat-label">Countries</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="download-section">
+                    <h3>Download Combined Data</h3>
+                    <p>Click the button below to download the combined JSON data:</p>
+                    <a href="${downloadUrl}" download="hydrogen-studies-combined-data.json">
+                        <button>Download JSON File</button>
+                    </a>
+                    <p><strong>Note:</strong> Save this file as <code>combined-data.json</code> in the same folder as the dashboard for automatic loading.</p>
+                </div>
+
+                <div class="container">
+                    <h3>Sample Data (First 3 Studies)</h3>
+                    <div class="json-preview">
+            `;
+            
+            studies.slice(0, 3).forEach((study, index) => {
+                html += `
+                    <strong>Study ${index + 1}:</strong><br>
+                    Title: "${study.title}"<br>
+                    Year: ${study.year}<br>
+                    Authors: ${study.allAuthors.join(', ')}<br>
+                    DOI: "${study.doi}"<br>
+                    Topic: "${study.topic}"<br>
+                    Country: "${study.country}"<br>
+                    <hr>
+                `;
+            });
+            
+            html += `
+                    </div>
+                </div>
+            `;
+            
+            resultsDiv.innerHTML = html;
+        }
+
+        function calculateStatistics(studies) {
+            const uniqueTitles = new Set(studies.map(s => s.title.toLowerCase().trim()));
+            const uniqueAuthors = new Set();
+            const topics = new Set();
+            const countries = new Set();
+            
+            studies.forEach(study => {
+                study.allAuthors.forEach(author => {
+                    if (author && author.trim()) {
+                        uniqueAuthors.add(author.trim());
+                    }
+                });
+                
+                if (study.topic && study.topic.trim()) {
+                    topics.add(study.topic.trim());
+                }
+                
+                if (study.country && study.country.trim()) {
+                    countries.add(study.country.trim());
+                }
+            });
+            
+            const withHyperlinks = studies.filter(study => {
+                const doi = study.doi || '';
+                return doi.includes('http') || doi.includes('www') || doi.includes('doi.org') || doi.includes('pubmed') || doi.includes('arxiv');
+            }).length;
+            
+            return {
+                totalStudies: studies.length,
+                uniqueTitles: uniqueTitles.size,
+                uniqueAuthors: uniqueAuthors.size,
+                withHyperlinks: withHyperlinks,
+                topicsCount: topics.size,
+                countriesCount: countries.size
+            };
+        }
+
+        async function loadJSONData() {
+            try {
+                const response = await fetch('combined-data.json');
+                if (!response.ok) {
+                    throw new Error('JSON file not found. Please create it first using the "Load All CSV Files" button.');
+                }
+                
+                const data = await response.json();
+                combinedData = data;
+                
+                const stats = calculateStatistics(data);
+                const resultsDiv = document.getElementById('results');
+                
+                let html = `
+                    <div class="container">
+                        <h2>Loaded JSON Data</h2>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">${stats.totalStudies}</div>
+                                <div class="stat-label">Total Studies</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">${stats.uniqueTitles}</div>
+                                <div class="stat-label">Unique Titles</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">${stats.uniqueAuthors}</div>
+                                <div class="stat-label">Unique Authors</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">${stats.withHyperlinks}</div>
+                                <div class="stat-label">With Hyperlinks</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">${stats.topicsCount}</div>
+                                <div class="stat-label">Topics</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">${stats.countriesCount}</div>
+                                <div class="stat-label">Countries</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                resultsDiv.innerHTML = html;
+                showStatus('JSON data loaded successfully!', 'success');
+                
+            } catch (error) {
+                showStatus(`Error loading JSON: ${error.message}`, 'error');
+            }
+        }
+
+        function showStatus(message, type) {
+            const resultsDiv = document.getElementById('results');
+            const statusDiv = document.createElement('div');
+            statusDiv.className = `status ${type}`;
+            statusDiv.textContent = message;
+            resultsDiv.insertBefore(statusDiv, resultsDiv.firstChild);
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+            document.getElementById('progressContainer').style.display = 'none';
+            document.getElementById('progressBar').style.width = '0%';
+            combinedData = null;
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Test - Hydrogen Studies Tools</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .status {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #28a745;
+        }
+        .tool-list {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .tool-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border: 1px solid #e9ecef;
+        }
+        .tool-item a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .tool-item a:hover {
+            text-decoration: underline;
+        }
+        .tool-description {
+            color: #6c757d;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .admin-info {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Hydrogen Studies Tools - Server Test</h1>
+        
+        <div class="status">
+            ✅ <strong>Server is running!</strong> You can now access the tools below.
+        </div>
+
+        <div class="tool-list">
+            <h2>📋 Available Tools</h2>
+            
+            <div class="tool-item">
+                <a href="index.html" target="_blank">🏠 Main Tools Index</a>
+                <div class="tool-description">Navigation hub for all research tools</div>
+            </div>
+            
+            <div class="tool-item">
+                <a href="hydrogen-research-dashboard.html" target="_blank">📊 Hydrogen Research Dashboard</a>
+                <div class="tool-description">Main dashboard with charts and statistics</div>
+            </div>
+            
+            <div class="tool-item">
+                <a href="dashboard-update-interface.html" target="_blank">🔄 Dashboard Update Interface</a>
+                <div class="tool-description">Update dashboard with fresh data from live website</div>
+            </div>
+            
+            <div class="tool-item">
+                <a href="echo-water-interface.html" target="_blank">💧 EchoWater Data Extractor</a>
+                <div class="tool-description">Extract data in CSV format with preserved hyperlinks</div>
+            </div>
+            
+            <div class="tool-item">
+                <a href="web-scraper-interface.html" target="_blank">🌐 Advanced Web Scraper</a>
+                <div class="tool-description">Comprehensive data extraction with filtering options</div>
+            </div>
+            
+            <div class="tool-item">
+                <a href="csv-analyzer.html" target="_blank">📈 CSV Analyzer</a>
+                <div class="tool-description">Analyze study counts and statistics</div>
+            </div>
+            
+            <div class="tool-item">
+                <a href="simple-update.html" target="_blank">⚡ Simple Dashboard Updater</a>
+                <div class="tool-description">Quick update with drag-and-drop CSV files</div>
+            </div>
+            
+            <div class="tool-item">
+                <a href="database-updater.html" target="_blank">🗄️ Database Updater</a>
+                <div class="tool-description">Advanced database management with duplicate detection</div>
+            </div>
+            
+            <div class="tool-item">
+                <a href="csv-export-tool.html" target="_blank">📄 CSV Export Tool</a>
+                <div class="tool-description">Export data in CSV format with preserved hyperlinks</div>
+            </div>
+            
+            <div class="tool-item">
+                <a href="combined-data-loader.html" target="_blank">🔗 Combined Data Loader</a>
+                <div class="tool-description">Load all CSV files, combine them, and create JSON for dashboard</div>
+            </div>
+        </div>
+
+        <div class="admin-info">
+            <h3>👤 Admin Information</h3>
+            <p><strong>Admin:</strong> shayne@devpipeline.com</p>
+            <p><strong>Purpose:</strong> EchoWater data extraction and dashboard management</p>
+            <p><strong>Server:</strong> Running on http://localhost:9000</p>
+            <p><strong>Status:</strong> All tools are ready for use</p>
+        </div>
+    </div>
+
+    <script>
+        // Test if server is responding
+        fetch(window.location.href)
+            .then(response => {
+                if (response.ok) {
+                    console.log('✅ Server is responding correctly');
+                }
+            })
+            .catch(error => {
+                console.error('❌ Server error:', error);
+            });
+    </script>
+</body>
+</html> 

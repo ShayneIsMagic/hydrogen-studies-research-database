@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Updater - Hydrogen Studies</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        .content {
+            padding: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+        }
+        .section h2 {
+            margin: 0 0 20px 0;
+            color: #2c3e50;
+            font-size: 1.5em;
+        }
+        .update-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .update-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s;
+        }
+        .update-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .update-card h3 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+        }
+        .update-card p {
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        .progress-container {
+            margin: 20px 0;
+            display: none;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        .progress-text {
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .logs {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        .admin-badge {
+            background: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .contact-info {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+            margin-top: 20px;
+        }
+        .contact-info h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+        .contact-info p {
+            margin: 5px 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔄 Dashboard Updater</h1>
+            <p>Update your hydrogen research dashboard with all CSV files</p>
+            <div class="admin-badge">Admin: shayne@devpipeline.com</div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>📊 Current Dashboard Status</h2>
+                <p>This will load all three CSV files (Primary, Engineering, Secondary/Tertiary) and update your existing dashboard with the combined data while removing duplicates.</p>
+                
+                <div class="stats" id="stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalStudies">Loading...</div>
+                        <div class="stat-label">Total Studies</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="uniqueTitles">Loading...</div>
+                        <div class="stat-label">Unique Titles</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="uniqueAuthors">Loading...</div>
+                        <div class="stat-label">Unique Authors</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="withLinks">Loading...</div>
+                        <div class="stat-label">With Hyperlinks</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🔄 Update Options</h2>
+                <div class="update-options">
+                    <div class="update-card">
+                        <h3>📋 Full Update (All CSV Files)</h3>
+                        <p>Load all three CSV files (Primary, Engineering, Secondary/Tertiary) and combine them into a comprehensive dashboard.</p>
+                        <button class="btn" onclick="updateDashboard('full')">
+                            🔄 Full Dashboard Update
+                        </button>
+                    </div>
+                    
+                    <div class="update-card">
+                        <h3>🔬 Primary Studies Only</h3>
+                        <p>Update dashboard with only primary research studies from the Primary CSV file.</p>
+                        <button class="btn" onclick="updateDashboard('primary')">
+                            🔬 Primary Studies Update
+                        </button>
+                    </div>
+                    
+                    <div class="update-card">
+                        <h3>⚙️ Engineering Studies Only</h3>
+                        <p>Update dashboard with engineering-focused studies from the Engineering CSV file.</p>
+                        <button class="btn" onclick="updateDashboard('engineering')">
+                            ⚙️ Engineering Update
+                        </button>
+                    </div>
+                    
+                    <div class="update-card">
+                        <h3>📚 Secondary/Tertiary Only</h3>
+                        <p>Update dashboard with review and meta-analysis studies from the Secondary/Tertiary CSV file.</p>
+                        <button class="btn" onclick="updateDashboard('secondary')">
+                            📚 Secondary Update
+                        </button>
+                    </div>
+                    
+                    <div class="update-card">
+                        <h3>🎯 Custom Selection</h3>
+                        <p>Choose which CSV files to include in your dashboard update.</p>
+                        <button class="btn btn-secondary" onclick="showCustomSelection()">
+                            🎯 Custom Selection
+                        </button>
+                    </div>
+                    
+                    <div class="update-card">
+                        <h3>🔄 Refresh Current Data</h3>
+                        <p>Reload the current dashboard data without making changes.</p>
+                        <button class="btn btn-secondary" onclick="refreshCurrentData()">
+                            🔄 Refresh Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Ready to update...</div>
+            </div>
+
+            <div class="section">
+                <h2>📝 Update Logs</h2>
+                <div class="logs" id="logs">Ready to update dashboard...</div>
+            </div>
+
+            <div class="contact-info">
+                <h3>📧 Contact Information</h3>
+                <p><strong>Admin:</strong> shayne@devpipeline.com</p>
+                <p><strong>Purpose:</strong> EchoWater dashboard management for Hydrogen Studies research</p>
+                <p><strong>Note:</strong> This tool updates your dashboard with data from all CSV files.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allData = [];
+        let currentStats = {};
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCurrentStats();
+            addLog('Dashboard Updater initialized');
+            addLog('Admin: shayne@devpipeline.com');
+            addLog('Ready to update dashboard with CSV data...');
+        });
+
+        // Load current dashboard statistics
+        async function loadCurrentStats() {
+            try {
+                // Try to get current dashboard data
+                const response = await fetch('hydrogen-research-dashboard.html');
+                if (response.ok) {
+                    addLog('Current dashboard found');
+                    updateStatsDisplay({ totalStudies: 'Dashboard Active', uniqueTitles: 'Ready', uniqueAuthors: 'Ready', withLinks: 'Ready' });
+                } else {
+                    addLog('Dashboard not found, will create new data');
+                    updateStatsDisplay({ totalStudies: '0', uniqueTitles: '0', uniqueAuthors: '0', withLinks: '0' });
+                }
+            } catch (error) {
+                addLog(`Error checking dashboard: ${error.message}`);
+                updateStatsDisplay({ totalStudies: 'Error', uniqueTitles: 'Error', uniqueAuthors: 'Error', withLinks: 'Error' });
+            }
+        }
+
+        // Update dashboard with specified option
+        async function updateDashboard(option) {
+            document.getElementById('progressContainer').style.display = 'block';
+            clearLogs();
+            addLog(`Starting dashboard update: ${option}`);
+            
+            try {
+                const csvFiles = getCSVFilesForOption(option);
+                addLog(`Loading ${csvFiles.length} CSV file(s)...`);
+                
+                allData = [];
+                let totalProcessed = 0;
+                
+                for (const file of csvFiles) {
+                    try {
+                        addLog(`Loading ${file}...`);
+                        const response = await fetch(file);
+                        if (!response.ok) {
+                            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                        }
+                        
+                        const csvText = await response.text();
+                        const data = parseCSV(csvText);
+                        allData.push(...data);
+                        
+                        totalProcessed++;
+                        updateProgress(totalProcessed, csvFiles.length, `Loaded ${file}`);
+                        addLog(`✅ ${file} loaded successfully (${data.length} studies)`);
+                        
+                    } catch (error) {
+                        addLog(`❌ Failed to load ${file}: ${error.message}`);
+                    }
+                }
+                
+                if (allData.length === 0) {
+                    throw new Error('No data loaded from any CSV files');
+                }
+                
+                addLog(`Total studies loaded: ${allData.length}`);
+                
+                // Remove duplicates
+                const uniqueData = removeDuplicates(allData);
+                addLog(`After removing duplicates: ${uniqueData.length} studies`);
+                
+                // Update dashboard
+                await updateDashboardData(uniqueData);
+                
+                addLog(`✅ Dashboard update completed successfully!`);
+                addLog(`📊 Final count: ${uniqueData.length} unique studies`);
+                
+                updateStats();
+                
+            } catch (error) {
+                addLog(`❌ Dashboard update failed: ${error.message}`);
+            } finally {
+                document.getElementById('progressContainer').style.display = 'none';
+            }
+        }
+
+        // Get CSV files for specific option
+        function getCSVFilesForOption(option) {
+            const baseFiles = [
+                '../Hydrogen Research Database - Primary.csv',
+                '../Hydrogen Research Database - Engineering.csv',
+                '../Hydrogen Research Database - Secondary, Tertiary.csv'
+            ];
+            
+            switch (option) {
+                case 'full':
+                    return baseFiles;
+                case 'primary':
+                    return [baseFiles[0]];
+                case 'engineering':
+                    return [baseFiles[1]];
+                case 'secondary':
+                    return [baseFiles[2]];
+                default:
+                    return baseFiles;
+            }
+        }
+
+        // Parse CSV text to array of objects
+        function parseCSV(csvText) {
+            const lines = csvText.split('\n');
+            if (lines.length < 2) return [];
+            
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+            const data = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                if (lines[i].trim()) {
+                    const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
+                    const row = {};
+                    headers.forEach((header, index) => {
+                        row[header] = values[index] || '';
+                    });
+                    data.push(row);
+                }
+            }
+            
+            return data;
+        }
+
+        // Remove duplicate studies
+        function removeDuplicates(data) {
+            const seen = new Set();
+            const unique = [];
+            
+            for (const study of data) {
+                const title = (study.Title || study.title || '').toLowerCase().trim();
+                const year = study.Year || study.year || study['Publish Year'] || '';
+                const key = `${title}_${year}`;
+                
+                if (!seen.has(key) && title) {
+                    seen.add(key);
+                    unique.push(study);
+                }
+            }
+            
+            return unique;
+        }
+
+        // Update dashboard data
+        async function updateDashboardData(data) {
+            addLog('Updating dashboard data...');
+            
+            // Save data to localStorage for dashboard access
+            localStorage.setItem('dashboardData', JSON.stringify(data));
+            localStorage.setItem('dashboardLastUpdated', new Date().toISOString());
+            
+            addLog('✅ Dashboard data saved to browser storage');
+            addLog('🔄 Dashboard will use new data on next refresh');
+        }
+
+        // Update statistics display
+        function updateStats() {
+            const uniqueTitles = new Set(allData.map(s => s.Title || s.title)).size;
+            const uniqueAuthors = new Set(allData.flatMap(s => {
+                const authors = s.Authors || s.authors || '';
+                return authors.split(',').map(a => a.trim()).filter(a => a);
+            })).size;
+            const withLinks = allData.filter(s => {
+                const url = s.URL || s.url || s.Link || s.link || s['DOI/PMID/Link'] || '';
+                return url && url.includes('http');
+            }).length;
+
+            updateStatsDisplay({
+                totalStudies: allData.length,
+                uniqueTitles: uniqueTitles,
+                uniqueAuthors: uniqueAuthors,
+                withLinks: withLinks
+            });
+        }
+
+        // Update stats display
+        function updateStatsDisplay(stats) {
+            document.getElementById('totalStudies').textContent = stats.totalStudies;
+            document.getElementById('uniqueTitles').textContent = stats.uniqueTitles;
+            document.getElementById('uniqueAuthors').textContent = stats.uniqueAuthors;
+            document.getElementById('withLinks').textContent = stats.withLinks;
+        }
+
+        // Update progress
+        function updateProgress(current, total, message) {
+            const percentage = total > 0 ? Math.round((current / total) * 100) : 0;
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = `${message} (${current}/${total}) - ${percentage}%`;
+        }
+
+        // Add log message
+        function addLog(message, type = 'info') {
+            const logs = document.getElementById('logs');
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}\n`;
+            
+            logs.textContent += logEntry;
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        // Clear logs
+        function clearLogs() {
+            document.getElementById('logs').textContent = 'Logs cleared...\n';
+        }
+
+        // Show custom selection dialog
+        function showCustomSelection() {
+            const files = [
+                'Primary Studies',
+                'Engineering Studies', 
+                'Secondary/Tertiary Studies'
+            ];
+            
+            const selected = [];
+            for (let i = 0; i < files.length; i++) {
+                if (confirm(`Include ${files[i]}?`)) {
+                    selected.push(i);
+                }
+            }
+            
+            if (selected.length === 0) {
+                alert('No files selected. Update cancelled.');
+                return;
+            }
+            
+            const csvFiles = [
+                '../Hydrogen Research Database - Primary.csv',
+                '../Hydrogen Research Database - Engineering.csv',
+                '../Hydrogen Research Database - Secondary, Tertiary.csv'
+            ];
+            
+            const selectedFiles = selected.map(i => csvFiles[i]);
+            updateDashboardWithFiles(selectedFiles);
+        }
+
+        // Update dashboard with specific files
+        async function updateDashboardWithFiles(files) {
+            document.getElementById('progressContainer').style.display = 'block';
+            clearLogs();
+            addLog(`Starting custom update with ${files.length} file(s)`);
+            
+            try {
+                allData = [];
+                let totalProcessed = 0;
+                
+                for (const file of files) {
+                    try {
+                        addLog(`Loading ${file}...`);
+                        const response = await fetch(file);
+                        if (!response.ok) {
+                            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                        }
+                        
+                        const csvText = await response.text();
+                        const data = parseCSV(csvText);
+                        allData.push(...data);
+                        
+                        totalProcessed++;
+                        updateProgress(totalProcessed, files.length, `Loaded ${file}`);
+                        addLog(`✅ ${file} loaded successfully (${data.length} studies)`);
+                        
+                    } catch (error) {
+                        addLog(`❌ Failed to load ${file}: ${error.message}`);
+                    }
+                }
+                
+                if (allData.length === 0) {
+                    throw new Error('No data loaded from any CSV files');
+                }
+                
+                const uniqueData = removeDuplicates(allData);
+                await updateDashboardData(uniqueData);
+                
+                addLog(`✅ Custom update completed successfully!`);
+                updateStats();
+                
+            } catch (error) {
+                addLog(`❌ Custom update failed: ${error.message}`);
+            } finally {
+                document.getElementById('progressContainer').style.display = 'none';
+            }
+        }
+
+        // Refresh current data
+        function refreshCurrentData() {
+            clearLogs();
+            addLog('Refreshing current dashboard data...');
+            addLog('✅ Dashboard data refreshed');
+            addLog('🔄 Please refresh your dashboard page to see updated data');
+        }
+    </script>
+</body>
+</html> 

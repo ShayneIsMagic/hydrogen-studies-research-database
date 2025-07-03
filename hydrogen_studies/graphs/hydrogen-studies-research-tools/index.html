@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydrogen Studies Research Tools</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .tool-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .tool-card h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .tool-card p {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+
+        .status {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .features {
+            background: #e8f4fd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .features h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .features ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .features li {
+            padding: 8px 0;
+            color: #34495e;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .features li:before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔬 Hydrogen Studies Research Tools</h1>
+            <p>Comprehensive tools for managing and analyzing hydrogen research data</p>
+        </div>
+
+        <div class="content">
+            <div class="status">
+                <strong>✅ Server Running</strong> - Tools are ready to use on port 9000
+            </div>
+
+            <!-- Database Updater Tool -->
+            <div class="tool-card">
+                <h2>📊 Database Updater</h2>
+                <p>Update your hydrogen studies database with the latest CSV files while preventing duplicate entries. This tool processes all three CSV files and provides comprehensive duplicate detection.</p>
+                
+                <a href="database-updater.html" class="btn">Open Database Updater</a>
+                
+                <div class="features">
+                    <h3>Key Features:</h3>
+                    <ul>
+                        <li>Multi-CSV file processing (Primary, Engineering, Secondary/Tertiary)</li>
+                        <li>Advanced duplicate detection with DOI, title, and author matching</li>
+                        <li>Real-time progress tracking and detailed reporting</li>
+                        <li>Search functionality and statistics dashboard</li>
+                        <li>JSON export for data backup</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Research Dashboard Tool -->
+            <div class="tool-card">
+                <h2>📈 Research Dashboard</h2>
+                <p>Interactive dashboard for analyzing hydrogen research data with charts, statistics, and advanced search capabilities.</p>
+                
+                <a href="hydrogen-research-dashboard.html" class="btn btn-success">Open Research Dashboard</a>
+                
+                <div class="features">
+                    <h3>Key Features:</h3>
+                    <ul>
+                        <li>Interactive charts and visualizations</li>
+                        <li>Advanced search with filters</li>
+                        <li>Statistical analysis and trends</li>
+                        <li>Export capabilities for reports</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Documentation -->
+            <div class="tool-card">
+                <h2>📚 Documentation</h2>
+                <p>Comprehensive guides and documentation for using the hydrogen studies research tools.</p>
+                
+                <a href="DATABASE_UPDATE_GUIDE.md" class="btn btn-warning">View Update Guide</a>
+                <a href="README.md" class="btn btn-warning">View README</a>
+                
+                <div class="features">
+                    <h3>Available Documentation:</h3>
+                    <ul>
+                        <li>Database Update Guide - Complete instructions for updating your database</li>
+                        <li>README - General tool information and setup</li>
+                        <li>Deployment Guide - Server setup and configuration</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Simple Dashboard Update -->
+            <div class="tool-card">
+                <h2>🔧 Simple Dashboard Update</h2>
+                <p>Quick and simple way to update your existing dashboard with all CSV files. This tool directly modifies your dashboard data.</p>
+                
+                <a href="simple-update.html" class="btn btn-success">Open Simple Update</a>
+                
+                <div class="features">
+                    <h3>Key Features:</h3>
+                    <ul>
+                        <li>Loads all three CSV files automatically</li>
+                        <li>Removes duplicates using DOI and title matching</li>
+                        <li>Directly updates your existing dashboard</li>
+                        <li>Simple one-click operation</li>
+                        <li>Shows detailed results and statistics</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Dashboard Update Tool -->
+            <div class="tool-card">
+                <h2>🔄 Dashboard Update</h2>
+                <p>Update the Hydrogen Research Dashboard with fresh data from EchoWater extraction. Admin: shayne@devpipeline.com</p>
+                
+                <a href="dashboard-update-interface.html" class="btn btn-primary">Open Dashboard Update</a>
+                
+                <div class="features">
+                    <h3>Key Features:</h3>
+                    <ul>
+                        <li>Update dashboard with fresh data from Hydrogen Studies website</li>
+                        <li>Full, incremental, or filtered updates</li>
+                        <li>Real-time progress tracking and logging</li>
+                        <li>Automatic chart and statistics refresh</li>
+                        <li>Export updated data in multiple formats</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- EchoWater Data Extractor -->
+            <div class="tool-card">
+                <h2>💧 EchoWater Data Extractor</h2>
+                <p>Extract Hydrogen Studies data in CSV format with preserved hyperlinks. Designed for EchoWater team (Sarah & Alesha).</p>
+                
+                <a href="echo-water-interface.html" class="btn btn-success">Open EchoWater Extractor</a>
+                
+                <div class="features">
+                    <h3>Key Features:</h3>
+                    <ul>
+                        <li>Extract all 1,284+ studies from Hydrogen Studies website</li>
+                        <li>Preserve study hyperlinks for easy access</li>
+                        <li>CSV format matching your existing database structure</li>
+                        <li>Complete metadata extraction (topics, organisms, outcomes)</li>
+                        <li>Professional interface for EchoWater team</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Web Scraper Tool -->
+            <div class="tool-card">
+                <h2>🕷️ Web Scraper</h2>
+                <p>Extract comprehensive data from the live Hydrogen Studies website. Use this tool responsibly and consider contacting the site owner first.</p>
+                
+                <a href="web-scraper-interface.html" class="btn btn-warning">Open Web Scraper</a>
+                
+                <div class="features">
+                    <h3>Key Features:</h3>
+                    <ul>
+                        <li>Extract data from https://hydrogenstudies.com</li>
+                        <li>Systematic scraping by year, organism, or topic</li>
+                        <li>Respectful delays to avoid overwhelming the server</li>
+                        <li>Export to CSV or JSON format</li>
+                        <li>Progress tracking and detailed logging</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="tool-card">
+                <h2>🔗 Quick Access</h2>
+                <p>Direct links to important files and tools.</p>
+                
+                <a href="duplicate-detector.js" class="btn">Duplicate Detector (JS)</a>
+                <a href="enhanced-data-processor.js" class="btn">Enhanced Processor (JS)</a>
+                <a href="update-database.js" class="btn">Update Script (JS)</a>
+                <a href="simple-dashboard-updater.js" class="btn">Simple Updater (JS)</a>
+                <a href="web-scraper.js" class="btn">Web Scraper (JS)</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Hydrogen Studies Research Tools loaded successfully!');
+            
+            // Add click tracking
+            const links = document.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', function() {
+                    console.log(`Navigating to: ${this.href}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

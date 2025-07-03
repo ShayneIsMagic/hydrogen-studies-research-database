@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Update - EchoWater Integration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .info-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .info-section p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .update-options {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .update-options h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .option-group {
+            margin-bottom: 20px;
+        }
+
+        .option-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .option-group select, .option-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .option-group select:focus, .option-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-success {
+            background: #28a745;
+        }
+
+        .btn-warning {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .progress-section {
+            margin: 30px 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-top: 4px solid #667eea;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .log-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .log-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .log-content {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .disclaimer {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #ffeaa7;
+        }
+
+        .disclaimer h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .disclaimer p {
+            color: #856404;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔄 Dashboard Update</h1>
+            <p>Update Hydrogen Research Dashboard with EchoWater Data</p>
+        </div>
+
+        <div class="content">
+            <div class="info-section">
+                <h2>📋 Update Information</h2>
+                <p><strong>Purpose:</strong> Update the Hydrogen Research Dashboard with fresh data from the live Hydrogen Studies website using EchoWater extraction tools.</p>
+                <p><strong>Admin:</strong> shayne@devpipeline.com</p>
+                <p><strong>Data Source:</strong> https://hydrogenstudies.com</p>
+                <p><strong>Integration:</strong> EchoWater Data Extractor + Dashboard</p>
+            </div>
+
+            <div class="disclaimer">
+                <h4>⚠️ Important Notice</h4>
+                <p>This tool will replace the current dashboard data with fresh data extracted from the Hydrogen Studies website. The update process may take several minutes depending on the amount of data. Please ensure you have a stable internet connection.</p>
+            </div>
+
+            <div class="update-options">
+                <h2>🔧 Update Options</h2>
+                
+                <div class="option-group">
+                    <label for="updateType">Update Type:</label>
+                    <select id="updateType">
+                        <option value="full">Full Update (Complete Database)</option>
+                        <option value="incremental">Incremental Update (Recent Studies)</option>
+                        <option value="filtered">Filtered Update (By Criteria)</option>
+                    </select>
+                </div>
+
+                <div class="option-group" id="filterOptions" style="display: none;">
+                    <label for="yearRange">Year Range:</label>
+                    <select id="yearRange">
+                        <option value="">All Years</option>
+                        <option value="2020-2024">2020-2024</option>
+                        <option value="2015-2019">2015-2019</option>
+                        <option value="2010-2014">2010-2014</option>
+                        <option value="2005-2009">2005-2009</option>
+                    </select>
+                </div>
+
+                <div class="option-group" id="topicFilter" style="display: none;">
+                    <label for="topic">Health Topic:</label>
+                    <select id="topic">
+                        <option value="">All Topics</option>
+                        <option value="acne">Acne</option>
+                        <option value="aging">Aging</option>
+                        <option value="cancer">Cancer</option>
+                        <option value="cardiovascular">Cardiovascular</option>
+                        <option value="diabetes">Diabetes</option>
+                        <option value="inflammation">Inflammation</option>
+                        <option value="neurological">Neurological</option>
+                        <option value="oxidative-stress">Oxidative Stress</option>
+                        <option value="skin">Skin Health</option>
+                        <option value="sports">Sports Performance</option>
+                    </select>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn" id="startUpdate">🚀 Start Update</button>
+                    <button class="btn btn-warning" id="stopUpdate" disabled>⏹️ Stop Update</button>
+                    <button class="btn btn-success" id="viewDashboard">📊 View Dashboard</button>
+                    <button class="btn" id="clearLogs">🗑️ Clear Logs</button>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <h3>📊 Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div id="progressText">Ready to start update...</div>
+            </div>
+
+            <div id="statusContainer"></div>
+
+            <div class="stats-grid" id="statsGrid" style="display: none;">
+                <div class="stat-card">
+                    <div class="stat-number" id="currentStudies">0</div>
+                    <div class="stat-label">Current Studies</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="newStudies">0</div>
+                    <div class="stat-label">New Studies</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="updateTime">0s</div>
+                    <div class="stat-label">Update Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="successRate">0%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+            </div>
+
+            <div class="log-section">
+                <h3>📝 Update Logs</h3>
+                <div class="log-content" id="logContent">Dashboard Update Interface initialized...
+Admin: shayne@devpipeline.com
+Ready to update Hydrogen Research Dashboard...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="echo-water-scraper.js"></script>
+    <script src="csv-converter.js"></script>
+    <script src="dashboard-echowater-integration.js"></script>
+    <script>
+        // Dashboard Update Controller
+        class DashboardUpdateController {
+            constructor() {
+                this.integration = null;
+                this.isUpdating = false;
+                this.startTime = null;
+                
+                this.initializeEventListeners();
+                this.updateContactInfo();
+            }
+
+            initializeEventListeners() {
+                // Update type change
+                document.getElementById('updateType').addEventListener('change', (e) => {
+                    this.toggleFilterOptions(e.target.value);
+                });
+
+                // Start update
+                document.getElementById('startUpdate').addEventListener('click', () => {
+                    this.startUpdate();
+                });
+
+                // Stop update
+                document.getElementById('stopUpdate').addEventListener('click', () => {
+                    this.stopUpdate();
+                });
+
+                // View dashboard
+                document.getElementById('viewDashboard').addEventListener('click', () => {
+                    this.viewDashboard();
+                });
+
+                // Clear logs
+                document.getElementById('clearLogs').addEventListener('click', () => {
+                    this.clearLogs();
+                });
+            }
+
+            updateContactInfo() {
+                this.log('Dashboard Update Interface initialized');
+                this.log('Admin: shayne@devpipeline.com');
+                this.log('Ready to update Hydrogen Research Dashboard...');
+            }
+
+            toggleFilterOptions(updateType) {
+                const filterOptions = document.getElementById('filterOptions');
+                const topicFilter = document.getElementById('topicFilter');
+                
+                if (updateType === 'filtered') {
+                    filterOptions.style.display = 'block';
+                    topicFilter.style.display = 'block';
+                } else {
+                    filterOptions.style.display = 'none';
+                    topicFilter.style.display = 'none';
+                }
+            }
+
+            async startUpdate() {
+                if (this.isUpdating) return;
+
+                const updateType = document.getElementById('updateType').value;
+                const options = this.getUpdateOptions(updateType);
+
+                this.isUpdating = true;
+                this.startTime = Date.now();
+
+                // Update UI
+                document.getElementById('startUpdate').disabled = true;
+                document.getElementById('stopUpdate').disabled = false;
+                document.getElementById('statsGrid').style.display = 'grid';
+
+                this.log(`Starting dashboard update: ${updateType}`);
+                this.log(`Options: ${JSON.stringify(options)}`);
+                this.updateStatus('Update started...', 'info');
+
+                try {
+                    // Initialize integration
+                    this.integration = new DashboardEchoWaterIntegration();
+                    
+                    // Set up callbacks
+                    this.integration.initialize(
+                        null, // Dashboard instance will be loaded dynamically
+                        (progress, message) => this.updateProgress(progress, message),
+                        (message, type) => this.log(message, type)
+                    );
+                    
+                    // Start update process
+                    const result = await this.integration.updateDashboardWithEchoWaterData();
+                    
+                    if (result.success) {
+                        this.completeUpdate(result);
+                    } else {
+                        throw new Error(result.error);
+                    }
+
+                } catch (error) {
+                    this.log(`Update error: ${error.message}`, 'error');
+                    this.updateStatus(`Update failed: ${error.message}`, 'error');
+                } finally {
+                    this.isUpdating = false;
+                    document.getElementById('startUpdate').disabled = false;
+                    document.getElementById('stopUpdate').disabled = true;
+                }
+            }
+
+            getUpdateOptions(updateType) {
+                const options = { type: updateType };
+                
+                if (updateType === 'filtered') {
+                    options.yearRange = document.getElementById('yearRange').value;
+                    options.topic = document.getElementById('topic').value;
+                }
+                
+                return options;
+            }
+
+            completeUpdate(result) {
+                const updateTime = Math.round((Date.now() - this.startTime) / 1000);
+                
+                this.log(`Dashboard update completed!`);
+                this.log(`Studies updated: ${result.studiesCount}`);
+                this.log(`Update time: ${updateTime} seconds`);
+                
+                this.updateStatus(`Dashboard updated successfully! ${result.studiesCount} studies processed.`, 'success');
+                this.updateProgress(100, 'Update completed');
+                this.updateStats(result.studiesCount, updateTime, 100);
+            }
+
+            stopUpdate() {
+                this.isUpdating = false;
+                this.log('Update stopped by user');
+                this.updateStatus('Update stopped', 'warning');
+                document.getElementById('startUpdate').disabled = false;
+                document.getElementById('stopUpdate').disabled = true;
+            }
+
+            viewDashboard() {
+                window.open('hydrogen-research-dashboard.html', '_blank');
+            }
+
+            clearLogs() {
+                document.getElementById('logContent').textContent = 'Logs cleared...\n';
+                this.log('Dashboard Update Interface ready');
+            }
+
+            updateProgress(percentage, message) {
+                document.getElementById('progressFill').style.width = `${percentage}%`;
+                document.getElementById('progressText').textContent = message || `${Math.round(percentage)}% complete`;
+            }
+
+            updateStats(newStudies, updateTime, successRate) {
+                document.getElementById('newStudies').textContent = newStudies;
+                document.getElementById('updateTime').textContent = `${updateTime}s`;
+                document.getElementById('successRate').textContent = `${successRate}%`;
+            }
+
+            updateStatus(message, type = 'info') {
+                const statusContainer = document.getElementById('statusContainer');
+                const statusDiv = document.createElement('div');
+                statusDiv.className = `status ${type}`;
+                statusDiv.textContent = message;
+                
+                statusContainer.innerHTML = '';
+                statusContainer.appendChild(statusDiv);
+                
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    if (statusDiv.parentNode) {
+                        statusDiv.remove();
+                    }
+                }, 5000);
+            }
+
+            log(message, type = 'info') {
+                const logContent = document.getElementById('logContent');
+                const timestamp = new Date().toLocaleTimeString();
+                const logEntry = `[${timestamp}] ${message}\n`;
+                
+                logContent.textContent += logEntry;
+                logContent.scrollTop = logContent.scrollHeight;
+                
+                console.log(`[DashboardUpdate] ${message}`);
+            }
+        }
+
+        // Initialize the controller when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            window.dashboardUpdateController = new DashboardUpdateController();
+        });
+    </script>
+</body>
+</html> 

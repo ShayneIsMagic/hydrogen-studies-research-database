@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Debug Tool</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.4.1/papaparse.min.js"></script>
+    <script src="hydrogen-data-processor.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0066cc;
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            color: #6c757d;
+            font-weight: 500;
+        }
+        .debug-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+        }
+        .sample-data {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard Debug Tool</h1>
+        <p>This tool helps diagnose issues with the Hydrogen Studies dashboard statistics.</p>
+        
+        <button onclick="loadAllCSVs()">Load All CSV Files</button>
+        <button onclick="loadSingleCSV()">Load Single CSV (Secondary/Tertiary)</button>
+        <button onclick="showSampleData()">Show Sample Data</button>
+        <button onclick="clearResults()">Clear Results</button>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+        let dataProcessor = null;
+        let allStudies = [];
+
+        async function loadAllCSVs() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="debug-section">Loading all CSV files...</div>';
+            
+            const csvFiles = [
+                '../Hydrogen Research Database - Primary.csv',
+                '../Hydrogen Research Database - Engineering.csv',
+                '../Hydrogen Research Database - Secondary, Tertiary.csv'
+            ];
+            
+            allStudies = [];
+            dataProcessor = new HydrogenDataProcessor();
+            
+            for (const csvFile of csvFiles) {
+                try {
+                    console.log(`Loading ${csvFile}...`);
+                    const response = await fetch(csvFile);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    const csvData = await response.text();
+                    const result = await dataProcessor.loadDataFromCSV(csvData);
+                    
+                    if (result.success) {
+                        allStudies = allStudies.concat(dataProcessor.studies);
+                        console.log(`Loaded ${result.studiesCount} studies from ${csvFile}`);
+                    } else {
+                        console.error(`Failed to load ${csvFile}:`, result.error);
+                    }
+                } catch (error) {
+                    console.error(`Error loading ${csvFile}:`, error);
+                }
+            }
+            
+            // Update processor with all studies
+            dataProcessor.studies = allStudies;
+            dataProcessor.generateStatistics();
+            
+            displayResults('All CSV Files Loaded');
+        }
+
+        async function loadSingleCSV() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="debug-section">Loading single CSV file...</div>';
+            
+            try {
+                dataProcessor = new HydrogenDataProcessor();
+                const response = await fetch('../Hydrogen Research Database - Secondary, Tertiary.csv');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const csvData = await response.text();
+                const result = await dataProcessor.loadDataFromCSV(csvData);
+                
+                if (result.success) {
+                    allStudies = dataProcessor.studies;
+                    displayResults('Single CSV File Loaded');
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+            }
+        }
+
+        function displayResults(title) {
+            const stats = dataProcessor.exportStatistics();
+            const resultsDiv = document.getElementById('results');
+            
+            let html = `
+                <div class="container">
+                    <h2>${title}</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">${stats.totalStudies}</div>
+                            <div class="stat-label">Total Studies</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${stats.uniqueTitles}</div>
+                            <div class="stat-label">Unique Titles</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${stats.uniqueAuthors}</div>
+                            <div class="stat-label">Unique Authors</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${stats.withHyperlinks}</div>
+                            <div class="stat-label">With Hyperlinks</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${stats.topicsCount}</div>
+                            <div class="stat-label">Topics</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${stats.countriesCount}</div>
+                            <div class="stat-label">Countries</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Debug information
+            html += `
+                <div class="container">
+                    <h3>Debug Information</h3>
+                    <div class="debug-section">
+                        <h4>Sample Studies with Authors:</h4>
+                        <div class="sample-data">
+            `;
+            
+            const studiesWithAuthors = dataProcessor.studies.filter(study => study.allAuthors.length > 0).slice(0, 5);
+            studiesWithAuthors.forEach(study => {
+                html += `
+                    Study: ${study.title}<br>
+                    Authors: ${study.allAuthors.join(', ')}<br>
+                    First Author: "${study.firstAuthor}"<br>
+                    Other Authors: "${study.otherAuthors.join(', ')}"<br>
+                    Last Author: "${study.lastAuthor}"<br>
+                    DOI: "${study.doi}"<br>
+                    <hr>
+                `;
+            });
+            
+            html += `
+                        </div>
+                    </div>
+                    
+                    <div class="debug-section">
+                        <h4>Sample Studies with Hyperlinks:</h4>
+                        <div class="sample-data">
+            `;
+            
+            const studiesWithLinks = dataProcessor.studies.filter(study => {
+                const doi = study.doi || '';
+                return doi.includes('http') || doi.includes('www') || doi.includes('doi.org') || doi.includes('pubmed') || doi.includes('arxiv');
+            }).slice(0, 5);
+            
+            studiesWithLinks.forEach(study => {
+                html += `
+                    Study: ${study.title}<br>
+                    DOI/Link: "${study.doi}"<br>
+                    <hr>
+                `;
+            });
+            
+            html += `
+                        </div>
+                    </div>
+                    
+                    <div class="debug-section">
+                        <h4>Author Statistics:</h4>
+                        <p>Total studies: ${dataProcessor.studies.length}</p>
+                        <p>Studies with first author: ${dataProcessor.studies.filter(s => s.firstAuthor && s.firstAuthor.trim()).length}</p>
+                        <p>Studies with other authors: ${dataProcessor.studies.filter(s => s.otherAuthors && s.otherAuthors.length > 0).length}</p>
+                        <p>Studies with last author: ${dataProcessor.studies.filter(s => s.lastAuthor && s.lastAuthor.trim()).length}</p>
+                        <p>Studies with any authors: ${dataProcessor.studies.filter(s => s.allAuthors.length > 0).length}</p>
+                    </div>
+                </div>
+            `;
+            
+            resultsDiv.innerHTML = html;
+        }
+
+        function showSampleData() {
+            if (!dataProcessor || !dataProcessor.studies.length) {
+                document.getElementById('results').innerHTML = '<div class="error">No data loaded. Please load CSV files first.</div>';
+                return;
+            }
+            
+            const resultsDiv = document.getElementById('results');
+            let html = `
+                <div class="container">
+                    <h3>Sample Raw Data (First 5 Studies)</h3>
+                    <div class="sample-data">
+            `;
+            
+            dataProcessor.studies.slice(0, 5).forEach((study, index) => {
+                html += `
+                    <strong>Study ${index + 1}:</strong><br>
+                    Title: "${study.title}"<br>
+                    Year: ${study.year}<br>
+                    Journal: "${study.journal}"<br>
+                    DOI: "${study.doi}"<br>
+                    First Author: "${study.firstAuthor}"<br>
+                    Other Authors: "${study.otherAuthors.join(', ')}"<br>
+                    Last Author: "${study.lastAuthor}"<br>
+                    All Authors: [${study.allAuthors.join(', ')}]<br>
+                    Topic: "${study.topic}"<br>
+                    Country: "${study.country}"<br>
+                    <hr>
+                `;
+            });
+            
+            html += `
+                    </div>
+                </div>
+            `;
+            
+            resultsDiv.innerHTML = html;
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+            dataProcessor = null;
+            allStudies = [];
+        }
+    </script>
+</body>
+</html> 

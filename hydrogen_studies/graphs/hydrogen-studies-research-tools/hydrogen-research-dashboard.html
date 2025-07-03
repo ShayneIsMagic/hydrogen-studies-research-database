@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydrogen Studies Research Dashboard - Secondary & Tertiary Research</title>
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.4.1/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    
+    <!-- Fallback for Papa Parse if CDN fails -->
+    <script>
+        // Check if Papa Parse loaded successfully
+        if (typeof Papa === 'undefined') {
+            console.warn('Papa Parse not loaded from CDN, trying alternative sources...');
+            
+            // Try alternative CDN
+            const script = document.createElement('script');
+            script.src = 'https://unpkg.com/papaparse@5.4.1/papaparse.min.js';
+            script.onload = function() {
+                console.log('Papa Parse loaded from alternative CDN');
+            };
+            script.onerror = function() {
+                console.error('Failed to load Papa Parse from alternative CDN');
+                // Show error message
+                document.addEventListener('DOMContentLoaded', function() {
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'error-message';
+                    errorDiv.innerHTML = `
+                        <h3>Library Loading Error</h3>
+                        <p>Failed to load Papa Parse library from CDN. This may be due to network restrictions.</p>
+                        <h4>Solutions:</h4>
+                        <ol>
+                            <li>Check your internet connection</li>
+                            <li>Try refreshing the page</li>
+                            <li>If using a corporate network, contact your IT department</li>
+                            <li>Try using a different browser</li>
+                        </ol>
+                    `;
+                    document.querySelector('.hero').appendChild(errorDiv);
+                });
+            };
+            document.head.appendChild(script);
+        } else {
+            console.log('Papa Parse loaded successfully from primary CDN');
+        }
+    </script>
+    
+    <!-- Hydrogen Data Processor -->
+    <script src="hydrogen-data-processor.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0066cc;
+            --secondary-blue: #4da6ff;
+            --accent-teal: #00b8cc;
+            --dark-blue: #003d7a;
+            --light-gray: #f8f9fa;
+            --medium-gray: #6c757d;
+            --dark-gray: #343a40;
+            --white: #ffffff;
+            --border-color: #dee2e6;
+            --success-green: #28a745;
+            --warning-orange: #ffc107;
+            --danger-red: #dc3545;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--light-gray);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--accent-teal);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page {
+            display: none;
+            min-height: calc(100vh - 80px);
+            padding: 2rem 0;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .loading-spinner {
+            border: 4px solid var(--light-gray);
+            border-top: 4px solid var(--primary-blue);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 2rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--white), var(--light-gray));
+            padding: 3rem 0;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--medium-gray);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--medium-gray);
+            font-weight: 500;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .chart-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .chart-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .chart-controls select,
+        .chart-controls button {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: white;
+            color: var(--dark-gray);
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .chart-controls button {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .chart-controls button:hover {
+            background: var(--dark-blue);
+        }
+
+        .chart-controls button.active {
+            background: var(--dark-blue);
+        }
+
+        .chart-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .chart-tab {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            background: white;
+            color: var(--medium-gray);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .chart-tab.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+        }
+
+        .chart-insights {
+            background: var(--light-gray);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+        }
+
+        .insight-highlight {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .search-button {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .search-filters {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            font-weight: 500;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .filter-group select {
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* Study Card */
+        .study-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin: 1rem 0;
+            transition: transform 0.3s ease;
+        }
+
+        .study-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .study-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .study-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .study-meta span {
+            background: var(--light-gray);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            color: var(--medium-gray);
+        }
+
+        .study-authors, .study-topic {
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            color: var(--dark-gray);
+        }
+
+        .study-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .study-details span {
+            background: #e3f2fd;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            color: var(--primary-blue);
+            border: 1px solid #bbdefb;
+        }
+
+        .study-abstract {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        .study-links {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .study-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--primary-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .study-link:hover {
+            background: var(--dark-blue);
+            color: white;
+        }
+
+        .study-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: var(--light-gray);
+            color: var(--primary-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Grid Layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Error State */
+        .error-message {
+            background: var(--danger-red);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        /* Success State */
+        .success-message {
+            background: var(--success-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        /* Search Enhancements */
+        .search-stats {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #0066cc;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .suggestion-item {
+            padding: 8px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+
+        .suggestion-item:hover {
+            background: #f8f9fa;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-prefix {
+            font-weight: 600;
+            color: #0066cc;
+            margin-right: 8px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .search-input-container {
+            position: relative;
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">Hydrogen Studies Research</a>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active" onclick="showPage('dashboard')">Dashboard</a></li>
+                <li><a href="#" class="nav-link" onclick="showPage('timeline')">Timeline</a></li>
+                <li><a href="#" class="nav-link" onclick="showPage('topics')">Topics</a></li>
+                <li><a href="#" class="nav-link" onclick="showPage('countries')">Countries</a></li>
+                <li><a href="#" class="nav-link" onclick="showPage('search')">Search</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Dashboard Page -->
+        <div id="dashboard" class="page active">
+            <div class="hero">
+                <h1>Hydrogen Studies Research Database</h1>
+                <p>Comprehensive analysis of secondary and tertiary hydrogen research studies</p>
+                <div id="loadingState" class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading research data...</p>
+                </div>
+            </div>
+
+            <!-- Statistics Grid -->
+            <div id="statsGrid" class="stats-grid" style="display: none;">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalStudies">-</div>
+                    <div class="stat-label">Total Studies</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="uniqueTitles">-</div>
+                    <div class="stat-label">Unique Titles</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="uniqueAuthors">-</div>
+                    <div class="stat-label">Unique Authors</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="withHyperlinks">-</div>
+                    <div class="stat-label">With Hyperlinks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="topicsCount">-</div>
+                    <div class="stat-label">Research Topics</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="countriesCount">-</div>
+                    <div class="stat-label">Countries</div>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Timeline Chart -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Research Timeline</h3>
+                        <div class="chart-controls">
+                            <select id="timelineFilter" onchange="updateTimelineChart()">
+                                <option value="all">All Years</option>
+                                <option value="modern">Modern Era (2000+)</option>
+                                <option value="recent">Recent (2015+)</option>
+                                <option value="peak">Peak Years (2010-2023)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="timelineChart"></canvas>
+                    </div>
+                    <div class="chart-insights" id="timelineInsights"></div>
+                </div>
+
+                <!-- Topics Chart -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Research Topics</h3>
+                        <div class="chart-controls">
+                            <select id="topicsLimit" onchange="updateTopicsChart()">
+                                <option value="5">Top 5</option>
+                                <option value="10" selected>Top 10</option>
+                                <option value="15">Top 15</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="topicsChart"></canvas>
+                    </div>
+                    <div class="chart-insights" id="topicsInsights"></div>
+                </div>
+            </div>
+
+            <!-- Countries Chart -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">Research by Country</h3>
+                    <div class="chart-controls">
+                        <select id="countriesLimit" onchange="updateCountriesChart()">
+                            <option value="5">Top 5</option>
+                            <option value="10" selected>Top 10</option>
+                            <option value="15">Top 15</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="countriesChart"></canvas>
+                </div>
+                <div class="chart-insights" id="countriesInsights"></div>
+            </div>
+        </div>
+
+        <!-- Timeline Page -->
+        <div id="timeline" class="page">
+            <div class="hero">
+                <h1>Research Timeline Analysis</h1>
+                <p>Explore the evolution of hydrogen research over time</p>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">Publication Timeline</h3>
+                    <div class="chart-tabs">
+                        <button class="chart-tab active" onclick="setTimelineType('line')">Line</button>
+                        <button class="chart-tab" onclick="setTimelineType('bar')">Bar</button>
+                        <button class="chart-tab" onclick="setTimelineType('area')">Area</button>
+                        <button class="chart-tab" onclick="setTimelineType('logarithmic')">Logarithmic</button>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="detailedTimelineChart"></canvas>
+                </div>
+                <div class="chart-insights" id="detailedTimelineInsights"></div>
+            </div>
+        </div>
+
+        <!-- Topics Page -->
+        <div id="topics" class="page">
+            <div class="hero">
+                <h1>Research Topics Analysis</h1>
+                <p>Explore the distribution of research topics and themes</p>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">Topic Distribution</h3>
+                    <div class="chart-tabs">
+                        <button class="chart-tab active" onclick="setTopicType('doughnut')">Doughnut</button>
+                        <button class="chart-tab" onclick="setTopicType('pie')">Pie</button>
+                        <button class="chart-tab" onclick="setTopicType('bar')">Bar</button>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="detailedTopicsChart"></canvas>
+                </div>
+                <div class="chart-insights" id="detailedTopicsInsights"></div>
+            </div>
+        </div>
+
+        <!-- Countries Page -->
+        <div id="countries" class="page">
+            <div class="hero">
+                <h1>Geographic Research Analysis</h1>
+                <p>Explore research distribution by country and region</p>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">Research by Country</h3>
+                    <div class="chart-tabs">
+                        <button class="chart-tab active" onclick="setCountryType('bar')">Vertical</button>
+                        <button class="chart-tab" onclick="setCountryType('horizontal')">Horizontal</button>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="detailedCountriesChart"></canvas>
+                </div>
+                <div class="chart-insights" id="detailedCountriesInsights"></div>
+            </div>
+        </div>
+
+        <!-- Search Page -->
+        <div id="search" class="page">
+            <div class="hero">
+                <h1>Research Search & Filter</h1>
+                <p>Search and filter through the hydrogen research database</p>
+            </div>
+
+            <div class="search-section">
+                            <div class="search-bar">
+                <div class="search-input-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Universal search: topics, countries, authors, journals, titles..." oninput="showTopicSuggestions(this.value)">
+                    <div id="topicSuggestions" class="search-suggestions" style="display: none;"></div>
+                </div>
+                <button class="search-button" onclick="performSearch()">Search</button>
+            </div>
+
+                <div class="search-filters">
+                    <div class="filter-group">
+                        <label for="yearFilter">Year Range</label>
+                        <select id="yearFilter">
+                            <option value="">All Years</option>
+                            <option value="2020-2024">2020-2024</option>
+                            <option value="2015-2019">2015-2019</option>
+                            <option value="2010-2014">2010-2014</option>
+                            <option value="2000-2009">2000-2009</option>
+                            <option value="1990-1999">1990-1999</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="topicFilter">Topic</label>
+                        <select id="topicFilter">
+                            <option value="">All Topics</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="countryFilter">Country</label>
+                        <select id="countryFilter">
+                            <option value="">All Countries</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="designationFilter">Designation</label>
+                        <select id="designationFilter">
+                            <option value="">All Types</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="searchResults">
+                    <!-- Search results will be populated here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Global variables
+        let dataProcessor = null;
+        let charts = {};
+        let currentTimelineType = 'line';
+        let currentTopicType = 'doughnut';
+        let currentCountryType = 'bar';
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Wait a bit to ensure libraries are loaded
+            setTimeout(async function() {
+                await initializeData();
+            }, 1000);
+        });
+
+        /**
+         * Initialize data loading and processing
+         */
+        async function initializeData() {
+            try {
+                // Create data processor
+                dataProcessor = new HydrogenDataProcessor();
+
+                // Load all three CSV files
+                const csvFiles = [
+                    '../Hydrogen Research Database - Primary.csv',
+                    '../Hydrogen Research Database - Engineering.csv',
+                    '../Hydrogen Research Database - Secondary, Tertiary.csv'
+                ];
+                
+                let allStudies = [];
+                
+                for (const csvFile of csvFiles) {
+                    try {
+                        console.log(`Loading ${csvFile}...`);
+                        const response = await fetch(csvFile);
+                        
+                        if (!response.ok) {
+                            console.warn(`Failed to load ${csvFile}: ${response.status}`);
+                            continue;
+                        }
+                        
+                        const csvData = await response.text();
+                        const result = await dataProcessor.loadDataFromCSV(csvData);
+                        
+                        if (result.success) {
+                            allStudies = allStudies.concat(dataProcessor.studies);
+                            console.log(`Loaded ${result.studiesCount} studies from ${csvFile}`);
+                        } else {
+                            console.warn(`Failed to process ${csvFile}:`, result.error);
+                        }
+                    } catch (error) {
+                        console.warn(`Error loading ${csvFile}:`, error.message);
+                    }
+                }
+                
+                if (allStudies.length === 0) {
+                    throw new Error('Failed to load any CSV files. Please ensure you are running this through a web server.');
+                }
+                
+                // Remove duplicates and update processor
+                const uniqueStudies = removeDuplicates(allStudies);
+                dataProcessor.studies = uniqueStudies;
+                dataProcessor.generateStatistics();
+
+                console.log(`Loaded ${uniqueStudies.length} unique studies from all CSV files`);
+                console.log('Statistics:', dataProcessor.exportStatistics());
+                hideLoading();
+                updateStatistics();
+                initializeCharts();
+                populateFilters();
+
+            } catch (error) {
+                console.error('Error initializing data:', error);
+                showError('Failed to load research data. Please check the console for details.');
+            }
+        }
+
+        function removeDuplicates(studies) {
+            const seen = new Set();
+            const uniqueStudies = [];
+
+            studies.forEach(study => {
+                const key = createStudyKey(study);
+                if (!seen.has(key)) {
+                    seen.add(key);
+                    uniqueStudies.push(study);
+                }
+            });
+
+            return uniqueStudies;
+        }
+
+        function createStudyKey(study) {
+            const title = (study.title || '').toLowerCase().trim();
+            const year = study.year || '';
+            const firstAuthor = (study.firstAuthor || '').toLowerCase().trim();
+            
+            return `${title}_${year}_${firstAuthor}`;
+        }
+
+        /**
+         * Hide loading state and show content
+         */
+        function hideLoading() {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('statsGrid').style.display = 'grid';
+        }
+
+        /**
+         * Show error message
+         */
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.innerHTML = `
+                <h3>Error Loading Data</h3>
+                <p>${message}</p>
+                <h4>How to fix this:</h4>
+                <ol>
+                    <li><strong>Option 1 (Python):</strong> Open terminal in this folder and run: <code>python3 -m http.server 8000</code></li>
+                    <li><strong>Option 2 (Node.js):</strong> Install dependencies with <code>npm install</code> then run <code>npm start</code></li>
+                    <li><strong>Option 3:</strong> Use any local web server (Live Server in VS Code, etc.)</li>
+                </ol>
+                <p>Then visit: <code>http://localhost:8000</code> (Python) or <code>http://localhost:3000</code> (Node.js)</p>
+            `;
+            document.querySelector('.hero').appendChild(errorDiv);
+        }
+
+        /**
+         * Update statistics display
+         */
+        function updateStatistics() {
+            const stats = dataProcessor.exportStatistics();
+            console.log('Updating statistics with:', stats);
+            
+            // Safely update statistics with fallback values
+            document.getElementById('totalStudies').textContent = (stats.totalStudies || 0).toLocaleString();
+            document.getElementById('uniqueTitles').textContent = (stats.uniqueTitles || 0).toLocaleString();
+            document.getElementById('uniqueAuthors').textContent = (stats.uniqueAuthors || 0).toLocaleString();
+            document.getElementById('withHyperlinks').textContent = (stats.withHyperlinks || 0).toLocaleString();
+            document.getElementById('topicsCount').textContent = stats.topicsCount || 0;
+            document.getElementById('countriesCount').textContent = stats.countriesCount || 0;
+        }
+
+        /**
+         * Initialize all charts
+         */
+        function initializeCharts() {
+            try {
+                console.log('Initializing charts...');
+                
+                // Dashboard charts
+                charts.timeline = dataProcessor.renderTimelineChart('timelineChart');
+                console.log('Timeline chart created');
+                
+                charts.topics = dataProcessor.renderTopicChart('topicsChart');
+                console.log('Topics chart created');
+                
+                charts.countries = dataProcessor.renderCountryChart('countriesChart');
+                console.log('Countries chart created');
+
+                // Detailed charts
+                charts.detailedTimeline = dataProcessor.renderTimelineChart('detailedTimelineChart', { type: 'line' });
+                charts.detailedTopics = dataProcessor.renderTopicChart('detailedTopicsChart', { type: 'doughnut' });
+                charts.detailedCountries = dataProcessor.renderCountryChart('detailedCountriesChart', { type: 'bar' });
+
+                updateChartInsights();
+                console.log('All charts initialized successfully');
+            } catch (error) {
+                console.error('Error initializing charts:', error);
+            }
+        }
+
+        /**
+         * Update chart insights
+         */
+        function updateChartInsights() {
+            const stats = dataProcessor.exportStatistics();
+            
+            // Timeline insights
+            const timelineInsights = document.getElementById('timelineInsights');
+            if (timelineInsights && stats.growthTrends && stats.growthTrends.length > 0) {
+                const trends = stats.growthTrends;
+                const total = trends.reduce((sum, d) => sum + d.count, 0);
+                const peakYear = trends.reduce((max, d) => d.count > max.count ? d : max, trends[0]);
+                
+                timelineInsights.innerHTML = `
+                    <strong>Analysis:</strong> Total of <span class="insight-highlight">${total} studies</span> published. 
+                    Peak year was <span class="insight-highlight">${peakYear.year}</span> with ${peakYear.count} studies. 
+                    Research spans <span class="insight-highlight">${stats.yearRange?.span || 0} years</span> from ${stats.yearRange?.earliest || 'N/A'} to ${stats.yearRange?.latest || 'N/A'}.
+                `;
+            }
+
+            // Topics insights
+            const topicsInsights = document.getElementById('topicsInsights');
+            if (topicsInsights && stats.topTopics && stats.topTopics.length > 0) {
+                const topTopic = stats.topTopics[0];
+                topicsInsights.innerHTML = `
+                    <strong>Analysis:</strong> <span class="insight-highlight">${stats.topicsCount || 0} unique topics</span> identified. 
+                    Most researched topic is <span class="insight-highlight">${topTopic.topic}</span> with ${topTopic.count} studies.
+                `;
+            }
+
+            // Countries insights
+            const countriesInsights = document.getElementById('countriesInsights');
+            if (countriesInsights && stats.topCountries && stats.topCountries.length > 0) {
+                const topCountry = stats.topCountries[0];
+                countriesInsights.innerHTML = `
+                    <strong>Analysis:</strong> Research from <span class="insight-highlight">${stats.countriesCount || 0} countries</span>. 
+                    Leading country is <span class="insight-highlight">${topCountry.country}</span> with ${topCountry.count} studies.
+                `;
+            }
+        }
+
+        /**
+         * Populate filter dropdowns
+         */
+        function populateFilters() {
+            const stats = dataProcessor.exportStatistics();
+            
+            // Populate topic filter
+            const topicFilter = document.getElementById('topicFilter');
+            if (topicFilter && stats.topTopics && stats.topTopics.length > 0) {
+                stats.topTopics.forEach(topic => {
+                    const option = document.createElement('option');
+                    option.value = topic.topic;
+                    option.textContent = `${topic.topic} (${topic.count})`;
+                    topicFilter.appendChild(option);
+                });
+            }
+
+            // Populate country filter
+            const countryFilter = document.getElementById('countryFilter');
+            if (countryFilter && stats.topCountries && stats.topCountries.length > 0) {
+                stats.topCountries.forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.country;
+                    option.textContent = `${country.country} (${country.count})`;
+                    countryFilter.appendChild(option);
+                });
+            }
+
+            // Populate designation filter
+            const designationFilter = document.getElementById('designationFilter');
+            if (designationFilter && dataProcessor.studies) {
+                const designations = new Set();
+                dataProcessor.studies.forEach(study => {
+                    if (study.designation) {
+                        designations.add(study.designation);
+                    }
+                });
+                
+                Array.from(designations).sort().forEach(designation => {
+                    const option = document.createElement('option');
+                    option.value = designation;
+                    option.textContent = designation;
+                    designationFilter.appendChild(option);
+                });
+            }
+        }
+
+        /**
+         * Update timeline chart based on filter
+         */
+        function updateTimelineChart() {
+            const filter = document.getElementById('timelineFilter').value;
+            let filteredData = dataProcessor.getGrowthTrends();
+            
+            switch(filter) {
+                case 'modern':
+                    filteredData = filteredData.filter(d => d.year >= 2000);
+                    break;
+                case 'recent':
+                    filteredData = filteredData.filter(d => d.year >= 2015);
+                    break;
+                case 'peak':
+                    filteredData = filteredData.filter(d => d.year >= 2010 && d.year <= 2023);
+                    break;
+            }
+
+            if (charts.timeline) {
+                charts.timeline.destroy();
+            }
+            
+            charts.timeline = dataProcessor.renderTimelineChart('timelineChart', {
+                data: filteredData
+            });
+        }
+
+        /**
+         * Update topics chart based on limit
+         */
+        function updateTopicsChart() {
+            const limit = parseInt(document.getElementById('topicsLimit').value);
+            
+            if (charts.topics) {
+                charts.topics.destroy();
+            }
+            
+            charts.topics = dataProcessor.renderTopicChart('topicsChart', {
+                limit: limit
+            });
+        }
+
+        /**
+         * Update countries chart based on limit
+         */
+        function updateCountriesChart() {
+            const limit = parseInt(document.getElementById('countriesLimit').value);
+            
+            if (charts.countries) {
+                charts.countries.destroy();
+            }
+            
+            charts.countries = dataProcessor.renderCountryChart('countriesChart', {
+                limit: limit
+            });
+        }
+
+        /**
+         * Set timeline chart type
+         */
+        function setTimelineType(type) {
+            currentTimelineType = type;
+            
+            // Update tab appearance
+            document.querySelectorAll('#timeline .chart-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Recreate chart
+            if (charts.detailedTimeline) {
+                charts.detailedTimeline.destroy();
+            }
+            
+            charts.detailedTimeline = dataProcessor.renderTimelineChart('detailedTimelineChart', {
+                type: type
+            });
+        }
+
+        /**
+         * Set topic chart type
+         */
+        function setTopicType(type) {
+            currentTopicType = type;
+            
+            // Update tab appearance
+            document.querySelectorAll('#topics .chart-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Recreate chart
+            if (charts.detailedTopics) {
+                charts.detailedTopics.destroy();
+            }
+            
+            charts.detailedTopics = dataProcessor.renderTopicChart('detailedTopicsChart', {
+                type: type
+            });
+        }
+
+        /**
+         * Set country chart type
+         */
+        function setCountryType(type) {
+            currentCountryType = type;
+            
+            // Update tab appearance
+            document.querySelectorAll('#countries .chart-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Recreate chart
+            if (charts.detailedCountries) {
+                charts.detailedCountries.destroy();
+            }
+            
+            charts.detailedCountries = dataProcessor.renderCountryChart('detailedCountriesChart', {
+                type: type,
+                horizontal: type === 'horizontal'
+            });
+        }
+
+        /**
+         * Perform search with enhanced functionality
+         */
+        function performSearch() {
+            const query = document.getElementById('searchInput').value;
+            const yearFilter = document.getElementById('yearFilter').value;
+            const topicFilter = document.getElementById('topicFilter').value;
+            const countryFilter = document.getElementById('countryFilter').value;
+            const designationFilter = document.getElementById('designationFilter').value;
+
+            // Build filters object
+            const filters = {};
+            
+            if (yearFilter) {
+                const [startYear, endYear] = yearFilter.split('-').map(Number);
+                filters.yearRange = [startYear, endYear];
+            }
+            
+            if (topicFilter) filters.topic = topicFilter;
+            if (countryFilter) filters.country = countryFilter;
+            if (designationFilter) filters.designation = designationFilter;
+
+            // Perform search
+            const results = dataProcessor.searchStudies(query, filters);
+            displaySearchResults(results);
+            
+            // Update search statistics
+            updateSearchStats(results.length, query, filters);
+        }
+
+        /**
+         * Update search statistics display
+         */
+        function updateSearchStats(resultCount, query, filters) {
+            const totalStudies = dataProcessor.studies.length;
+            
+            // Create or update search stats element
+            let statsEl = document.getElementById('searchStats');
+            if (!statsEl) {
+                statsEl = document.createElement('div');
+                statsEl.id = 'searchStats';
+                statsEl.className = 'search-stats';
+                document.getElementById('searchResults').insertBefore(statsEl, document.getElementById('searchResults').firstChild);
+            }
+            
+            let statsText = `Showing ${resultCount} of ${totalStudies} studies`;
+            
+            if (query) {
+                statsText += ` for "${query}"`;
+            }
+            
+            const activeFilters = [];
+            if (filters.topic) activeFilters.push(`Topic: ${filters.topic}`);
+            if (filters.country) activeFilters.push(`Country: ${filters.country}`);
+            if (filters.designation) activeFilters.push(`Type: ${filters.designation}`);
+            if (filters.yearRange && (filters.yearRange[0] || filters.yearRange[1])) {
+                const yearText = [];
+                if (filters.yearRange[0]) yearText.push(`from ${filters.yearRange[0]}`);
+                if (filters.yearRange[1]) yearText.push(`to ${filters.yearRange[1]}`);
+                activeFilters.push(`Years: ${yearText.join(' ')}`);
+            }
+            
+            if (activeFilters.length > 0) {
+                statsText += ` (${activeFilters.join(', ')})`;
+            }
+            
+            statsEl.innerHTML = `<strong>${statsText}</strong>`;
+        }
+
+        /**
+         * Display search results
+         */
+        function displaySearchResults(results) {
+            const container = document.getElementById('searchResults');
+            
+            if (results.length === 0) {
+                container.innerHTML = '<p>No studies found matching your criteria.</p>';
+                return;
+            }
+
+            container.innerHTML = `
+                <h3>Found ${results.length} studies</h3>
+                ${results.slice(0, 20).map(study => `
+                    <div class="study-card">
+                        <div class="study-title">${study.title}</div>
+                        <div class="study-meta">
+                            <span><strong>Year:</strong> ${study.year || 'N/A'}</span>
+                            <span><strong>Journal:</strong> ${study.journal || 'N/A'}</span>
+                            <span><strong>Country:</strong> ${study.country || 'N/A'}</span>
+                            <span><strong>Type:</strong> ${study.designation || 'N/A'}</span>
+                        </div>
+                        <div class="study-authors">
+                            <strong>Authors:</strong> ${study.allAuthors.length > 0 ? study.allAuthors.join(', ') : 'N/A'}
+                        </div>
+                        <div class="study-topic">
+                            <strong>Topic:</strong> ${study.topic || study.primaryTopic || 'N/A'}
+                        </div>
+                        <div class="study-details">
+                            ${study.rank ? `<span><strong>Rank:</strong> ${study.rank}</span>` : ''}
+                            ${study.model ? `<span><strong>Model:</strong> ${study.model}</span>` : ''}
+                            ${study.vehicle ? `<span><strong>Vehicle:</strong> ${study.vehicle}</span>` : ''}
+                            ${study.ph ? `<span><strong>pH:</strong> ${study.ph}</span>` : ''}
+                            ${study.application ? `<span><strong>Application:</strong> ${study.application}</span>` : ''}
+                            ${study.comparison ? `<span><strong>Comparison:</strong> ${study.comparison}</span>` : ''}
+                            ${study.complement ? `<span><strong>Complement:</strong> ${study.complement}</span>` : ''}
+                        </div>
+                        <div class="study-abstract">
+                            <strong>Abstract:</strong> ${study.abstract ? study.abstract.substring(0, 300) + (study.abstract.length > 300 ? '...' : '') : 'N/A'}
+                        </div>
+                        <div class="study-links">
+                            ${study.doi ? this.generateStudyLinks(study.doi) : ''}
+                        </div>
+                        <div class="study-tags">
+                            ${study.allAuthors.slice(0, 3).map(author => `<span class="tag">${author}</span>`).join('')}
+                            <span class="tag">${study.topic || 'No Topic'}</span>
+                            <span class="tag">${study.country || 'No Country'}</span>
+                        </div>
+                    </div>
+                `).join('')}
+                ${results.length > 20 ? `<p>Showing first 20 results. Use more specific filters to narrow down results.</p>` : ''}
+            `;
+        }
+
+        /**
+         * Show page
+         */
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Set active nav link
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pageMap = {
+                'dashboard': 0,
+                'timeline': 1,
+                'topics': 2,
+                'countries': 3,
+                'search': 4
+            };
+            
+            if (pageMap[pageId] !== undefined) {
+                navLinks[pageMap[pageId]].classList.add('active');
+            }
+        }
+
+        /**
+         * Show universal search suggestions based on input
+         */
+        function showTopicSuggestions(query) {
+            if (!dataProcessor) return;
+            
+            const suggestionsContainer = document.getElementById('topicSuggestions');
+            const suggestions = dataProcessor.getSearchSuggestions(query);
+            
+            if (suggestions.length > 0 && query.trim().length >= 2) {
+                suggestionsContainer.innerHTML = suggestions.map(suggestion => {
+                    const [prefix, ...rest] = suggestion.split(': ');
+                    const value = rest.join(': ');
+                    return `<div class="suggestion-item" onclick="selectSearchSuggestion('${suggestion}')">
+                        <span class="suggestion-prefix">${prefix}</span>
+                        <span>${value}</span>
+                    </div>`;
+                }).join('');
+                suggestionsContainer.style.display = 'block';
+            } else {
+                suggestionsContainer.style.display = 'none';
+            }
+        }
+
+        /**
+         * Select a search suggestion
+         */
+        function selectSearchSuggestion(suggestion) {
+            // Extract the actual value from the suggestion (remove prefix like "Topic: ", "Country: ", etc.)
+            const value = suggestion.replace(/^(Topic|Country|Type|Journal|Author):\s*/, '');
+            document.getElementById('searchInput').value = value;
+            document.getElementById('topicSuggestions').style.display = 'none';
+            performSearch();
+        }
+
+        /**
+         * Select a topic suggestion (legacy function)
+         */
+        function selectTopicSuggestion(topic) {
+            document.getElementById('searchInput').value = topic;
+            document.getElementById('topicSuggestions').style.display = 'none';
+            performSearch();
+        }
+
+        /**
+         * Generate study links based on DOI/PMID/Link format
+         * @param {string} doi - DOI/PMID/Link string
+         * @returns {string} HTML links
+         */
+        function generateStudyLinks(doi) {
+            if (!doi || doi.trim() === '') return '';
+            
+            const doiStr = doi.trim();
+            let links = '';
+            
+            // Handle different DOI/PMID/Link formats
+            if (doiStr.startsWith('10.')) {
+                // Standard DOI format
+                links += `<a href="https://doi.org/${doiStr}" target="_blank" class="study-link">📄 View PDF/DOI</a>`;
+            } else if (doiStr.toLowerCase().includes('pubmed') || doiStr.toLowerCase().includes('pmid')) {
+                // PubMed format
+                const pmid = doiStr.replace(/[^\d]/g, '');
+                if (pmid) {
+                    links += `<a href="https://pubmed.ncbi.nlm.nih.gov/${pmid}/" target="_blank" class="study-link">🔬 PubMed</a>`;
+                }
+            } else if (doiStr.toLowerCase().includes('arxiv')) {
+                // arXiv format
+                const arxivId = doiStr.split('/').pop();
+                if (arxivId) {
+                    links += `<a href="https://arxiv.org/abs/${arxivId}" target="_blank" class="study-link">📚 arXiv</a>`;
+                }
+            } else if (doiStr.startsWith('http')) {
+                // Direct URL
+                links += `<a href="${doiStr}" target="_blank" class="study-link">🌐 View Study</a>`;
+            } else if (doiStr.length > 5) {
+                // Assume it's a DOI and try the standard format
+                links += `<a href="https://doi.org/${doiStr}" target="_blank" class="study-link">📄 View PDF/DOI</a>`;
+            }
+            
+            return links;
+        }
+
+        /**
+         * Hide suggestions when clicking outside
+         */
+        document.addEventListener('click', function(event) {
+            const suggestionsContainer = document.getElementById('topicSuggestions');
+            const searchInput = document.getElementById('searchInput');
+            
+            if (!searchInput.contains(event.target) && !suggestionsContainer.contains(event.target)) {
+                suggestionsContainer.style.display = 'none';
+            }
+        });
+
+        // Add keyboard shortcut for search
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.key === 'k') {
+                event.preventDefault();
+                showPage('search');
+                document.getElementById('searchInput').focus();
+            }
+        });
+    </script>
+</body>
+</html> 

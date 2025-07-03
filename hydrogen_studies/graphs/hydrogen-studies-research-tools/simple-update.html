@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Dashboard Update</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-top: 0;
+        }
+        
+        .upload-section {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-section.dragover {
+            border-color: #007bff;
+            background: #e3f2fd;
+        }
+        
+        .upload-section h3 {
+            color: #495057;
+            margin-bottom: 15px;
+        }
+        
+        .upload-section p {
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .upload-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        
+        .upload-btn:hover {
+            background: #0056b3;
+        }
+        
+        .file-list {
+            margin-top: 20px;
+        }
+        
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .file-name {
+            font-weight: 500;
+            color: #495057;
+        }
+        
+        .file-size {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .remove-file {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .button:hover {
+            background: #0056b3;
+        }
+        
+        .button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .results {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .results h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .stat-value {
+            color: #007bff;
+            font-weight: 600;
+        }
+        
+        .duplicates-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .duplicates-section h4 {
+            color: #856404;
+            margin-top: 0;
+        }
+        
+        .duplicate-item {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .duplicate-title {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+        
+        .duplicate-details {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .links {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .links a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+        
+        .links a:hover {
+            background: #218838;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #6c757d;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            color: #007bff;
+            border-bottom-color: #007bff;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Simple Dashboard Update</h1>
+        
+        <div class="info-box">
+            <h3>What this does:</h3>
+            <ul>
+                <li>Loads CSV files by drag-and-drop or automatic loading</li>
+                <li>Removes duplicate studies based on year and title matching</li>
+                <li>Updates your existing dashboard with the combined data</li>
+                <li>Shows you exactly what was updated and any duplicates found</li>
+            </ul>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('auto')">🔄 Auto Load CSV Files</button>
+            <button class="tab" onclick="switchTab('upload')">📁 Drag & Drop Files</button>
+        </div>
+        
+        <!-- Auto Load Tab -->
+        <div id="auto-tab" class="tab-content active">
+            <div class="info-box">
+                <h3>Automatic CSV Loading</h3>
+                <p>This will automatically load the three main CSV files from your project directory.</p>
+            </div>
+            
+            <button id="updateBtn" class="button" onclick="startAutoUpdate()">
+                <span id="updateText">🚀 Update Dashboard with Auto Files</span>
+            </button>
+        </div>
+        
+        <!-- Upload Tab -->
+        <div id="upload-tab" class="tab-content">
+            <div class="upload-section" id="dropZone">
+                <h3>📁 Drag & Drop CSV Files Here</h3>
+                <p>Or click the button below to select files</p>
+                <input type="file" id="fileInput" class="file-input" multiple accept=".csv">
+                <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                    Choose CSV Files
+                </button>
+                
+                <div class="file-list" id="fileList"></div>
+            </div>
+            
+            <button id="uploadUpdateBtn" class="button" onclick="startUploadUpdate()" disabled>
+                <span id="uploadUpdateText">🚀 Update Dashboard with Uploaded Files</span>
+            </button>
+        </div>
+        
+        <div id="status" class="status"></div>
+        
+        <div id="results" class="results">
+            <h3>Update Results</h3>
+            <div id="resultsContent"></div>
+        </div>
+        
+        <div id="duplicatesSection" class="duplicates-section">
+            <h4>🔍 Duplicates Found (Year + Title Matching)</h4>
+            <div id="duplicatesContent"></div>
+        </div>
+        
+        <div class="links">
+            <a href="hydrogen-research-dashboard.html">📊 View Dashboard</a>
+            <a href="index.html">🏠 Back to Tools</a>
+        </div>
+    </div>
+
+    <!-- Load Papa Parse for CSV processing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    
+    <!-- Load the simple updater script -->
+    <script src="simple-dashboard-updater.js"></script>
+    
+    <script>
+        let isUpdating = false;
+        let uploadedFiles = [];
+        
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(tabName + '-tab').classList.add('active');
+        }
+        
+        // Drag and drop functionality
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+        
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+        
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files).filter(file => file.name.endsWith('.csv'));
+            handleFiles(files);
+        });
+        
+        fileInput.addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            handleFiles(files);
+        });
+        
+        function handleFiles(files) {
+            uploadedFiles = files;
+            updateFileList();
+            updateUploadButton();
+        }
+        
+        function updateFileList() {
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';
+            
+            uploadedFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <div>
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-size">${(file.size / 1024).toFixed(1)} KB</div>
+                    </div>
+                    <button class="remove-file" onclick="removeFile(${index})">Remove</button>
+                `;
+                fileList.appendChild(fileItem);
+            });
+        }
+        
+        function removeFile(index) {
+            uploadedFiles.splice(index, 1);
+            updateFileList();
+            updateUploadButton();
+        }
+        
+        function updateUploadButton() {
+            const btn = document.getElementById('uploadUpdateBtn');
+            const text = document.getElementById('uploadUpdateText');
+            
+            if (uploadedFiles.length > 0) {
+                btn.disabled = false;
+                text.innerHTML = `🚀 Update Dashboard (${uploadedFiles.length} files)`;
+            } else {
+                btn.disabled = true;
+                text.innerHTML = '🚀 Update Dashboard with Uploaded Files';
+            }
+        }
+        
+        async function startAutoUpdate() {
+            if (isUpdating) return;
+            
+            isUpdating = true;
+            const updateBtn = document.getElementById('updateBtn');
+            const updateText = document.getElementById('updateText');
+            
+            updateBtn.disabled = true;
+            updateText.innerHTML = '<span class="loading"></span>Updating Dashboard...';
+            
+            showStatus('info', 'Loading and processing CSV files... This may take a moment.');
+            
+            try {
+                await new Promise(resolve => {
+                    if (window.simpleDashboardUpdater) {
+                        resolve();
+                    } else {
+                        document.addEventListener('DOMContentLoaded', resolve);
+                    }
+                });
+                
+                const result = await window.updateDashboardSimple();
+                
+                if (result.success) {
+                    showStatus('success', 'Dashboard updated successfully!');
+                    showResults(result);
+                    showDuplicates(result.duplicates);
+                } else {
+                    showStatus('error', 'Failed to update dashboard. Check console for details.');
+                }
+                
+            } catch (error) {
+                console.error('Update error:', error);
+                showStatus('error', `Error: ${error.message}`);
+            } finally {
+                isUpdating = false;
+                updateBtn.disabled = false;
+                updateText.innerHTML = '🚀 Update Dashboard with Auto Files';
+            }
+        }
+        
+        async function startUploadUpdate() {
+            if (isUpdating || uploadedFiles.length === 0) return;
+            
+            isUpdating = true;
+            const updateBtn = document.getElementById('uploadUpdateBtn');
+            const updateText = document.getElementById('uploadUpdateText');
+            
+            updateBtn.disabled = true;
+            updateText.innerHTML = '<span class="loading"></span>Processing Uploaded Files...';
+            
+            showStatus('info', 'Processing uploaded CSV files...');
+            
+            try {
+                await new Promise(resolve => {
+                    if (window.simpleDashboardUpdater) {
+                        resolve();
+                    } else {
+                        document.addEventListener('DOMContentLoaded', resolve);
+                    }
+                });
+                
+                // Process uploaded files
+                const result = await processUploadedFiles();
+                
+                if (result.success) {
+                    showStatus('success', 'Dashboard updated successfully!');
+                    showResults(result);
+                    showDuplicates(result.duplicates);
+                } else {
+                    showStatus('error', 'Failed to update dashboard. Check console for details.');
+                }
+                
+            } catch (error) {
+                console.error('Update error:', error);
+                showStatus('error', `Error: ${error.message}`);
+            } finally {
+                isUpdating = false;
+                updateBtn.disabled = false;
+                updateText.innerHTML = `🚀 Update Dashboard (${uploadedFiles.length} files)`;
+            }
+        }
+        
+        async function processUploadedFiles() {
+            try {
+                const updater = window.simpleDashboardUpdater;
+                const initialized = await updater.initialize();
+                if (!initialized) {
+                    throw new Error('Failed to initialize processor');
+                }
+                
+                let allStudies = [];
+                let totalStudies = 0;
+                
+                for (const file of uploadedFiles) {
+                    const csvData = await readFileAsText(file);
+                    const studies = updater.processCSVData(csvData, file.name);
+                    allStudies = [...allStudies, ...studies];
+                    totalStudies += studies.length;
+                    console.log(`${file.name}: ${studies.length} studies processed`);
+                }
+                
+                if (totalStudies === 0) {
+                    throw new Error('No studies were loaded from uploaded files');
+                }
+                
+                // Remove duplicates based on year and title
+                const uniqueStudies = removeDuplicatesByYearTitle(allStudies);
+                const duplicates = findDuplicatesByYearTitle(allStudies);
+                
+                // Ensure processor exists and update it
+                if (!updater.originalProcessor) {
+                    updater.originalProcessor = updater.createBasicProcessor();
+                }
+                
+                updater.originalProcessor.studies = uniqueStudies;
+                updater.originalProcessor.generateStatistics();
+                
+                return {
+                    success: true,
+                    totalStudies: totalStudies,
+                    uniqueStudies: uniqueStudies.length,
+                    duplicatesRemoved: totalStudies - uniqueStudies.length,
+                    studies: uniqueStudies,
+                    statistics: updater.originalProcessor.statistics,
+                    duplicates: duplicates
+                };
+                
+            } catch (error) {
+                console.error('Error in processUploadedFiles:', error);
+                return {
+                    success: false,
+                    error: error.message,
+                    totalStudies: 0,
+                    uniqueStudies: 0,
+                    duplicatesRemoved: 0,
+                    studies: [],
+                    statistics: {},
+                    duplicates: []
+                };
+            }
+        }
+        
+        function readFileAsText(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = e => resolve(e.target.result);
+                reader.onerror = reject;
+                reader.readAsText(file);
+            });
+        }
+        
+        function removeDuplicatesByYearTitle(studies) {
+            const uniqueStudies = [];
+            const seen = new Set();
+            
+            studies.forEach(study => {
+                const key = createYearTitleKey(study);
+                if (!seen.has(key)) {
+                    seen.add(key);
+                    uniqueStudies.push(study);
+                }
+            });
+            
+            return uniqueStudies;
+        }
+        
+        function findDuplicatesByYearTitle(studies) {
+            const duplicates = [];
+            const seen = new Map();
+            
+            studies.forEach(study => {
+                const key = createYearTitleKey(study);
+                if (seen.has(key)) {
+                    duplicates.push({
+                        original: seen.get(key),
+                        duplicate: study,
+                        matchType: 'Year + Title'
+                    });
+                } else {
+                    seen.set(key, study);
+                }
+            });
+            
+            return duplicates;
+        }
+        
+        function createYearTitleKey(study) {
+            const year = study.year || 'Unknown';
+            const title = (study.title || '').toLowerCase().trim();
+            return `${year}_${title}`;
+        }
+        
+        function showStatus(type, message) {
+            const status = document.getElementById('status');
+            status.className = `status ${type}`;
+            status.innerHTML = message;
+            status.style.display = 'block';
+        }
+        
+        function showResults(result) {
+            const results = document.getElementById('results');
+            const resultsContent = document.getElementById('resultsContent');
+            
+            resultsContent.innerHTML = `
+                <div class="stat-row">
+                    <span class="stat-label">Total Studies Processed:</span>
+                    <span class="stat-value">${result.totalStudies}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Unique Studies:</span>
+                    <span class="stat-value">${result.uniqueStudies}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Duplicates Removed:</span>
+                    <span class="stat-value">${result.duplicatesRemoved}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Success Rate:</span>
+                    <span class="stat-value">${((result.uniqueStudies / result.totalStudies) * 100).toFixed(1)}%</span>
+                </div>
+            `;
+            
+            results.style.display = 'block';
+        }
+        
+        function showDuplicates(duplicates) {
+            if (!duplicates || duplicates.length === 0) return;
+            
+            const duplicatesSection = document.getElementById('duplicatesSection');
+            const duplicatesContent = document.getElementById('duplicatesContent');
+            
+            duplicatesContent.innerHTML = '';
+            
+            duplicates.forEach((dup, index) => {
+                const duplicateItem = document.createElement('div');
+                duplicateItem.className = 'duplicate-item';
+                duplicateItem.innerHTML = `
+                    <div class="duplicate-title">${dup.duplicate.title}</div>
+                    <div class="duplicate-details">
+                        <strong>Original:</strong> ${dup.original.title} (${dup.original.year}) - ${dup.original.firstAuthor || 'Unknown Author'}<br>
+                        <strong>Duplicate:</strong> ${dup.duplicate.title} (${dup.duplicate.year}) - ${dup.duplicate.firstAuthor || 'Unknown Author'}<br>
+                        <strong>Match Type:</strong> ${dup.matchType}
+                    </div>
+                `;
+                duplicatesContent.appendChild(duplicateItem);
+            });
+            
+            duplicatesSection.style.display = 'block';
+        }
+        
+        // Auto-initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Simple Update page loaded');
+        });
+    </script>
+</body>
+</html> 

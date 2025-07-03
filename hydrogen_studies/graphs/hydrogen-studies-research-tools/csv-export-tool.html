@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Export Tool - Hydrogen Studies</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        .content {
+            padding: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+        }
+        .section h2 {
+            margin: 0 0 20px 0;
+            color: #2c3e50;
+            font-size: 1.5em;
+        }
+        .export-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .export-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s;
+        }
+        .export-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .export-card h3 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+        }
+        .export-card p {
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        .preview {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            margin-top: 20px;
+        }
+        .admin-badge {
+            background: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .contact-info {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+            margin-top: 20px;
+        }
+        .contact-info h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+        .contact-info p {
+            margin: 5px 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📄 CSV Export Tool</h1>
+            <p>Export Hydrogen Studies data in CSV format with preserved hyperlinks</p>
+            <div class="admin-badge">Admin: shayne@devpipeline.com</div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>📊 Current Data Statistics</h2>
+                <div class="stats" id="stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalStudies">Loading...</div>
+                        <div class="stat-label">Total Studies</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="uniqueTitles">Loading...</div>
+                        <div class="stat-label">Unique Titles</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="uniqueAuthors">Loading...</div>
+                        <div class="stat-label">Unique Authors</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="withLinks">Loading...</div>
+                        <div class="stat-label">With Hyperlinks</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>💾 Export Options</h2>
+                <div class="export-options">
+                    <div class="export-card">
+                        <h3>📋 All Studies (Combined)</h3>
+                        <p>Export all studies from all CSV files combined into a single CSV with preserved hyperlinks.</p>
+                        <button class="btn" onclick="exportAllStudies()">
+                            📄 Export All Studies
+                        </button>
+                    </div>
+                    
+                    <div class="export-card">
+                        <h3>🔬 Primary Studies</h3>
+                        <p>Export only primary research studies with full metadata and hyperlinks.</p>
+                        <button class="btn" onclick="exportPrimaryStudies()">
+                            📄 Export Primary
+                        </button>
+                    </div>
+                    
+                    <div class="export-card">
+                        <h3>⚙️ Engineering Studies</h3>
+                        <p>Export engineering-focused studies with technical details and links.</p>
+                        <button class="btn" onclick="exportEngineeringStudies()">
+                            📄 Export Engineering
+                        </button>
+                    </div>
+                    
+                    <div class="export-card">
+                        <h3>📚 Secondary/Tertiary</h3>
+                        <p>Export review and meta-analysis studies with comprehensive references.</p>
+                        <button class="btn" onclick="exportSecondaryStudies()">
+                            📄 Export Secondary
+                        </button>
+                    </div>
+                    
+                    <div class="export-card">
+                        <h3>🎯 Custom Filter</h3>
+                        <p>Export studies filtered by year, topic, or author with custom criteria.</p>
+                        <button class="btn btn-secondary" onclick="showCustomFilter()">
+                            🎯 Custom Export
+                        </button>
+                    </div>
+                    
+                    <div class="export-card">
+                        <h3>🔄 Fresh Data</h3>
+                        <p>Export the latest data extracted from the live Hydrogen Studies website.</p>
+                        <button class="btn" onclick="exportFreshData()">
+                            🔄 Export Fresh Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>👀 CSV Preview</h2>
+                <div class="preview" id="csvPreview">
+                    Click an export button above to see a preview of the CSV data...
+                </div>
+            </div>
+
+            <div class="contact-info">
+                <h3>📧 Contact Information</h3>
+                <p><strong>Admin:</strong> shayne@devpipeline.com</p>
+                <p><strong>Purpose:</strong> EchoWater data export for Hydrogen Studies research</p>
+                <p><strong>Format:</strong> CSV with preserved hyperlinks for article access</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allData = [];
+        let csvData = '';
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllData();
+        });
+
+        // Load all CSV data
+        async function loadAllData() {
+            try {
+                const csvFiles = [
+                    '../Hydrogen Research Database - Primary.csv',
+                    '../Hydrogen Research Database - Engineering.csv',
+                    '../Hydrogen Research Database - Secondary, Tertiary.csv'
+                ];
+
+                allData = [];
+                
+                for (const file of csvFiles) {
+                    try {
+                        const response = await fetch(file);
+                        const csvText = await response.text();
+                        const data = parseCSV(csvText);
+                        allData.push(...data);
+                    } catch (error) {
+                        console.log(`Could not load ${file}: ${error.message}`);
+                    }
+                }
+
+                updateStats();
+                showPreview('Data loaded successfully. Click an export button to see CSV preview.');
+                
+            } catch (error) {
+                console.error('Error loading data:', error);
+                showPreview('Error loading data. Please check the console for details.');
+            }
+        }
+
+        // Parse CSV text to array of objects
+        function parseCSV(csvText) {
+            const lines = csvText.split('\n');
+            if (lines.length < 2) return [];
+            
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+            const data = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                if (lines[i].trim()) {
+                    const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
+                    const row = {};
+                    headers.forEach((header, index) => {
+                        row[header] = values[index] || '';
+                    });
+                    data.push(row);
+                }
+            }
+            
+            return data;
+        }
+
+        // Update statistics
+        function updateStats() {
+            const uniqueTitles = new Set(allData.map(s => s.Title || s.title)).size;
+            const uniqueAuthors = new Set(allData.flatMap(s => {
+                const authors = s.Authors || s.authors || '';
+                return authors.split(',').map(a => a.trim()).filter(a => a);
+            })).size;
+            const withLinks = allData.filter(s => {
+                const url = s.URL || s.url || s.Link || s.link || '';
+                return url && url.includes('http');
+            }).length;
+
+            document.getElementById('totalStudies').textContent = allData.length;
+            document.getElementById('uniqueTitles').textContent = uniqueTitles;
+            document.getElementById('uniqueAuthors').textContent = uniqueAuthors;
+            document.getElementById('withLinks').textContent = withLinks;
+        }
+
+        // Show CSV preview
+        function showPreview(message) {
+            document.getElementById('csvPreview').textContent = message;
+        }
+
+        // Export functions
+        function exportAllStudies() {
+            const csv = convertToCSV(allData);
+            downloadCSV(csv, 'hydrogen-studies-all.csv');
+            showPreview(csv.substring(0, 1000) + '\n\n... (truncated for preview)');
+        }
+
+        function exportPrimaryStudies() {
+            const primaryData = allData.filter(study => {
+                const title = (study.Title || study.title || '').toLowerCase();
+                const abstract = (study.Abstract || study.abstract || '').toLowerCase();
+                return !title.includes('review') && !abstract.includes('review') && 
+                       !title.includes('meta-analysis') && !abstract.includes('meta-analysis');
+            });
+            const csv = convertToCSV(primaryData);
+            downloadCSV(csv, 'hydrogen-studies-primary.csv');
+            showPreview(csv.substring(0, 1000) + '\n\n... (truncated for preview)');
+        }
+
+        function exportEngineeringStudies() {
+            const engineeringData = allData.filter(study => {
+                const title = (study.Title || study.title || '').toLowerCase();
+                const abstract = (study.Abstract || study.abstract || '').toLowerCase();
+                return title.includes('engineering') || abstract.includes('engineering') ||
+                       title.includes('device') || abstract.includes('device') ||
+                       title.includes('system') || abstract.includes('system');
+            });
+            const csv = convertToCSV(engineeringData);
+            downloadCSV(csv, 'hydrogen-studies-engineering.csv');
+            showPreview(csv.substring(0, 1000) + '\n\n... (truncated for preview)');
+        }
+
+        function exportSecondaryStudies() {
+            const secondaryData = allData.filter(study => {
+                const title = (study.Title || study.title || '').toLowerCase();
+                const abstract = (study.Abstract || study.abstract || '').toLowerCase();
+                return title.includes('review') || abstract.includes('review') ||
+                       title.includes('meta-analysis') || abstract.includes('meta-analysis');
+            });
+            const csv = convertToCSV(secondaryData);
+            downloadCSV(csv, 'hydrogen-studies-secondary.csv');
+            showPreview(csv.substring(0, 1000) + '\n\n... (truncated for preview)');
+        }
+
+        function exportFreshData() {
+            // Check if there's fresh data from web scraping
+            const freshData = localStorage.getItem('extractedHydrogenData');
+            if (freshData) {
+                const data = JSON.parse(freshData);
+                const csv = convertToCSV(data);
+                downloadCSV(csv, 'hydrogen-studies-fresh.csv');
+                showPreview(csv.substring(0, 1000) + '\n\n... (truncated for preview)');
+            } else {
+                alert('No fresh data available. Please run the web scraper first to extract data from the live website.');
+                showPreview('No fresh data available. Use the web scraper to extract data from the live website first.');
+            }
+        }
+
+        function showCustomFilter() {
+            const year = prompt('Enter year to filter (e.g., 2023) or leave empty for all years:');
+            const topic = prompt('Enter topic to filter (e.g., Cancer, Brain) or leave empty for all topics:');
+            
+            if (!year && !topic) {
+                alert('No filters applied. Use "Export All Studies" instead.');
+                return;
+            }
+            
+            let filteredData = allData;
+            
+            if (year) {
+                filteredData = filteredData.filter(study => {
+                    const studyYear = study.Year || study.year || '';
+                    return studyYear.includes(year);
+                });
+            }
+            
+            if (topic) {
+                filteredData = filteredData.filter(study => {
+                    const title = (study.Title || study.title || '').toLowerCase();
+                    const abstract = (study.Abstract || study.abstract || '').toLowerCase();
+                    const topics = (study.Topics || study.topics || '').toLowerCase();
+                    const searchTerm = topic.toLowerCase();
+                    return title.includes(searchTerm) || abstract.includes(searchTerm) || topics.includes(searchTerm);
+                });
+            }
+            
+            if (filteredData.length === 0) {
+                alert('No studies found matching your criteria.');
+                return;
+            }
+            
+            const csv = convertToCSV(filteredData);
+            const filename = `hydrogen-studies-filtered-${year || 'all'}-${topic || 'all'}.csv`;
+            downloadCSV(csv, filename);
+            showPreview(csv.substring(0, 1000) + '\n\n... (truncated for preview)');
+        }
+
+        // Convert data to CSV format
+        function convertToCSV(data) {
+            if (data.length === 0) return '';
+            
+            const headers = Object.keys(data[0]);
+            const csvRows = [headers.join(',')];
+            
+            for (const row of data) {
+                const values = headers.map(header => {
+                    const value = row[header] || '';
+                    // Escape quotes and wrap in quotes if contains comma
+                    const escaped = value.toString().replace(/"/g, '""');
+                    return escaped.includes(',') ? `"${escaped}"` : escaped;
+                });
+                csvRows.push(values.join(','));
+            }
+            
+            return csvRows.join('\n');
+        }
+
+        // Download CSV file
+        function downloadCSV(csv, filename) {
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html> 

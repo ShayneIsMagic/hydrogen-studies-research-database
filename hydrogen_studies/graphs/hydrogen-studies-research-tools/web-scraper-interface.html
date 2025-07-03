@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Web Scraper - Hydrogen Studies</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        .content {
+            padding: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+        }
+        .section h2 {
+            margin: 0 0 20px 0;
+            color: #2c3e50;
+            font-size: 1.5em;
+        }
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .control-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .control-group input, .control-group select {
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        .control-group input:focus, .control-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #218838;
+        }
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        .progress-container {
+            margin: 20px 0;
+            display: none;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        .progress-text {
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .logs {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        .export-section {
+            background: #e8f5e8;
+            border-left-color: #28a745;
+        }
+        .admin-badge {
+            background: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .contact-info {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+            margin-top: 20px;
+        }
+        .contact-info h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+        .contact-info p {
+            margin: 5px 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌐 Advanced Web Scraper</h1>
+            <p>Extract comprehensive data from Hydrogen Studies website</p>
+            <div class="admin-badge">Admin: shayne@devpipeline.com</div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>🚀 Extraction Controls</h2>
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="extractionType">Extraction Type:</label>
+                        <select id="extractionType">
+                            <option value="all">All Studies (Full Database)</option>
+                            <option value="recent">Recent Studies Only</option>
+                            <option value="byYear">By Year Range</option>
+                            <option value="byTopic">By Health Topic</option>
+                            <option value="byOrganism">By Organism</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="yearStart">Start Year:</label>
+                        <input type="number" id="yearStart" value="2020" min="1990" max="2024">
+                    </div>
+                    <div class="control-group">
+                        <label for="yearEnd">End Year:</label>
+                        <input type="number" id="yearEnd" value="2024" min="1990" max="2024">
+                    </div>
+                    <div class="control-group">
+                        <label for="topic">Health Topic:</label>
+                        <input type="text" id="topic" placeholder="e.g., Cancer, Brain, Heart">
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="startExtraction()">
+                        🚀 Start Extraction
+                    </button>
+                    <button class="btn btn-secondary" onclick="stopExtraction()">
+                        ⏹️ Stop Extraction
+                    </button>
+                    <button class="btn btn-success" onclick="exportData()">
+                        📊 Export Data
+                    </button>
+                    <button class="btn btn-secondary" onclick="clearLogs()">
+                        🗑️ Clear Logs
+                    </button>
+                </div>
+            </div>
+
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Ready to start...</div>
+            </div>
+
+            <div class="section">
+                <h2>📊 Extraction Statistics</h2>
+                <div class="stats" id="stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalStudies">0</div>
+                        <div class="stat-label">Total Studies</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="uniqueTitles">0</div>
+                        <div class="stat-label">Unique Titles</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="uniqueAuthors">0</div>
+                        <div class="stat-label">Unique Authors</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="withDoi">0</div>
+                        <div class="stat-label">With DOI</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📝 Extraction Logs</h2>
+                <div class="logs" id="logs">Ready to start extraction...</div>
+            </div>
+
+            <div class="section export-section">
+                <h2>💾 Export Options</h2>
+                <div class="button-group">
+                    <button class="btn btn-success" onclick="exportToCSV()">
+                        📄 Export to CSV
+                    </button>
+                    <button class="btn btn-success" onclick="exportToJSON()">
+                        📋 Export to JSON
+                    </button>
+                    <button class="btn btn-success" onclick="exportToDashboard()">
+                        📊 Update Dashboard
+                    </button>
+                </div>
+            </div>
+
+            <div class="contact-info">
+                <h3>📧 Contact Information</h3>
+                <p><strong>Admin:</strong> shayne@devpipeline.com</p>
+                <p><strong>Purpose:</strong> EchoWater data extraction for Hydrogen Studies research</p>
+                <p><strong>Note:</strong> This tool extracts publicly available data for research purposes only.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="web-scraper.js"></script>
+    <script>
+        let scraper = null;
+        let extractedData = [];
+
+        // Initialize scraper
+        function initScraper() {
+            scraper = new WebScraper();
+            scraper.onProgress = updateProgress;
+            scraper.onLog = addLog;
+        }
+
+        // Start extraction
+        async function startExtraction() {
+            if (!scraper) {
+                initScraper();
+            }
+
+            const extractionType = document.getElementById('extractionType').value;
+            const yearStart = document.getElementById('yearStart').value;
+            const yearEnd = document.getElementById('yearEnd').value;
+            const topic = document.getElementById('topic').value;
+
+            const options = {
+                type: extractionType,
+                yearStart: parseInt(yearStart),
+                yearEnd: parseInt(yearEnd),
+                topic: topic
+            };
+
+            try {
+                document.getElementById('progressContainer').style.display = 'block';
+                clearLogs();
+                addLog('Starting advanced web extraction...', 'info');
+                addLog(`Options: ${JSON.stringify(options)}`, 'info');
+
+                extractedData = await scraper.startExtraction(options);
+                
+                updateStats();
+                addLog(`Extraction completed! Found ${extractedData.length} studies.`, 'success');
+                
+            } catch (error) {
+                addLog(`Extraction failed: ${error.message}`, 'error');
+            }
+        }
+
+        // Stop extraction
+        function stopExtraction() {
+            if (scraper) {
+                scraper.stopExtraction();
+                addLog('Extraction stopped by user.', 'warning');
+            }
+        }
+
+        // Update progress
+        function updateProgress(percentage, current, total, message) {
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = 
+                `${message} (${current}/${total}) - ${percentage}%`;
+        }
+
+        // Add log message
+        function addLog(message, type = 'info') {
+            const logs = document.getElementById('logs');
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}\n`;
+            
+            logs.textContent += logEntry;
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        // Clear logs
+        function clearLogs() {
+            document.getElementById('logs').textContent = 'Logs cleared...\n';
+        }
+
+        // Update statistics
+        function updateStats() {
+            const uniqueTitles = new Set(extractedData.map(s => s.title)).size;
+            const uniqueAuthors = new Set(extractedData.flatMap(s => 
+                s.authors ? s.authors.split(',').map(a => a.trim()) : []
+            )).size;
+            const withDoi = extractedData.filter(s => s.doi).length;
+
+            document.getElementById('totalStudies').textContent = extractedData.length;
+            document.getElementById('uniqueTitles').textContent = uniqueTitles;
+            document.getElementById('uniqueAuthors').textContent = uniqueAuthors;
+            document.getElementById('withDoi').textContent = withDoi;
+        }
+
+        // Export functions
+        function exportData() {
+            if (extractedData.length === 0) {
+                alert('No data to export. Please run extraction first.');
+                return;
+            }
+            alert(`Ready to export ${extractedData.length} studies. Use the export buttons below.`);
+        }
+
+        function exportToCSV() {
+            if (extractedData.length === 0) {
+                alert('No data to export.');
+                return;
+            }
+
+            const headers = ['Title', 'Authors', 'Year', 'Journal', 'DOI', 'Abstract', 'URL', 'Topics', 'Organism'];
+            const csvContent = [
+                headers.join(','),
+                ...extractedData.map(study => [
+                    `"${study.title || ''}"`,
+                    `"${study.authors || ''}"`,
+                    study.year || '',
+                    `"${study.journal || ''}"`,
+                    study.doi || '',
+                    `"${study.abstract || ''}"`,
+                    study.url || '',
+                    `"${study.topics.join(', ') || ''}"`,
+                    study.organism || ''
+                ].join(','))
+            ].join('\n');
+
+            downloadFile(csvContent, 'hydrogen-studies-data.csv', 'text/csv');
+        }
+
+        function exportToJSON() {
+            if (extractedData.length === 0) {
+                alert('No data to export.');
+                return;
+            }
+
+            const jsonContent = JSON.stringify(extractedData, null, 2);
+            downloadFile(jsonContent, 'hydrogen-studies-data.json', 'application/json');
+        }
+
+        function exportToDashboard() {
+            if (extractedData.length === 0) {
+                alert('No data to export.');
+                return;
+            }
+
+            // Save data for dashboard integration
+            localStorage.setItem('extractedHydrogenData', JSON.stringify(extractedData));
+            addLog('Data saved for dashboard integration. Use the dashboard update tool to apply changes.', 'info');
+        }
+
+        function downloadFile(content, filename, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initScraper();
+            addLog('Advanced Web Scraper initialized');
+            addLog('Admin: shayne@devpipeline.com');
+            addLog('Ready to extract data from Hydrogen Studies website...');
+        });
+    </script>
+</body>
+</html>
