@@ -1,0 +1,443 @@
+Hydrogen Studies Topic Extraction Summary
+==================================================
+
+Extraction Date: 2025-07-17 15:49:29
+Total Topics: 216
+
+Topics with Content:
+--------------------
+Acne: 25377 characters
+Acute Kidney Injury: 65284 characters
+Acute Respiratory Distress Syndrome: 21582 characters
+Acute Tubuluar Necrosis: 12974 characters
+Addiction: 25986 characters
+Aflatoxicosis: 14986 characters
+Aging: 50506 characters
+Alcohol Toxicity: 34802 characters
+Alcoholic Liver Disease: 19227 characters
+Alkali Burn: 28057 characters
+Alzheimer's Disease: 45074 characters
+Amyloid Beta Toxicity: 34220 characters
+Amyotrophic Laterial Sclerosis: 14843 characters
+Anxiety: 24124 characters
+Aplastic Anemia: 13532 characters
+Asphyxial Encephalopathy: 23874 characters
+Asthma: 38388 characters
+Atherosclerosis: 57103 characters
+Atrophy: 21279 characters
+Auditory Neuropathy: 17776 characters
+Autism Spectrum Disorder: 19886 characters
+Bacterial Infection: 63157 characters
+Bile Duct Injury: 20301 characters
+Bladder Outlet Obstruction: 18298 characters
+Blunt Chest Trauma: 13522 characters
+Brain Injury: 60233 characters
+Bronchopulmonary Dysplasia: 15656 characters
+Cancer: 59259 characters
+Candida Yeast Infection: 24591 characters
+Cardiac Arrest: 39827 characters
+Cardiac Degeneration: 32328 characters
+Cardiac Hypertrophy: 26364 characters
+Cardiomyopathy: 31313 characters
+Cardiovascular Disease: 40373 characters
+Cataract: 14867 characters
+Cavities: 18789 characters
+Chagas Disease: 19207 characters
+Chronic Fatigue Syndrome: 22781 characters
+Chronic Heart Failure: 32729 characters
+Chronic Kidney Disease: 31568 characters
+Chronic Obstructive Pulmonary Disease: 43888 characters
+Cognitive Impairment: 54681 characters
+Colitis: 21976 characters
+Coma: 19983 characters
+Concussion: 15092 characters
+Congenital Obstructive Nephropathy: 23426 characters
+Constipation: 19620 characters
+Corneal Injury: 45167 characters
+Cosmetic Skin Issues: 51632 characters
+Dehydration: 23978 characters
+Dementia: 27899 characters
+Dentin Integrity: 30240 characters
+Depression: 33634 characters
+Dermatitis: 31572 characters
+Dermatophagoides farinae exposure: 17830 characters
+Diabetes (Type I): 35681 characters
+Diabetes (Type II): 70557 characters
+Diabetic Nephropathy: 28522 characters
+Diabetic Peripheral Neuropathy: 28534 characters
+Diabetic Retinopathy: 28494 characters
+Diarrhea: 17233 characters
+Diffuse Axonal Injury: 26073 characters
+Disuse Atrophy: 24553 characters
+Dry Eye: 20233 characters
+Dyslipidemia: 27161 characters
+Dyspnea: 20465 characters
+Edema: 32244 characters
+Encapsulating Peritoneal Sclerosis: 19414 characters
+Encephalopathy: 56471 characters
+Endometriosis: 26548 characters
+Endothelial Dysfunction: 34946 characters
+Endotoxemia: 36640 characters
+Enteropathy: 28216 characters
+Epithelial Dysfunction: 25368 characters
+Erectile Dysfunction: 19085 characters
+Erythema: 26489 characters
+Excercise: 65265 characters
+Excitotoxicity: 38734 characters
+Fatigue: 54405 characters
+Fatty Liver Disease (Alcoholic): 31624 characters
+Fatty Liver Disease (Nonalcoholic): 46724 characters
+Fibrosis: 50265 characters
+Fluke Infection: 29971 characters
+Food Poisoning: 37758 characters
+Foot Ulcer: 25815 characters
+Fracture: 26086 characters
+Gastric Mucosal Injury: 38186 characters
+Gastric Ulcer: 24320 characters
+Gastritis: 18311 characters
+Gastroenteritis: 17121 characters
+Gastroesophageal Reflux Disease: 18216 characters
+Gingivitis: 21034 characters
+Glaucoma: 21646 characters
+Glomerulosclerosis: 23057 characters
+Graft-Versus-Host-Disease: 39028 characters
+Hangover: 20882 characters
+Hearing Loss: 54372 characters
+Heart Attack: 72276 characters
+Heart Failure: 43135 characters
+Heat Stress: 26269 characters
+Helicobacter pylori Infection: 19383 characters
+Hemolytic Anemia: 22237 characters
+Hemorrhagic Shock: 47750 characters
+Hepatitis B: 16393 characters
+Hidden Blood Loss: 22435 characters
+High Blood Pressure: 59439 characters
+Hypoxia-Ischemia: 67083 characters
+Immune Dysfunction: 35139 characters
+Indigestion: 14883 characters
+Infertility: 28664 characters
+Inflammation: 32054 characters
+Inflammatory Bowel Disease: 47550 characters
+Interstitial Cystitis: 22296 characters
+Interstitial Lung Disease: 23658 characters
+Intervertebral Disc Degeneration: 25689 characters
+Intestinal Injury: 46084 characters
+Intestinal Volvulus: 18086 characters
+Intracranial Hemorrhage: 61660 characters
+Intraocular Pressure: 23940 characters
+Iron Overload: 20594 characters
+Irritable Bowel Syndrome: 32181 characters
+Ischemia-Reperfusion Injury: 76870 characters
+Kawasaki Disease: 18218 characters
+Keratin Plugs: 20307 characters
+Kidney Failure: 36717 characters
+Kidney Stones: 37672 characters
+Liver Disease: 50039 characters
+Liver Failure: 25127 characters
+Liver Injury: 34891 characters
+Lung Contusion: 16705 characters
+Lung Injury: 48415 characters
+Macular Degeneration: 22199 characters
+Mastitis: 19384 characters
+Maternal Immune Activation: 27470 characters
+Metabolic Acidosis: 22986 characters
+Metabolic Syndrome: 58731 characters
+Motor Deficit: 18627 characters
+Multiple Organ Dysfunction Syndrome: 54739 characters
+Multiple Sclerosis: 21346 characters
+Muscular Dystrophy: 21962 characters
+Mycotoxicosis: 29262 characters
+Myocardial Necrosis: 32043 characters
+Necrotizing Enterocolitis: 27623 characters
+Necrotizing Pancreatitis: 25800 characters
+Neurodegeneration: 40826 characters
+Neuropathic Pain: 47259 characters
+No-Reflow Syndrome: 22673 characters
+Non-Alcoholic Steatohepatitis: 29312 characters
+Norovirus Infection: 16338 characters
+Obesity: 45198 characters
+Obliterative Airway Disease: 17427 characters
+Obstructive Jaundice: 26470 characters
+Optic Nerve Crush: 21721 characters
+Osteoarthritis: 31769 characters
+Osteonecrosis: 25473 characters
+Osteoporosis: 31375 characters
+Ovarian Injury: 25389 characters
+Oxalate Injury: 30382 characters
+Painful Bladder Syndrome: 20121 characters
+Pancreatitis: 46445 characters
+Panic Disorder: 18353 characters
+Paraplegia: 23068 characters
+Parkinson's Disease: 59931 characters
+Pemphigus: 21286 characters
+Periodontitis: 52249 characters
+Peripheral Arterial Disease: 16825 characters
+Placental Stress: 26486 characters
+Polycystic Kidney Disease: 27585 characters
+Polycystic Ovary Syndrome: 24991 characters
+Poor Hair Quality: 18319 characters
+Postoperative Cognitive Impairment: 22444 characters
+Postoperative Delirium: 19086 characters
+Postoperative Ileus: 18911 characters
+Postoperative Liver Failure: 23604 characters
+Postoperative Pain: 23076 characters
+Postsurgical Peritoneal Adhesions: 18919 characters
+Preeclampsia: 33055 characters
+Pregnancy: 31537 characters
+Premature Ovarian Failure: 23346 characters
+Pressure Ulcer: 28147 characters
+Preterm Birth: 26011 characters
+Psoriasis: 20638 characters
+Psoriasis-Associated Arthritis: 26210 characters
+Retinal Injury: 54367 characters
+Retinal Vein Occlusion: 20922 characters
+Retinitis Pigmentosa: 28189 characters
+Rhabdomyolysis: 23748 characters
+Rheumatoid Arthritis: 41369 characters
+Rhinitis: 40829 characters
+Rhinosinusitis: 23138 characters
+Seizure: 22228 characters
+Sensorineural Hearing Loss: 21790 characters
+Sepsis: 63955 characters
+Shingles: 17626 characters
+Shock: 52950 characters
+Sleep Apnea: 42561 characters
+Sleep Deprivation: 32435 characters
+Spinal Cord Injury: 37499 characters
+Sprain: 34013 characters
+Status Epilepticus: 21091 characters
+Stress Ulcer: 22750 characters
+Stroke: 56244 characters
+Testicular Injury: 22401 characters
+Tracheal Stenosis: 18856 characters
+Transplantation/Graft Injury: 62203 characters
+Traumatic Brain Injury: 54189 characters
+Ulcer: 25221 characters
+Ulcerative Colitis: 36665 characters
+Unstable Angina: 20973 characters
+Upper Respiratory Tract Infection: 17376 characters
+Ureteral Obstruction: 25227 characters
+Uveal Injury: 22357 characters
+Vascular Dysfunction: 33621 characters
+Vasculitis: 24352 characters
+Ventilator-Induced Lung Injury: 31583 characters
+Vitiligo: 21595 characters
+
+Topics with Studies:
+--------------------
+Acne: 0 studies
+Acute Kidney Injury: 0 studies
+Acute Respiratory Distress Syndrome: 0 studies
+Acute Tubuluar Necrosis: 0 studies
+Addiction: 0 studies
+Aflatoxicosis: 0 studies
+Aging: 0 studies
+Alcohol Toxicity: 0 studies
+Alcoholic Liver Disease: 0 studies
+Alkali Burn: 0 studies
+Alzheimer's Disease: 0 studies
+Amyloid Beta Toxicity: 0 studies
+Amyotrophic Laterial Sclerosis: 0 studies
+Anxiety: 0 studies
+Aplastic Anemia: 0 studies
+Asphyxial Encephalopathy: 0 studies
+Asthma: 0 studies
+Atherosclerosis: 0 studies
+Atrophy: 0 studies
+Auditory Neuropathy: 0 studies
+Autism Spectrum Disorder: 0 studies
+Bacterial Infection: 0 studies
+Bile Duct Injury: 0 studies
+Bladder Outlet Obstruction: 0 studies
+Blunt Chest Trauma: 0 studies
+Brain Injury: 0 studies
+Bronchopulmonary Dysplasia: 0 studies
+Cancer: 0 studies
+Candida Yeast Infection: 0 studies
+Cardiac Arrest: 0 studies
+Cardiac Degeneration: 0 studies
+Cardiac Hypertrophy: 0 studies
+Cardiomyopathy: 0 studies
+Cardiovascular Disease: 0 studies
+Cataract: 0 studies
+Cavities: 0 studies
+Chagas Disease: 0 studies
+Chronic Fatigue Syndrome: 0 studies
+Chronic Heart Failure: 0 studies
+Chronic Kidney Disease: 0 studies
+Chronic Obstructive Pulmonary Disease: 0 studies
+Cognitive Impairment: 0 studies
+Colitis: 0 studies
+Coma: 0 studies
+Concussion: 0 studies
+Congenital Obstructive Nephropathy: 0 studies
+Constipation: 0 studies
+Corneal Injury: 0 studies
+Cosmetic Skin Issues: 0 studies
+Dehydration: 0 studies
+Dementia: 0 studies
+Dentin Integrity: 0 studies
+Depression: 0 studies
+Dermatitis: 0 studies
+Dermatophagoides farinae exposure: 0 studies
+Diabetes (Type I): 0 studies
+Diabetes (Type II): 0 studies
+Diabetic Nephropathy: 0 studies
+Diabetic Peripheral Neuropathy: 0 studies
+Diabetic Retinopathy: 0 studies
+Diarrhea: 0 studies
+Diffuse Axonal Injury: 0 studies
+Disuse Atrophy: 0 studies
+Dry Eye: 0 studies
+Dyslipidemia: 0 studies
+Dyspnea: 0 studies
+Edema: 0 studies
+Encapsulating Peritoneal Sclerosis: 0 studies
+Encephalopathy: 0 studies
+Endometriosis: 0 studies
+Endothelial Dysfunction: 0 studies
+Endotoxemia: 0 studies
+Enteropathy: 0 studies
+Epithelial Dysfunction: 0 studies
+Erectile Dysfunction: 0 studies
+Erythema: 0 studies
+Excercise: 0 studies
+Excitotoxicity: 0 studies
+Fatigue: 0 studies
+Fatty Liver Disease (Alcoholic): 0 studies
+Fatty Liver Disease (Nonalcoholic): 0 studies
+Fibrosis: 0 studies
+Fluke Infection: 0 studies
+Food Poisoning: 0 studies
+Foot Ulcer: 0 studies
+Fracture: 0 studies
+Gastric Mucosal Injury: 0 studies
+Gastric Ulcer: 0 studies
+Gastritis: 0 studies
+Gastroenteritis: 0 studies
+Gastroesophageal Reflux Disease: 0 studies
+Gingivitis: 0 studies
+Glaucoma: 0 studies
+Glomerulosclerosis: 0 studies
+Graft-Versus-Host-Disease: 0 studies
+Hangover: 0 studies
+Hearing Loss: 0 studies
+Heart Attack: 0 studies
+Heart Failure: 0 studies
+Heat Stress: 0 studies
+Helicobacter pylori Infection: 0 studies
+Hemolytic Anemia: 0 studies
+Hemorrhagic Shock: 0 studies
+Hepatitis B: 0 studies
+Hidden Blood Loss: 0 studies
+High Blood Pressure: 0 studies
+Hypoxia-Ischemia: 0 studies
+Immune Dysfunction: 0 studies
+Indigestion: 0 studies
+Infertility: 0 studies
+Inflammation: 0 studies
+Inflammatory Bowel Disease: 0 studies
+Interstitial Cystitis: 0 studies
+Interstitial Lung Disease: 0 studies
+Intervertebral Disc Degeneration: 0 studies
+Intestinal Injury: 0 studies
+Intestinal Volvulus: 0 studies
+Intracranial Hemorrhage: 0 studies
+Intraocular Pressure: 0 studies
+Iron Overload: 0 studies
+Irritable Bowel Syndrome: 0 studies
+Ischemia-Reperfusion Injury: 0 studies
+Kawasaki Disease: 0 studies
+Keratin Plugs: 0 studies
+Kidney Failure: 0 studies
+Kidney Stones: 0 studies
+Liver Disease: 0 studies
+Liver Failure: 0 studies
+Liver Injury: 0 studies
+Lung Contusion: 0 studies
+Lung Injury: 0 studies
+Macular Degeneration: 0 studies
+Mastitis: 0 studies
+Maternal Immune Activation: 0 studies
+Metabolic Acidosis: 0 studies
+Metabolic Syndrome: 0 studies
+Motor Deficit: 0 studies
+Multiple Organ Dysfunction Syndrome: 0 studies
+Multiple Sclerosis: 0 studies
+Muscular Dystrophy: 0 studies
+Mycotoxicosis: 0 studies
+Myocardial Necrosis: 0 studies
+Necrotizing Enterocolitis: 0 studies
+Necrotizing Pancreatitis: 0 studies
+Neurodegeneration: 0 studies
+Neuropathic Pain: 0 studies
+No-Reflow Syndrome: 0 studies
+Non-Alcoholic Steatohepatitis: 0 studies
+Norovirus Infection: 0 studies
+Obesity: 0 studies
+Obliterative Airway Disease: 0 studies
+Obstructive Jaundice: 0 studies
+Optic Nerve Crush: 0 studies
+Osteoarthritis: 0 studies
+Osteonecrosis: 0 studies
+Osteoporosis: 0 studies
+Ovarian Injury: 0 studies
+Oxalate Injury: 0 studies
+Painful Bladder Syndrome: 0 studies
+Pancreatitis: 0 studies
+Panic Disorder: 0 studies
+Paraplegia: 0 studies
+Parkinson's Disease: 0 studies
+Pemphigus: 0 studies
+Periodontitis: 0 studies
+Peripheral Arterial Disease: 0 studies
+Placental Stress: 0 studies
+Polycystic Kidney Disease: 0 studies
+Polycystic Ovary Syndrome: 0 studies
+Poor Hair Quality: 0 studies
+Postoperative Cognitive Impairment: 0 studies
+Postoperative Delirium: 0 studies
+Postoperative Ileus: 0 studies
+Postoperative Liver Failure: 0 studies
+Postoperative Pain: 0 studies
+Postsurgical Peritoneal Adhesions: 0 studies
+Preeclampsia: 0 studies
+Pregnancy: 0 studies
+Premature Ovarian Failure: 0 studies
+Pressure Ulcer: 0 studies
+Preterm Birth: 0 studies
+Psoriasis: 0 studies
+Psoriasis-Associated Arthritis: 0 studies
+Retinal Injury: 0 studies
+Retinal Vein Occlusion: 0 studies
+Retinitis Pigmentosa: 0 studies
+Rhabdomyolysis: 0 studies
+Rheumatoid Arthritis: 0 studies
+Rhinitis: 0 studies
+Rhinosinusitis: 0 studies
+Seizure: 0 studies
+Sensorineural Hearing Loss: 0 studies
+Sepsis: 0 studies
+Shingles: 0 studies
+Shock: 0 studies
+Sleep Apnea: 0 studies
+Sleep Deprivation: 0 studies
+Spinal Cord Injury: 0 studies
+Sprain: 0 studies
+Status Epilepticus: 0 studies
+Stress Ulcer: 0 studies
+Stroke: 0 studies
+Testicular Injury: 0 studies
+Tracheal Stenosis: 0 studies
+Transplantation/Graft Injury: 0 studies
+Traumatic Brain Injury: 0 studies
+Ulcer: 0 studies
+Ulcerative Colitis: 0 studies
+Unstable Angina: 0 studies
+Upper Respiratory Tract Infection: 0 studies
+Ureteral Obstruction: 0 studies
+Uveal Injury: 0 studies
+Vascular Dysfunction: 0 studies
+Vasculitis: 0 studies
+Ventilator-Induced Lung Injury: 0 studies
+Vitiligo: 0 studies
