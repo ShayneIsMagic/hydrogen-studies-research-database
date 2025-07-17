@@ -1,0 +1,1537 @@
+[
+  {
+    "topic": "Acute Kidney Injury",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/acute-kidney-injury/ after 3 attempts",
+    "timestamp": "2025-07-16T22:01:53.239Z"
+  },
+  {
+    "topic": "Addiction",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/addiction/ after 3 attempts",
+    "timestamp": "2025-07-16T22:01:56.238Z"
+  },
+  {
+    "topic": "ADHD",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/adhd/ after 3 attempts",
+    "timestamp": "2025-07-16T22:01:59.135Z"
+  },
+  {
+    "topic": "Aging",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/aging/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:01.793Z"
+  },
+  {
+    "topic": "Alcoholism",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/alcoholism/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:04.958Z"
+  },
+  {
+    "topic": "Allergies",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/allergies/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:07.890Z"
+  },
+  {
+    "topic": "Alzheimer's Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/alzheimer's-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:10.919Z"
+  },
+  {
+    "topic": "Anemia",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/anemia/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:13.766Z"
+  },
+  {
+    "topic": "Anxiety",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/anxiety/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:16.587Z"
+  },
+  {
+    "topic": "Arthritis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/arthritis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:19.538Z"
+  },
+  {
+    "topic": "Asthma",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/asthma/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:22.392Z"
+  },
+  {
+    "topic": "Autism",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/autism/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:25.215Z"
+  },
+  {
+    "topic": "Back Pain",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/back-pain/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:28.403Z"
+  },
+  {
+    "topic": "Bipolar Disorder",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/bipolar-disorder/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:31.353Z"
+  },
+  {
+    "topic": "Bladder Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/bladder-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:34.252Z"
+  },
+  {
+    "topic": "Blood Pressure",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/blood-pressure/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:37.134Z"
+  },
+  {
+    "topic": "Brain Injury",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/brain-injury/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:40.020Z"
+  },
+  {
+    "topic": "Breast Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/breast-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:42.996Z"
+  },
+  {
+    "topic": "Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:45.887Z"
+  },
+  {
+    "topic": "Cardiovascular Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/cardiovascular-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:48.741Z"
+  },
+  {
+    "topic": "Cataracts",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/cataracts/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:51.611Z"
+  },
+  {
+    "topic": "Celiac Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/celiac-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:54.449Z"
+  },
+  {
+    "topic": "Chronic Fatigue",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/chronic-fatigue/ after 3 attempts",
+    "timestamp": "2025-07-16T22:02:57.286Z"
+  },
+  {
+    "topic": "Chronic Pain",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/chronic-pain/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:00.229Z"
+  },
+  {
+    "topic": "Cirrhosis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/cirrhosis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:02.598Z"
+  },
+  {
+    "topic": "Colon Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/colon-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:05.983Z"
+  },
+  {
+    "topic": "COPD",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/copd/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:09.185Z"
+  },
+  {
+    "topic": "Crohn's Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/crohn's-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:12.152Z"
+  },
+  {
+    "topic": "Dementia",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/dementia/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:15.266Z"
+  },
+  {
+    "topic": "Diabetes Type 1",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/diabetes-type-1/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:20.496Z"
+  },
+  {
+    "topic": "Diabetes Type 2",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/diabetes-type-2/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:23.371Z"
+  },
+  {
+    "topic": "Diverticulitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/diverticulitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:26.375Z"
+  },
+  {
+    "topic": "Eczema",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/eczema/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:29.555Z"
+  },
+  {
+    "topic": "Endometriosis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/endometriosis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:32.418Z"
+  },
+  {
+    "topic": "Epilepsy",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/epilepsy/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:35.311Z"
+  },
+  {
+    "topic": "Fibromyalgia",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/fibromyalgia/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:40.484Z"
+  },
+  {
+    "topic": "Food Allergies",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/food-allergies/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:44.146Z"
+  },
+  {
+    "topic": "Gallstones",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/gallstones/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:47.010Z"
+  },
+  {
+    "topic": "Gout",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/gout/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:54.647Z"
+  },
+  {
+    "topic": "Headaches",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/headaches/ after 3 attempts",
+    "timestamp": "2025-07-16T22:03:57.484Z"
+  },
+  {
+    "topic": "Heart Attack",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/heart-attack/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:00.447Z"
+  },
+  {
+    "topic": "Heart Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/heart-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:03.301Z"
+  },
+  {
+    "topic": "Hepatitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hepatitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:06.172Z"
+  },
+  {
+    "topic": "High Blood Pressure",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/high-blood-pressure/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:09.053Z"
+  },
+  {
+    "topic": "High Cholesterol",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/high-cholesterol/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:12.076Z"
+  },
+  {
+    "topic": "HIV/AIDS",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hiv/aids/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:15.170Z"
+  },
+  {
+    "topic": "Hormonal Imbalance",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hormonal-imbalance/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:18.216Z"
+  },
+  {
+    "topic": "Hypertension",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hypertension/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:20.599Z"
+  },
+  {
+    "topic": "Inflammation",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/inflammation/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:22.987Z"
+  },
+  {
+    "topic": "Inflammatory Bowel Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/inflammatory-bowel-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:25.857Z"
+  },
+  {
+    "topic": "Insomnia",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/insomnia/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:28.861Z"
+  },
+  {
+    "topic": "Irritable Bowel Syndrome",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/irritable-bowel-syndrome/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:31.876Z"
+  },
+  {
+    "topic": "Joint Pain",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/joint-pain/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:34.846Z"
+  },
+  {
+    "topic": "Kidney Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/kidney-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:38.241Z"
+  },
+  {
+    "topic": "Kidney Stones",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/kidney-stones/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:41.341Z"
+  },
+  {
+    "topic": "Leukemia",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/leukemia/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:44.188Z"
+  },
+  {
+    "topic": "Liver Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/liver-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:47.041Z"
+  },
+  {
+    "topic": "Lung Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/lung-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:50.012Z"
+  },
+  {
+    "topic": "Lupus",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/lupus/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:53.049Z"
+  },
+  {
+    "topic": "Lyme Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/lyme-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:04:55.868Z"
+  },
+  {
+    "topic": "Melanoma",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/melanoma/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:01.093Z"
+  },
+  {
+    "topic": "Memory Loss",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/memory-loss/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:03.945Z"
+  },
+  {
+    "topic": "Menopause",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/menopause/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:06.887Z"
+  },
+  {
+    "topic": "Migraine",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/migraine/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:09.774Z"
+  },
+  {
+    "topic": "Multiple Sclerosis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/multiple-sclerosis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:12.696Z"
+  },
+  {
+    "topic": "Muscle Pain",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/muscle-pain/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:15.565Z"
+  },
+  {
+    "topic": "Nausea",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/nausea/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:18.457Z"
+  },
+  {
+    "topic": "Neuropathy",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/neuropathy/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:21.303Z"
+  },
+  {
+    "topic": "Obesity",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/obesity/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:24.188Z"
+  },
+  {
+    "topic": "Osteoarthritis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/osteoarthritis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:27.656Z"
+  },
+  {
+    "topic": "Osteoporosis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/osteoporosis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:30.723Z"
+  },
+  {
+    "topic": "Ovarian Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/ovarian-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:33.601Z"
+  },
+  {
+    "topic": "Pancreatic Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/pancreatic-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:36.411Z"
+  },
+  {
+    "topic": "Pancreatitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/pancreatitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:38.834Z"
+  },
+  {
+    "topic": "Parkinson's Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/parkinson's-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:41.636Z"
+  },
+  {
+    "topic": "PCOS",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/pcos/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:44.501Z"
+  },
+  {
+    "topic": "Pneumonia",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/pneumonia/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:47.345Z"
+  },
+  {
+    "topic": "Prostate Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/prostate-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:50.377Z"
+  },
+  {
+    "topic": "Psoriasis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/psoriasis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:52.742Z"
+  },
+  {
+    "topic": "Rheumatoid Arthritis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/rheumatoid-arthritis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:55.539Z"
+  },
+  {
+    "topic": "Rosacea",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/rosacea/ after 3 attempts",
+    "timestamp": "2025-07-16T22:05:58.384Z"
+  },
+  {
+    "topic": "Schizophrenia",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/schizophrenia/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:01.341Z"
+  },
+  {
+    "topic": "Scleroderma",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/scleroderma/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:04.204Z"
+  },
+  {
+    "topic": "Seizures",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/seizures/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:07.141Z"
+  },
+  {
+    "topic": "Sinusitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/sinusitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:10.202Z"
+  },
+  {
+    "topic": "Skin Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/skin-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:13.087Z"
+  },
+  {
+    "topic": "Sleep Apnea",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/sleep-apnea/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:15.921Z"
+  },
+  {
+    "topic": "Spinal Cord Injury",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/spinal-cord-injury/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:18.801Z"
+  },
+  {
+    "topic": "Stroke",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/stroke/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:21.138Z"
+  },
+  {
+    "topic": "Thyroid Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/thyroid-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:23.956Z"
+  },
+  {
+    "topic": "Tinnitus",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/tinnitus/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:27.397Z"
+  },
+  {
+    "topic": "Tuberculosis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/tuberculosis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:30.309Z"
+  },
+  {
+    "topic": "Urinary Tract Infection",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/urinary-tract-infection/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:35.523Z"
+  },
+  {
+    "topic": "Vision Problems",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/vision-problems/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:38.466Z"
+  },
+  {
+    "topic": "Vitiligo",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/vitiligo/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:41.400Z"
+  },
+  {
+    "topic": "Acid Reflux",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/acid-reflux/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:44.231Z"
+  },
+  {
+    "topic": "Adrenal Fatigue",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/adrenal-fatigue/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:47.178Z"
+  },
+  {
+    "topic": "Allergic Rhinitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/allergic-rhinitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:50.153Z"
+  },
+  {
+    "topic": "Anxiety Disorders",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/anxiety-disorders/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:53.015Z"
+  },
+  {
+    "topic": "Arrhythmia",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/arrhythmia/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:56.019Z"
+  },
+  {
+    "topic": "Atrial Fibrillation",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/atrial-fibrillation/ after 3 attempts",
+    "timestamp": "2025-07-16T22:06:59.020Z"
+  },
+  {
+    "topic": "Autoimmune Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/autoimmune-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:01.891Z"
+  },
+  {
+    "topic": "Bacterial Infections",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/bacterial-infections/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:04.752Z"
+  },
+  {
+    "topic": "Bell's Palsy",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/bell's-palsy/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:07.696Z"
+  },
+  {
+    "topic": "Benign Prostatic Hyperplasia",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/benign-prostatic-hyperplasia/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:10.625Z"
+  },
+  {
+    "topic": "Bleeding Disorders",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/bleeding-disorders/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:13.492Z"
+  },
+  {
+    "topic": "Blood Clots",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/blood-clots/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:16.286Z"
+  },
+  {
+    "topic": "Bone Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/bone-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:19.151Z"
+  },
+  {
+    "topic": "Brain Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/brain-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:22.172Z"
+  },
+  {
+    "topic": "Bronchitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/bronchitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:25.010Z"
+  },
+  {
+    "topic": "Bursitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/bursitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:27.987Z"
+  },
+  {
+    "topic": "Carpal Tunnel Syndrome",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/carpal-tunnel-syndrome/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:30.860Z"
+  },
+  {
+    "topic": "Cervical Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/cervical-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:33.741Z"
+  },
+  {
+    "topic": "Chronic Bronchitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/chronic-bronchitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:36.563Z"
+  },
+  {
+    "topic": "Chronic Kidney Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/chronic-kidney-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:39.410Z"
+  },
+  {
+    "topic": "Chronic Migraine",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/chronic-migraine/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:42.196Z"
+  },
+  {
+    "topic": "Chronic Obstructive Pulmonary Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/chronic-obstructive-pulmonary-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:45.100Z"
+  },
+  {
+    "topic": "Chronic Sinusitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/chronic-sinusitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:48.004Z"
+  },
+  {
+    "topic": "Circulation Problems",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/circulation-problems/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:50.863Z"
+  },
+  {
+    "topic": "Colorectal Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/colorectal-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:53.696Z"
+  },
+  {
+    "topic": "Common Cold",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/common-cold/ after 3 attempts",
+    "timestamp": "2025-07-16T22:07:56.527Z"
+  },
+  {
+    "topic": "Congestive Heart Failure",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/congestive-heart-failure/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:01.673Z"
+  },
+  {
+    "topic": "Coronary Artery Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/coronary-artery-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:06.859Z"
+  },
+  {
+    "topic": "Cystic Fibrosis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/cystic-fibrosis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:09.785Z"
+  },
+  {
+    "topic": "Deep Vein Thrombosis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/deep-vein-thrombosis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:12.770Z"
+  },
+  {
+    "topic": "Dental Problems",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/dental-problems/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:15.593Z"
+  },
+  {
+    "topic": "Dermatitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/dermatitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:19.052Z"
+  },
+  {
+    "topic": "Diabetes Complications",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/diabetes-complications/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:21.918Z"
+  },
+  {
+    "topic": "Diabetic Neuropathy",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/diabetic-neuropathy/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:24.805Z"
+  },
+  {
+    "topic": "Diverticulosis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/diverticulosis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:30.280Z"
+  },
+  {
+    "topic": "Dry Eye Syndrome",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/dry-eye-syndrome/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:33.079Z"
+  },
+  {
+    "topic": "Dyslexia",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/dyslexia/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:35.884Z"
+  },
+  {
+    "topic": "Ear Infections",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/ear-infections/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:38.694Z"
+  },
+  {
+    "topic": "Eating Disorders",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/eating-disorders/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:41.505Z"
+  },
+  {
+    "topic": "Eczema",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/eczema/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:44.339Z"
+  },
+  {
+    "topic": "Endometrial Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/endometrial-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:49.529Z"
+  },
+  {
+    "topic": "Eosinophilic Esophagitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/eosinophilic-esophagitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:52.333Z"
+  },
+  {
+    "topic": "Esophageal Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/esophageal-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:08:57.307Z"
+  },
+  {
+    "topic": "Essential Tremor",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/essential-tremor/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:00.269Z"
+  },
+  {
+    "topic": "Eye Infections",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/eye-infections/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:03.088Z"
+  },
+  {
+    "topic": "Facial Pain",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/facial-pain/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:05.946Z"
+  },
+  {
+    "topic": "Fatty Liver Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/fatty-liver-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:09.054Z"
+  },
+  {
+    "topic": "Fibroids",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/fibroids/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:11.897Z"
+  },
+  {
+    "topic": "Food Poisoning",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/food-poisoning/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:15.057Z"
+  },
+  {
+    "topic": "Fractures",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/fractures/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:18.276Z"
+  },
+  {
+    "topic": "Fungal Infections",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/fungal-infections/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:21.169Z"
+  },
+  {
+    "topic": "Gallbladder Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/gallbladder-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:24.061Z"
+  },
+  {
+    "topic": "Gastroparesis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/gastroparesis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:27.674Z"
+  },
+  {
+    "topic": "Genital Herpes",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/genital-herpes/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:31.959Z"
+  },
+  {
+    "topic": "Glomerulonephritis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/glomerulonephritis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:35.070Z"
+  },
+  {
+    "topic": "Gout",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/gout/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:37.995Z"
+  },
+  {
+    "topic": "Graves' Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/graves'-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:40.838Z"
+  },
+  {
+    "topic": "Gum Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/gum-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:43.640Z"
+  },
+  {
+    "topic": "Hair Loss",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hair-loss/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:46.487Z"
+  },
+  {
+    "topic": "Hashimoto's Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hashimoto's-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:49.514Z"
+  },
+  {
+    "topic": "Head and Neck Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/head-and-neck-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:52.382Z"
+  },
+  {
+    "topic": "Hearing Loss",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hearing-loss/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:54.724Z"
+  },
+  {
+    "topic": "Heart Failure",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/heart-failure/ after 3 attempts",
+    "timestamp": "2025-07-16T22:09:57.808Z"
+  },
+  {
+    "topic": "Heart Palpitations",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/heart-palpitations/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:00.688Z"
+  },
+  {
+    "topic": "Hemorrhoids",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hemorrhoids/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:03.508Z"
+  },
+  {
+    "topic": "Hepatitis A",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hepatitis-a/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:06.420Z"
+  },
+  {
+    "topic": "Hepatitis B",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hepatitis-b/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:09.282Z"
+  },
+  {
+    "topic": "Hepatitis C",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hepatitis-c/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:12.192Z"
+  },
+  {
+    "topic": "Hernia",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hernia/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:15.004Z"
+  },
+  {
+    "topic": "Herpes Simplex",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/herpes-simplex/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:18.047Z"
+  },
+  {
+    "topic": "High Triglycerides",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/high-triglycerides/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:20.953Z"
+  },
+  {
+    "topic": "Hives",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hives/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:23.780Z"
+  },
+  {
+    "topic": "Hormone Imbalance",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hormone-imbalance/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:26.959Z"
+  },
+  {
+    "topic": "Hot Flashes",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hot-flashes/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:29.964Z"
+  },
+  {
+    "topic": "Hyperthyroidism",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hyperthyroidism/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:32.892Z"
+  },
+  {
+    "topic": "Hypothyroidism",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/hypothyroidism/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:35.715Z"
+  },
+  {
+    "topic": "Immune System Disorders",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/immune-system-disorders/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:38.744Z"
+  },
+  {
+    "topic": "Impotence",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/impotence/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:41.814Z"
+  },
+  {
+    "topic": "Infertility",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/infertility/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:44.676Z"
+  },
+  {
+    "topic": "Inflammatory Arthritis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/inflammatory-arthritis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:47.587Z"
+  },
+  {
+    "topic": "Insulin Resistance",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/insulin-resistance/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:50.447Z"
+  },
+  {
+    "topic": "Interstitial Cystitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/interstitial-cystitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:53.265Z"
+  },
+  {
+    "topic": "Iron Deficiency",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/iron-deficiency/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:56.120Z"
+  },
+  {
+    "topic": "Irritable Bowel Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/irritable-bowel-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:10:58.999Z"
+  },
+  {
+    "topic": "Jaundice",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/jaundice/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:01.855Z"
+  },
+  {
+    "topic": "Kidney Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/kidney-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:04.712Z"
+  },
+  {
+    "topic": "Kidney Infection",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/kidney-infection/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:07.600Z"
+  },
+  {
+    "topic": "Kidney Stones",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/kidney-stones/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:10.519Z"
+  },
+  {
+    "topic": "Lactose Intolerance",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/lactose-intolerance/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:13.380Z"
+  },
+  {
+    "topic": "Laryngeal Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/laryngeal-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:16.335Z"
+  },
+  {
+    "topic": "Leukemia",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/leukemia/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:19.183Z"
+  },
+  {
+    "topic": "Liver Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/liver-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:22.007Z"
+  },
+  {
+    "topic": "Low Blood Pressure",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/low-blood-pressure/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:24.891Z"
+  },
+  {
+    "topic": "Low Testosterone",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/low-testosterone/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:28.073Z"
+  },
+  {
+    "topic": "Lung Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/lung-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:31.446Z"
+  },
+  {
+    "topic": "Lupus Nephritis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/lupus-nephritis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:34.388Z"
+  },
+  {
+    "topic": "Lyme Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/lyme-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:37.286Z"
+  },
+  {
+    "topic": "Lymphoma",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/lymphoma/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:40.188Z"
+  },
+  {
+    "topic": "Male Pattern Baldness",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/male-pattern-baldness/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:45.638Z"
+  },
+  {
+    "topic": "Malnutrition",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/malnutrition/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:48.537Z"
+  },
+  {
+    "topic": "Mastitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/mastitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:51.410Z"
+  },
+  {
+    "topic": "Melanoma",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/melanoma/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:54.265Z"
+  },
+  {
+    "topic": "Memory Problems",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/memory-problems/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:57.111Z"
+  },
+  {
+    "topic": "Menstrual Disorders",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/menstrual-disorders/ after 3 attempts",
+    "timestamp": "2025-07-16T22:11:59.947Z"
+  },
+  {
+    "topic": "Metabolic Syndrome",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/metabolic-syndrome/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:02.961Z"
+  },
+  {
+    "topic": "Migraine with Aura",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/migraine-with-aura/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:05.922Z"
+  },
+  {
+    "topic": "Miscarriage",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/miscarriage/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:08.851Z"
+  },
+  {
+    "topic": "Mitral Valve Prolapse",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/mitral-valve-prolapse/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:11.733Z"
+  },
+  {
+    "topic": "Mood Disorders",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/mood-disorders/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:14.571Z"
+  },
+  {
+    "topic": "Motion Sickness",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/motion-sickness/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:17.356Z"
+  },
+  {
+    "topic": "Multiple Myeloma",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/multiple-myeloma/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:20.215Z"
+  },
+  {
+    "topic": "Muscular Dystrophy",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/muscular-dystrophy/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:23.135Z"
+  },
+  {
+    "topic": "Myasthenia Gravis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/myasthenia-gravis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:25.965Z"
+  },
+  {
+    "topic": "Nail Fungus",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/nail-fungus/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:28.796Z"
+  },
+  {
+    "topic": "Narcolepsy",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/narcolepsy/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:31.666Z"
+  },
+  {
+    "topic": "Nasal Polyps",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/nasal-polyps/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:34.489Z"
+  },
+  {
+    "topic": "Nausea and Vomiting",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/nausea-and-vomiting/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:37.301Z"
+  },
+  {
+    "topic": "Nerve Pain",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/nerve-pain/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:40.140Z"
+  },
+  {
+    "topic": "Neuropathy",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/neuropathy/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:42.988Z"
+  },
+  {
+    "topic": "Night Sweats",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/night-sweats/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:45.809Z"
+  },
+  {
+    "topic": "Non-Hodgkin Lymphoma",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/non-hodgkin-lymphoma/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:48.662Z"
+  },
+  {
+    "topic": "Nosebleeds",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/nosebleeds/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:51.588Z"
+  },
+  {
+    "topic": "Obesity",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/obesity/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:54.519Z"
+  },
+  {
+    "topic": "Obsessive-Compulsive Disorder",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/obsessive-compulsive-disorder/ after 3 attempts",
+    "timestamp": "2025-07-16T22:12:57.386Z"
+  },
+  {
+    "topic": "Oral Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/oral-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:00.258Z"
+  },
+  {
+    "topic": "Osteoarthritis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/osteoarthritis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:03.103Z"
+  },
+  {
+    "topic": "Osteoporosis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/osteoporosis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:06.095Z"
+  },
+  {
+    "topic": "Ovarian Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/ovarian-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:15.878Z"
+  },
+  {
+    "topic": "Overactive Bladder",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/overactive-bladder/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:18.732Z"
+  },
+  {
+    "topic": "Pancreatic Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/pancreatic-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:21.557Z"
+  },
+  {
+    "topic": "Pancreatitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/pancreatitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:23.819Z"
+  },
+  {
+    "topic": "Parathyroid Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/parathyroid-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:29.224Z"
+  },
+  {
+    "topic": "Parkinson's Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/parkinson's-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:32.119Z"
+  },
+  {
+    "topic": "Pelvic Inflammatory Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/pelvic-inflammatory-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:34.961Z"
+  },
+  {
+    "topic": "Peptic Ulcer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/peptic-ulcer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:37.817Z"
+  },
+  {
+    "topic": "Peripheral Artery Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/peripheral-artery-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:40.720Z"
+  },
+  {
+    "topic": "Peripheral Neuropathy",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/peripheral-neuropathy/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:43.572Z"
+  },
+  {
+    "topic": "Peritonitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/peritonitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:45.994Z"
+  },
+  {
+    "topic": "Peyronie's Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/peyronie's-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:48.817Z"
+  },
+  {
+    "topic": "Phobias",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/phobias/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:51.664Z"
+  },
+  {
+    "topic": "Pink Eye",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/pink-eye/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:54.502Z"
+  },
+  {
+    "topic": "Plantar Fasciitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/plantar-fasciitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:13:57.310Z"
+  },
+  {
+    "topic": "Pleurisy",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/pleurisy/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:00.169Z"
+  },
+  {
+    "topic": "Pneumonia",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/pneumonia/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:02.995Z"
+  },
+  {
+    "topic": "Polycystic Kidney Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/polycystic-kidney-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:05.846Z"
+  },
+  {
+    "topic": "Polycystic Ovary Syndrome",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/polycystic-ovary-syndrome/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:08.765Z"
+  },
+  {
+    "topic": "Post-Traumatic Stress Disorder",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/post-traumatic-stress-disorder/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:11.623Z"
+  },
+  {
+    "topic": "Postpartum Depression",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/postpartum-depression/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:14.488Z"
+  },
+  {
+    "topic": "Pre-diabetes",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/pre-diabetes/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:17.351Z"
+  },
+  {
+    "topic": "Pregnancy Complications",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/pregnancy-complications/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:20.211Z"
+  },
+  {
+    "topic": "Premature Ejaculation",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/premature-ejaculation/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:23.178Z"
+  },
+  {
+    "topic": "Premenstrual Syndrome",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/premenstrual-syndrome/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:26.046Z"
+  },
+  {
+    "topic": "Prostate Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/prostate-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:29.184Z"
+  },
+  {
+    "topic": "Prostate Enlargement",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/prostate-enlargement/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:32.213Z"
+  },
+  {
+    "topic": "Psoriasis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/psoriasis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:34.483Z"
+  },
+  {
+    "topic": "Psoriatic Arthritis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/psoriatic-arthritis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:37.335Z"
+  },
+  {
+    "topic": "Pulmonary Embolism",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/pulmonary-embolism/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:40.345Z"
+  },
+  {
+    "topic": "Pulmonary Fibrosis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/pulmonary-fibrosis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:43.210Z"
+  },
+  {
+    "topic": "Raynaud's Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/raynaud's-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:46.033Z"
+  },
+  {
+    "topic": "Rectal Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/rectal-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:48.835Z"
+  },
+  {
+    "topic": "Restless Leg Syndrome",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/restless-leg-syndrome/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:51.697Z"
+  },
+  {
+    "topic": "Retinal Detachment",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/retinal-detachment/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:54.562Z"
+  },
+  {
+    "topic": "Rheumatoid Arthritis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/rheumatoid-arthritis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:14:57.385Z"
+  },
+  {
+    "topic": "Rosacea",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/rosacea/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:00.230Z"
+  },
+  {
+    "topic": "Sarcoidosis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/sarcoidosis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:03.088Z"
+  },
+  {
+    "topic": "Scabies",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/scabies/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:05.912Z"
+  },
+  {
+    "topic": "Schizophrenia",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/schizophrenia/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:08.916Z"
+  },
+  {
+    "topic": "Scleroderma",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/scleroderma/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:11.754Z"
+  },
+  {
+    "topic": "Seasonal Affective Disorder",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/seasonal-affective-disorder/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:14.630Z"
+  },
+  {
+    "topic": "Seborrheic Dermatitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/seborrheic-dermatitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:17.507Z"
+  },
+  {
+    "topic": "Seizures",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/seizures/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:20.717Z"
+  },
+  {
+    "topic": "Sepsis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/sepsis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:23.050Z"
+  },
+  {
+    "topic": "Sexually Transmitted Diseases",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/sexually-transmitted-diseases/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:25.885Z"
+  },
+  {
+    "topic": "Shingles",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/shingles/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:29.141Z"
+  },
+  {
+    "topic": "Sickle Cell Anemia",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/sickle-cell-anemia/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:32.002Z"
+  },
+  {
+    "topic": "Sinus Infections",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/sinus-infections/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:34.848Z"
+  },
+  {
+    "topic": "Sinusitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/sinusitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:37.625Z"
+  },
+  {
+    "topic": "Skin Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/skin-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:40.556Z"
+  },
+  {
+    "topic": "Sleep Apnea",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/sleep-apnea/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:43.461Z"
+  },
+  {
+    "topic": "Sleep Disorders",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/sleep-disorders/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:46.292Z"
+  },
+  {
+    "topic": "Small Intestine Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/small-intestine-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:49.136Z"
+  },
+  {
+    "topic": "Spinal Cord Injury",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/spinal-cord-injury/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:52.004Z"
+  },
+  {
+    "topic": "Spinal Stenosis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/spinal-stenosis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:54.914Z"
+  },
+  {
+    "topic": "Squamous Cell Carcinoma",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/squamous-cell-carcinoma/ after 3 attempts",
+    "timestamp": "2025-07-16T22:15:57.759Z"
+  },
+  {
+    "topic": "Stomach Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/stomach-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:00.687Z"
+  },
+  {
+    "topic": "Stomach Ulcers",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/stomach-ulcers/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:03.522Z"
+  },
+  {
+    "topic": "Stress",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/stress/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:06.367Z"
+  },
+  {
+    "topic": "Stroke",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/stroke/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:08.653Z"
+  },
+  {
+    "topic": "Substance Abuse",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/substance-abuse/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:11.525Z"
+  },
+  {
+    "topic": "Swollen Lymph Nodes",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/swollen-lymph-nodes/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:14.340Z"
+  },
+  {
+    "topic": "Syphilis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/syphilis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:17.186Z"
+  },
+  {
+    "topic": "Testicular Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/testicular-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:19.996Z"
+  },
+  {
+    "topic": "Throat Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/throat-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:22.857Z"
+  },
+  {
+    "topic": "Thyroid Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/thyroid-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:25.698Z"
+  },
+  {
+    "topic": "Thyroid Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/thyroid-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:29.055Z"
+  },
+  {
+    "topic": "Tinnitus",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/tinnitus/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:31.916Z"
+  },
+  {
+    "topic": "Tonsillitis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/tonsillitis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:34.798Z"
+  },
+  {
+    "topic": "Tourette Syndrome",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/tourette-syndrome/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:37.645Z"
+  },
+  {
+    "topic": "Tuberculosis",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/tuberculosis/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:40.628Z"
+  },
+  {
+    "topic": "Type 1 Diabetes",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/type-1-diabetes/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:43.479Z"
+  },
+  {
+    "topic": "Type 2 Diabetes",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/type-2-diabetes/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:46.318Z"
+  },
+  {
+    "topic": "Urinary Incontinence",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/urinary-incontinence/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:51.344Z"
+  },
+  {
+    "topic": "Urinary Tract Infection",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/urinary-tract-infection/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:54.160Z"
+  },
+  {
+    "topic": "Uterine Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/uterine-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:56.959Z"
+  },
+  {
+    "topic": "Uterine Fibroids",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/uterine-fibroids/ after 3 attempts",
+    "timestamp": "2025-07-16T22:16:59.778Z"
+  },
+  {
+    "topic": "Vaginal Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/vaginal-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:17:02.795Z"
+  },
+  {
+    "topic": "Varicose Veins",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/varicose-veins/ after 3 attempts",
+    "timestamp": "2025-07-16T22:17:05.716Z"
+  },
+  {
+    "topic": "Vertigo",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/vertigo/ after 3 attempts",
+    "timestamp": "2025-07-16T22:17:08.842Z"
+  },
+  {
+    "topic": "Vision Problems",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/vision-problems/ after 3 attempts",
+    "timestamp": "2025-07-16T22:17:11.851Z"
+  },
+  {
+    "topic": "Vitiligo",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/vitiligo/ after 3 attempts",
+    "timestamp": "2025-07-16T22:17:14.790Z"
+  },
+  {
+    "topic": "Vulvar Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/vulvar-cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:17:17.667Z"
+  },
+  {
+    "topic": "Wilson's Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/wilson's-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:17:20.527Z"
+  }
+]

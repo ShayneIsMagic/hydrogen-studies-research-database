@@ -1,0 +1,17 @@
+[
+  {
+    "topic": "Diabetes Type 2",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/diabetes-type-2/ after 3 attempts",
+    "timestamp": "2025-07-16T22:29:12.094Z"
+  },
+  {
+    "topic": "Cancer",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/cancer/ after 3 attempts",
+    "timestamp": "2025-07-16T22:29:15.127Z"
+  },
+  {
+    "topic": "Heart Disease",
+    "error": "Failed to fetch https://hydrogenstudies.com/tertiary-topic/heart-disease/ after 3 attempts",
+    "timestamp": "2025-07-16T22:29:18.046Z"
+  }
+]

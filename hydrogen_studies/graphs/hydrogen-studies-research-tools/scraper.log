@@ -1,0 +1,258 @@
+2025-07-17 14:06:24,515 - 🔍 Discovering topic URLs...
+2025-07-17 14:06:24,972 - ✅ Found URLs for 216 topics
+2025-07-17 14:06:24,973 - 🔧 Limiting to 5 topics
+2025-07-17 14:06:24,973 - 📊 Processing 5 topics
+2025-07-17 14:06:24,973 - 📖 [1/5] Acne
+2025-07-17 14:06:27,226 - 📖 [2/5] Acute Kidney Injury
+2025-07-17 14:06:29,872 - 📖 [3/5] Acute Respiratory Distress Syndrome
+2025-07-17 14:06:32,276 - 📖 [4/5] Acute Tubuluar Necrosis
+2025-07-17 14:06:34,758 - 📖 [5/5] Addiction
+2025-07-17 14:06:37,231 - 💾 Saved 5 topics to topics_content_20250717_140637.csv
+2025-07-17 14:06:37,233 - 💾 Saved 5 topics to topics_studies_20250717_140637.csv
+2025-07-17 14:28:19,823 - 📚 Loading research database...
+2025-07-17 14:28:19,825 - 📖 Loading Hydrogen_Research_Database_Primary_Studies.csv
+2025-07-17 14:28:20,016 - 📖 Loading Hydrogen_Research_Database_Clean.csv
+2025-07-17 14:28:20,294 - ✅ Loaded research database: 35 primary topics, 0 secondary topics
+2025-07-17 14:28:20,295 - 🔍 Discovering topic URLs...
+2025-07-17 14:28:20,777 - ✅ Found URLs for 216 topics
+2025-07-17 14:28:20,777 - 🔧 Limiting to 216 topics
+2025-07-17 14:28:20,777 - 📊 Processing 216 topics
+2025-07-17 14:28:20,778 - 📖 [1/216] Acne
+2025-07-17 14:28:23,033 - 📖 [2/216] Acute Kidney Injury
+2025-07-17 14:28:25,287 - 📖 [3/216] Acute Respiratory Distress Syndrome
+2025-07-17 14:28:27,584 - 📖 [4/216] Acute Tubuluar Necrosis
+2025-07-17 14:28:29,824 - 📖 [5/216] Addiction
+2025-07-17 14:28:32,098 - 📖 [6/216] Aflatoxicosis
+2025-07-17 14:28:34,681 - 📖 [7/216] Aging
+2025-07-17 14:28:37,124 - 📖 [8/216] Alcohol Toxicity
+2025-07-17 14:28:39,552 - 📖 [9/216] Alcoholic Liver Disease
+2025-07-17 14:28:41,990 - 📖 [10/216] Alkali Burn
+2025-07-17 14:28:44,411 - ✅ Completed 10/216 topics
+2025-07-17 14:28:44,411 - 📖 [11/216] Alzheimer's Disease
+2025-07-17 14:28:46,695 - 📖 [12/216] Amyloid Beta Toxicity
+2025-07-17 14:28:49,128 - 📖 [13/216] Amyotrophic Laterial Sclerosis
+2025-07-17 14:28:51,572 - 📖 [14/216] Anxiety
+2025-07-17 14:28:53,967 - 📖 [15/216] Aplastic Anemia
+2025-07-17 14:28:56,351 - 📖 [16/216] Asphyxial Encephalopathy
+2025-07-17 14:28:58,813 - 📖 [17/216] Asthma
+2025-07-17 14:29:01,312 - 📖 [18/216] Atherosclerosis
+2025-07-17 14:29:03,929 - 📖 [19/216] Atrophy
+2025-07-17 14:29:06,428 - 📖 [20/216] Auditory Neuropathy
+2025-07-17 14:29:08,893 - ✅ Completed 20/216 topics
+2025-07-17 14:29:08,893 - 📖 [21/216] Autism Spectrum Disorder
+2025-07-17 14:29:11,284 - 📖 [22/216] Bacterial Infection
+2025-07-17 14:29:13,831 - 📖 [23/216] Bile Duct Injury
+2025-07-17 14:29:16,351 - 📖 [24/216] Bladder Outlet Obstruction
+2025-07-17 14:29:18,817 - 📖 [25/216] Blunt Chest Trauma
+2025-07-17 14:29:21,536 - 📖 [26/216] Brain Injury
+2025-07-17 14:29:23,981 - 📖 [27/216] Bronchopulmonary Dysplasia
+2025-07-17 14:29:26,396 - 📖 [28/216] Cancer
+2025-07-17 14:29:28,898 - 📖 [29/216] Candida Yeast Infection
+2025-07-17 14:29:31,721 - 📖 [30/216] Cardiac Arrest
+2025-07-17 14:29:33,987 - ✅ Completed 30/216 topics
+2025-07-17 14:29:33,988 - 📖 [31/216] Cardiac Degeneration
+2025-07-17 14:29:36,533 - 📖 [32/216] Cardiac Hypertrophy
+2025-07-17 14:29:39,264 - 📖 [33/216] Cardiomyopathy
+2025-07-17 14:29:41,669 - 📖 [34/216] Cardiovascular Disease
+2025-07-17 14:29:44,051 - 📖 [35/216] Cataract
+2025-07-17 14:29:46,468 - 📖 [36/216] Cavities
+2025-07-17 14:29:48,728 - 📖 [37/216] Chagas Disease
+2025-07-17 14:29:50,981 - 📖 [38/216] Chronic Fatigue Syndrome
+2025-07-17 14:29:53,424 - 📖 [39/216] Chronic Heart Failure
+2025-07-17 14:29:55,800 - 📖 [40/216] Chronic Kidney Disease
+2025-07-17 14:29:58,209 - ✅ Completed 40/216 topics
+2025-07-17 14:29:58,209 - 📖 [41/216] Chronic Obstructive Pulmonary Disease
+2025-07-17 14:30:00,651 - 📖 [42/216] Cognitive Impairment
+2025-07-17 14:30:03,166 - 📖 [43/216] Colitis
+2025-07-17 14:30:05,561 - 📖 [44/216] Coma
+2025-07-17 14:30:07,978 - 📖 [45/216] Concussion
+2025-07-17 14:30:10,368 - 📖 [46/216] Congenital Obstructive Nephropathy
+2025-07-17 14:30:12,797 - 📖 [47/216] Constipation
+2025-07-17 14:30:15,194 - 📖 [48/216] Corneal Injury
+2025-07-17 14:30:17,634 - 📖 [49/216] Cosmetic Skin Issues
+2025-07-17 14:30:20,062 - 📖 [50/216] Dehydration
+2025-07-17 14:30:22,304 - ✅ Completed 50/216 topics
+2025-07-17 14:30:22,305 - 📖 [51/216] Dementia
+2025-07-17 14:30:24,699 - 📖 [52/216] Dentin Integrity
+2025-07-17 14:30:27,028 - 📖 [53/216] Depression
+2025-07-17 14:30:29,742 - 📖 [54/216] Dermatitis
+2025-07-17 14:30:32,251 - 📖 [55/216] Dermatophagoides farinae exposure
+2025-07-17 14:30:34,706 - 📖 [56/216] Diabetes (Type I)
+2025-07-17 14:30:37,085 - 📖 [57/216] Diabetes (Type II)
+2025-07-17 14:30:39,540 - 📖 [58/216] Diabetic Nephropathy
+2025-07-17 14:30:41,944 - 📖 [59/216] Diabetic Peripheral Neuropathy
+2025-07-17 14:30:44,351 - 📖 [60/216] Diabetic Retinopathy
+2025-07-17 14:30:46,863 - ✅ Completed 60/216 topics
+2025-07-17 14:30:46,863 - 📖 [61/216] Diarrhea
+2025-07-17 14:30:49,377 - 📖 [62/216] Diffuse Axonal Injury
+2025-07-17 14:30:51,846 - 📖 [63/216] Disuse Atrophy
+2025-07-17 14:30:54,327 - 📖 [64/216] Dry Eye
+2025-07-17 14:30:56,751 - 📖 [65/216] Dyslipidemia
+2025-07-17 14:30:59,165 - 📖 [66/216] Dyspnea
+2025-07-17 14:31:01,681 - 📖 [67/216] Edema
+2025-07-17 14:31:04,131 - 📖 [68/216] Encapsulating Peritoneal Sclerosis
+2025-07-17 14:31:06,614 - 📖 [69/216] Encephalopathy
+2025-07-17 14:31:08,879 - 📖 [70/216] Endometriosis
+2025-07-17 14:31:11,262 - ✅ Completed 70/216 topics
+2025-07-17 14:31:11,262 - 📖 [71/216] Endothelial Dysfunction
+2025-07-17 14:31:13,662 - 📖 [72/216] Endotoxemia
+2025-07-17 14:31:16,228 - 📖 [73/216] Enteropathy
+2025-07-17 14:31:18,677 - 📖 [74/216] Epithelial Dysfunction
+2025-07-17 14:31:21,091 - 📖 [75/216] Erectile Dysfunction
+2025-07-17 14:31:23,506 - 📖 [76/216] Erythema
+2025-07-17 14:31:25,914 - 📖 [77/216] Excercise
+2025-07-17 14:31:28,383 - 📖 [78/216] Excitotoxicity
+2025-07-17 14:31:31,094 - 📖 [79/216] Fatigue
+2025-07-17 14:31:33,523 - 📖 [80/216] Fatty Liver Disease (Alcoholic)
+2025-07-17 14:31:36,133 - ✅ Completed 80/216 topics
+2025-07-17 14:31:36,133 - 📖 [81/216] Fatty Liver Disease (Nonalcoholic)
+2025-07-17 14:31:39,040 - 📖 [82/216] Fibrosis
+2025-07-17 14:31:41,675 - 📖 [83/216] Fluke Infection
+2025-07-17 14:31:44,402 - 📖 [84/216] Food Poisoning
+2025-07-17 14:31:46,810 - 📖 [85/216] Foot Ulcer
+2025-07-17 14:31:49,343 - 📖 [86/216] Fracture
+2025-07-17 14:31:51,615 - 📖 [87/216] Gastric Mucosal Injury
+2025-07-17 14:31:54,052 - 📖 [88/216] Gastric Ulcer
+2025-07-17 14:31:56,459 - 📖 [89/216] Gastritis
+2025-07-17 14:31:58,877 - 📖 [90/216] Gastroenteritis
+2025-07-17 14:32:01,297 - ✅ Completed 90/216 topics
+2025-07-17 14:32:01,297 - 📖 [91/216] Gastroesophageal Reflux Disease
+2025-07-17 14:32:03,805 - 📖 [92/216] Gingivitis
+2025-07-17 14:32:06,191 - 📖 [93/216] Glaucoma
+2025-07-17 14:32:08,714 - 📖 [94/216] Glomerulosclerosis
+2025-07-17 14:32:11,115 - 📖 [95/216] Graft-Versus-Host-Disease
+2025-07-17 14:32:13,566 - 📖 [96/216] Hangover
+2025-07-17 14:32:15,997 - 📖 [97/216] Hearing Loss
+2025-07-17 14:32:18,409 - 📖 [98/216] Heart Attack
+2025-07-17 14:32:20,852 - 📖 [99/216] Heart Failure
+2025-07-17 14:32:23,282 - 📖 [100/216] Heat Stress
+2025-07-17 14:32:25,702 - ✅ Completed 100/216 topics
+2025-07-17 14:32:25,702 - 📖 [101/216] Helicobacter pylori Infection
+2025-07-17 14:32:28,338 - 📖 [102/216] Hemolytic Anemia
+2025-07-17 14:32:31,002 - 📖 [103/216] Hemorrhagic Shock
+2025-07-17 14:32:33,436 - 📖 [104/216] Hepatitis B
+2025-07-17 14:32:35,869 - 📖 [105/216] Hidden Blood Loss
+2025-07-17 14:32:38,405 - 📖 [106/216] High Blood Pressure
+2025-07-17 14:32:40,688 - 📖 [107/216] Hypoxia-Ischemia
+2025-07-17 14:32:43,133 - 📖 [108/216] Immune Dysfunction
+2025-07-17 14:32:45,552 - 📖 [109/216] Indigestion
+2025-07-17 14:32:47,982 - 📖 [110/216] Infertility
+2025-07-17 14:32:50,465 - ✅ Completed 110/216 topics
+2025-07-17 14:32:50,465 - 📖 [111/216] Inflammation
+2025-07-17 14:32:52,872 - 📖 [112/216] Inflammatory Bowel Disease
+2025-07-17 14:32:55,311 - 📖 [113/216] Interstitial Cystitis
+2025-07-17 14:32:57,742 - 📖 [114/216] Interstitial Lung Disease
+2025-07-17 14:33:00,161 - 📖 [115/216] Intervertebral Disc Degeneration
+2025-07-17 14:33:02,556 - 📖 [116/216] Intestinal Injury
+2025-07-17 14:33:05,033 - 📖 [117/216] Intestinal Volvulus
+2025-07-17 14:33:07,486 - 📖 [118/216] Intracranial Hemorrhage
+2025-07-17 14:33:09,968 - 📖 [119/216] Intraocular Pressure
+2025-07-17 14:33:12,372 - 📖 [120/216] Iron Overload
+2025-07-17 14:33:14,854 - ✅ Completed 120/216 topics
+2025-07-17 14:33:14,854 - 📖 [121/216] Irritable Bowel Syndrome
+2025-07-17 14:33:17,300 - 📖 [122/216] Ischemia-Reperfusion Injury
+2025-07-17 14:33:19,766 - 📖 [123/216] Kawasaki Disease
+2025-07-17 14:33:22,191 - 📖 [124/216] Keratin Plugs
+2025-07-17 14:33:24,445 - 📖 [125/216] Kidney Failure
+2025-07-17 14:33:26,699 - 📖 [126/216] Kidney Stones
+2025-07-17 14:33:29,649 - 📖 [127/216] Liver Disease
+2025-07-17 14:33:32,091 - 📖 [128/216] Liver Failure
+2025-07-17 14:33:34,577 - 📖 [129/216] Liver Injury
+2025-07-17 14:33:36,991 - 📖 [130/216] Lung Contusion
+2025-07-17 14:33:39,484 - ✅ Completed 130/216 topics
+2025-07-17 14:33:39,485 - 📖 [131/216] Lung Injury
+2025-07-17 14:33:42,052 - 📖 [132/216] Macular Degeneration
+2025-07-17 14:33:44,445 - 📖 [133/216] Mastitis
+2025-07-17 14:33:46,852 - 📖 [134/216] Maternal Immune Activation
+2025-07-17 14:33:49,254 - 📖 [135/216] Metabolic Acidosis
+2025-07-17 14:33:51,662 - 📖 [136/216] Metabolic Syndrome
+2025-07-17 14:33:54,116 - 📖 [137/216] Motor Deficit
+2025-07-17 14:33:56,528 - 📖 [138/216] Multiple Organ Dysfunction Syndrome
+2025-07-17 14:33:58,968 - 📖 [139/216] Multiple Sclerosis
+2025-07-17 14:34:01,373 - 📖 [140/216] Muscular Dystrophy
+2025-07-17 14:34:03,852 - ✅ Completed 140/216 topics
+2025-07-17 14:34:03,853 - 📖 [141/216] Mycotoxicosis
+2025-07-17 14:34:06,242 - 📖 [142/216] Myocardial Necrosis
+2025-07-17 14:34:08,658 - 📖 [143/216] Necrotizing Enterocolitis
+2025-07-17 14:34:11,153 - 📖 [144/216] Necrotizing Pancreatitis
+2025-07-17 14:34:13,566 - 📖 [145/216] Neurodegeneration
+2025-07-17 14:34:16,015 - 📖 [146/216] Neuropathic Pain
+2025-07-17 14:34:18,460 - 📖 [147/216] No-Reflow Syndrome
+2025-07-17 14:34:20,868 - 📖 [148/216] Non-Alcoholic Steatohepatitis
+2025-07-17 14:34:23,376 - 📖 [149/216] Norovirus Infection
+2025-07-17 14:34:25,953 - 📖 [150/216] Obesity
+2025-07-17 14:34:28,827 - ✅ Completed 150/216 topics
+2025-07-17 14:34:28,828 - 📖 [151/216] Obliterative Airway Disease
+2025-07-17 14:34:31,543 - 📖 [152/216] Obstructive Jaundice
+2025-07-17 14:34:33,989 - 📖 [153/216] Optic Nerve Crush
+2025-07-17 14:34:36,404 - 📖 [154/216] Osteoarthritis
+2025-07-17 14:34:39,227 - 📖 [155/216] Osteonecrosis
+2025-07-17 14:34:41,667 - 📖 [156/216] Osteoporosis
+2025-07-17 14:34:44,093 - 📖 [157/216] Ovarian Injury
+2025-07-17 14:34:46,483 - 📖 [158/216] Oxalate Injury
+2025-07-17 14:34:49,193 - 📖 [159/216] Painful Bladder Syndrome
+2025-07-17 14:34:51,886 - 📖 [160/216] Pancreatitis
+2025-07-17 14:34:54,311 - ✅ Completed 160/216 topics
+2025-07-17 14:34:54,311 - 📖 [161/216] Panic Disorder
+2025-07-17 14:34:56,884 - 📖 [162/216] Paraplegia
+2025-07-17 14:34:59,276 - 📖 [163/216] Parkinson's Disease
+2025-07-17 14:35:01,532 - 📖 [164/216] Pemphigus
+2025-07-17 14:35:03,953 - 📖 [165/216] Periodontitis
+2025-07-17 14:35:06,394 - 📖 [166/216] Peripheral Arterial Disease
+2025-07-17 14:35:08,772 - 📖 [167/216] Placental Stress
+2025-07-17 14:35:11,172 - 📖 [168/216] Polycystic Kidney Disease
+2025-07-17 14:35:13,641 - 📖 [169/216] Polycystic Ovary Syndrome
+2025-07-17 14:35:16,276 - 📖 [170/216] Poor Hair Quality
+2025-07-17 14:35:18,740 - ✅ Completed 170/216 topics
+2025-07-17 14:35:18,740 - 📖 [171/216] Postoperative Cognitive Impairment
+2025-07-17 14:35:21,174 - 📖 [172/216] Postoperative Delirium
+2025-07-17 14:35:23,572 - 📖 [173/216] Postoperative Ileus
+2025-07-17 14:35:25,982 - 📖 [174/216] Postoperative Liver Failure
+2025-07-17 14:35:28,388 - 📖 [175/216] Postoperative Pain
+2025-07-17 14:35:31,105 - 📖 [176/216] Postsurgical Peritoneal Adhesions
+2025-07-17 14:35:33,562 - 📖 [177/216] Preeclampsia
+2025-07-17 14:35:35,827 - 📖 [178/216] Pregnancy
+2025-07-17 14:35:38,230 - 📖 [179/216] Premature Ovarian Failure
+2025-07-17 14:35:40,761 - 📖 [180/216] Pressure Ulcer
+2025-07-17 14:35:43,179 - ✅ Completed 180/216 topics
+2025-07-17 14:35:43,179 - 📖 [181/216] Preterm Birth
+2025-07-17 14:35:45,438 - 📖 [182/216] Psoriasis
+2025-07-17 14:35:48,011 - 📖 [183/216] Psoriasis-Associated Arthritis
+2025-07-17 14:35:50,411 - 📖 [184/216] Retinal Injury
+2025-07-17 14:35:52,860 - 📖 [185/216] Retinal Vein Occlusion
+2025-07-17 14:35:55,260 - 📖 [186/216] Retinitis Pigmentosa
+2025-07-17 14:35:57,712 - 📖 [187/216] Rhabdomyolysis
+2025-07-17 14:36:00,104 - 📖 [188/216] Rheumatoid Arthritis
+2025-07-17 14:36:02,627 - 📖 [189/216] Rhinitis
+2025-07-17 14:36:05,212 - 📖 [190/216] Rhinosinusitis
+2025-07-17 14:36:07,633 - ✅ Completed 190/216 topics
+2025-07-17 14:36:07,633 - 📖 [191/216] Seizure
+2025-07-17 14:36:09,897 - 📖 [192/216] Sensorineural Hearing Loss
+2025-07-17 14:36:12,478 - 📖 [193/216] Sepsis
+2025-07-17 14:36:14,954 - 📖 [194/216] Shingles
+2025-07-17 14:36:17,471 - 📖 [195/216] Shock
+2025-07-17 14:36:20,504 - 📖 [196/216] Sleep Apnea
+2025-07-17 14:36:23,269 - 📖 [197/216] Sleep Deprivation
+2025-07-17 14:36:25,724 - 📖 [198/216] Spinal Cord Injury
+2025-07-17 14:36:28,428 - 📖 [199/216] Sprain
+2025-07-17 14:36:31,131 - 📖 [200/216] Status Epilepticus
+2025-07-17 14:36:33,650 - ✅ Completed 200/216 topics
+2025-07-17 14:36:33,650 - 📖 [201/216] Stress Ulcer
+2025-07-17 14:36:36,115 - 📖 [202/216] Stroke
+2025-07-17 14:36:38,845 - 📖 [203/216] Testicular Injury
+2025-07-17 14:36:41,328 - 📖 [204/216] Tracheal Stenosis
+2025-07-17 14:36:43,798 - 📖 [205/216] Transplantation/Graft Injury
+2025-07-17 14:36:46,236 - 📖 [206/216] Traumatic Brain Injury
+2025-07-17 14:36:48,679 - 📖 [207/216] Ulcer
+2025-07-17 14:36:50,948 - 📖 [208/216] Ulcerative Colitis
+2025-07-17 14:36:53,657 - 📖 [209/216] Unstable Angina
+2025-07-17 14:36:56,277 - 📖 [210/216] Upper Respiratory Tract Infection
+2025-07-17 14:36:58,802 - ✅ Completed 210/216 topics
+2025-07-17 14:36:58,802 - 📖 [211/216] Ureteral Obstruction
+2025-07-17 14:37:01,378 - 📖 [212/216] Uveal Injury
+2025-07-17 14:37:04,020 - 📖 [213/216] Vascular Dysfunction
+2025-07-17 14:37:06,637 - 📖 [214/216] Vasculitis
+2025-07-17 14:37:09,118 - 📖 [215/216] Ventilator-Induced Lung Injury
+2025-07-17 14:37:11,559 - 📖 [216/216] Vitiligo
+2025-07-17 14:37:14,206 - 💾 Saved 216 topics to topics_content_20250717_143714.csv
+2025-07-17 14:37:14,221 - 💾 Saved 216 topics to topics_studies_20250717_143714.csv

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydrogen Studies Topics Extractor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .info-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #007bff;
+        }
+
+        .info-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .info-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-section li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-section li:last-child {
+            border-bottom: none;
+        }
+
+        .info-section li::before {
+            content: "✓";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,123,255,0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40,167,69,0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220,53,69,0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .progress-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .progress-container.active {
+            display: block;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .log-container {
+            background: #2c3e50;
+            color: #ecf0f1;
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .log-entry {
+            margin-bottom: 8px;
+            padding: 5px 0;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+
+        .log-entry.info {
+            color: #3498db;
+        }
+
+        .log-entry.success {
+            color: #2ecc71;
+        }
+
+        .log-entry.warning {
+            color: #f39c12;
+        }
+
+        .log-entry.error {
+            color: #e74c3c;
+        }
+
+        .results-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #007bff;
+        }
+
+        .result-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .result-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-running {
+            background: #f39c12;
+            animation: pulse 1.5s infinite;
+        }
+
+        .status-idle {
+            background: #95a5a6;
+        }
+
+        .status-success {
+            background: #2ecc71;
+        }
+
+        .status-error {
+            background: #e74c3c;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔬 Hydrogen Studies Topics Extractor</h1>
+            <p>Extract all topics and their associated study links from hydrogenstudies.com/topics/</p>
+        </div>
+
+        <div class="content">
+            <div class="info-section">
+                <h3>What this tool does:</h3>
+                <ul>
+                    <li>Scrapes the topics page at hydrogenstudies.com/topics/</li>
+                    <li>Identifies all topic categories and sections</li>
+                    <li>Extracts study links associated with each topic</li>
+                    <li>Generates a CSV file with Topic, Study Title, and Study URL columns</li>
+                    <li>Preserves all links to individual studies</li>
+                    <li>Handles CORS issues using a proxy service</li>
+                </ul>
+            </div>
+
+            <div class="controls">
+                <button id="startBtn" class="btn btn-primary">
+                    <span class="loading" id="loadingSpinner" style="display: none;"></span>
+                    🚀 Start Extraction
+                </button>
+                <button id="stopBtn" class="btn btn-danger" disabled>
+                    ⏹️ Stop Extraction
+                </button>
+                <button id="downloadBtn" class="btn btn-success" disabled>
+                    📥 Download CSV
+                </button>
+            </div>
+
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Ready to start...</div>
+            </div>
+
+            <div class="log-container" id="logContainer">
+                <div class="log-entry info">[System] Topics Extractor initialized and ready</div>
+                <div class="log-entry info">[System] Target URL: https://hydrogenstudies.com/topics/</div>
+            </div>
+
+            <div class="results-section" id="resultsSection">
+                <h3>📊 Extraction Results</h3>
+                <div class="results-grid" id="resultsGrid">
+                    <!-- Results will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="topics-extractor.js"></script>
+    <script>
+        // Global variables
+        let extractor = null;
+        let extractedData = null;
+        let csvContent = null;
+
+        // DOM elements
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const logContainer = document.getElementById('logContainer');
+        const resultsSection = document.getElementById('resultsSection');
+        const resultsGrid = document.getElementById('resultsGrid');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        // Initialize the extractor
+        function initializeExtractor() {
+            extractor = new TopicsExtractor();
+            
+            // Set up event handlers
+            extractor.onProgress = updateProgress;
+            extractor.onLog = addLogEntry;
+        }
+
+        // Update progress bar
+        function updateProgress(percentage, current, total, message) {
+            progressFill.style.width = `${percentage}%`;
+            progressText.textContent = message || `Progress: ${percentage}%`;
+        }
+
+        // Add log entry
+        function addLogEntry(message, type = 'info') {
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry ${type}`;
+            logEntry.textContent = message;
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+
+        // Show results
+        function showResults(data) {
+            resultsSection.classList.add('active');
+            
+            const totalStudies = data.reduce((sum, topic) => sum + topic.studyLinks.length, 0);
+            
+            resultsGrid.innerHTML = `
+                <div class="result-card">
+                    <h4>Topics Found</h4>
+                    <div class="result-value">${data.length}</div>
+                </div>
+                <div class="result-card">
+                    <h4>Total Studies</h4>
+                    <div class="result-value">${totalStudies}</div>
+                </div>
+                <div class="result-card">
+                    <h4>Average Studies per Topic</h4>
+                    <div class="result-value">${data.length > 0 ? Math.round(totalStudies / data.length) : 0}</div>
+                </div>
+            `;
+        }
+
+        // Start extraction
+        async function startExtraction() {
+            if (!extractor) {
+                initializeExtractor();
+            }
+
+            // Update UI
+            startBtn.disabled = true;
+            stopBtn.disabled = false;
+            downloadBtn.disabled = true;
+            progressContainer.classList.add('active');
+            loadingSpinner.style.display = 'inline-block';
+            resultsSection.classList.remove('active');
+
+            addLogEntry('Starting topics extraction...', 'info');
+
+            try {
+                const result = await extractor.startExtraction();
+                
+                if (result.success) {
+                    extractedData = result.data;
+                    csvContent = extractor.convertToCSV(extractedData);
+                    
+                    addLogEntry(`✅ Extraction completed successfully!`, 'success');
+                    addLogEntry(`📊 Found ${result.topicsCount} topics with ${result.totalStudies} total studies`, 'success');
+                    addLogEntry(`📁 CSV file: ${result.filename}`, 'success');
+                    
+                    showResults(result.data);
+                    downloadBtn.disabled = false;
+                } else {
+                    addLogEntry(`❌ Extraction failed: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                addLogEntry(`❌ Unexpected error: ${error.message}`, 'error');
+            } finally {
+                // Reset UI
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+                loadingSpinner.style.display = 'none';
+            }
+        }
+
+        // Stop extraction
+        function stopExtraction() {
+            if (extractor) {
+                extractor.stopExtraction();
+                addLogEntry('⏹️ Extraction stopped by user', 'warning');
+            }
+            
+            // Reset UI
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+            loadingSpinner.style.display = 'none';
+        }
+
+        // Download CSV
+        function downloadCSV() {
+            if (csvContent) {
+                const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                const filename = `hydrogen-studies-topics-${timestamp}.csv`;
+                
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                const url = URL.createObjectURL(blob);
+                
+                link.setAttribute('href', url);
+                link.setAttribute('download', filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                addLogEntry(`📥 CSV file downloaded: ${filename}`, 'success');
+            }
+        }
+
+        // Event listeners
+        startBtn.addEventListener('click', startExtraction);
+        stopBtn.addEventListener('click', stopExtraction);
+        downloadBtn.addEventListener('click', downloadCSV);
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeExtractor();
+            addLogEntry('🎯 Ready to extract topics from hydrogenstudies.com/topics/', 'info');
+        });
+    </script>
+</body>
+</html> 

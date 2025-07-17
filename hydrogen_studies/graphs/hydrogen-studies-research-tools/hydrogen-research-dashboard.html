@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hydrogen Studies Research Dashboard - Secondary & Tertiary Research</title>
+    <title>Hydrogen Studies Research Dashboard - Updated Primary Studies with New Protocols</title>
     
     <!-- External Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.4.1/papaparse.min.js"></script>
@@ -598,10 +598,10 @@
         <div id="dashboard" class="page active">
             <div class="hero">
                 <h1>Hydrogen Studies Research Database</h1>
-                <p>Comprehensive analysis of secondary and tertiary hydrogen research studies</p>
+                <p>Updated with New Protocols on Names - Primary Research Studies: 1,689 studies | Additional Resources: 459 materials</p>
                 <div id="loadingState" class="loading">
                     <div class="loading-spinner"></div>
-                    <p>Loading research data...</p>
+                    <p>Loading updated research data with new protocols...</p>
                 </div>
             </div>
 
@@ -609,11 +609,11 @@
             <div id="statsGrid" class="stats-grid" style="display: none;">
                 <div class="stat-card">
                     <div class="stat-number" id="totalStudies">-</div>
-                    <div class="stat-label">Total Studies</div>
+                    <div class="stat-label">Primary Studies</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" id="uniqueTitles">-</div>
-                    <div class="stat-label">Unique Titles</div>
+                    <div class="stat-number" id="additionalResources">-</div>
+                    <div class="stat-label">Additional Resources</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number" id="uniqueAuthors">-</div>
@@ -840,49 +840,48 @@
                 // Create data processor
                 dataProcessor = new HydrogenDataProcessor();
 
-                // Load all three CSV files
-                const csvFiles = [
-                    '../Hydrogen Research Database - Primary.csv',
-                    '../Hydrogen Research Database - Engineering.csv',
-                    '../Hydrogen Research Database - Secondary, Tertiary.csv'
-                ];
+                // Load Primary Studies (main database) - Updated with new protocols on names
+                const primaryCSVFile = 'Hydrogen Research Database - Primary.csv';
                 
-                let allStudies = [];
+                console.log(`Loading primary studies: ${primaryCSVFile}...`);
+                const response = await fetch(primaryCSVFile);
                 
-                for (const csvFile of csvFiles) {
-                    try {
-                        console.log(`Loading ${csvFile}...`);
-                        const response = await fetch(csvFile);
-                        
-                        if (!response.ok) {
-                            console.warn(`Failed to load ${csvFile}: ${response.status}`);
-                            continue;
+                if (!response.ok) {
+                    throw new Error(`Failed to load primary studies: ${response.status}`);
+                }
+                
+                const csvData = await response.text();
+                const result = await dataProcessor.loadDataFromCSV(csvData);
+                
+                if (!result.success) {
+                    throw new Error(`Failed to process primary studies: ${result.error}`);
+                }
+                
+                // Store primary studies count for display
+                window.primaryStudiesCount = dataProcessor.studies.length;
+                
+                // Load Additional Resources (for reference, not counted in main stats)
+                try {
+                    const additionalCSVFile = 'Hydrogen_Research_Database_Additional_Resources.csv';
+                    console.log(`Loading additional resources: ${additionalCSVFile}...`);
+                    const additionalResponse = await fetch(additionalCSVFile);
+                    
+                    if (additionalResponse.ok) {
+                        const additionalCSVData = await additionalResponse.text();
+                        const additionalResult = await dataProcessor.loadDataFromCSV(additionalCSVData);
+                        if (additionalResult.success) {
+                            window.additionalResourcesCount = additionalResult.studiesCount;
+                            console.log(`Loaded ${additionalResult.studiesCount} additional resources`);
                         }
-                        
-                        const csvData = await response.text();
-                        const result = await dataProcessor.loadDataFromCSV(csvData);
-                        
-                        if (result.success) {
-                            allStudies = allStudies.concat(dataProcessor.studies);
-                            console.log(`Loaded ${result.studiesCount} studies from ${csvFile}`);
-                        } else {
-                            console.warn(`Failed to process ${csvFile}:`, result.error);
-                        }
-                    } catch (error) {
-                        console.warn(`Error loading ${csvFile}:`, error.message);
                     }
+                } catch (error) {
+                    console.warn('Could not load additional resources:', error.message);
+                    window.additionalResourcesCount = 0;
                 }
                 
-                if (allStudies.length === 0) {
-                    throw new Error('Failed to load any CSV files. Please ensure you are running this through a web server.');
-                }
-                
-                // Remove duplicates and update processor
-                const uniqueStudies = removeDuplicates(allStudies);
-                dataProcessor.studies = uniqueStudies;
                 dataProcessor.generateStatistics();
 
-                console.log(`Loaded ${uniqueStudies.length} unique studies from all CSV files`);
+                console.log(`Loaded ${dataProcessor.studies.length} primary studies`);
                 console.log('Statistics:', dataProcessor.exportStatistics());
                 hideLoading();
                 updateStatistics();
@@ -895,28 +894,7 @@
             }
         }
 
-        function removeDuplicates(studies) {
-            const seen = new Set();
-            const uniqueStudies = [];
-
-            studies.forEach(study => {
-                const key = createStudyKey(study);
-                if (!seen.has(key)) {
-                    seen.add(key);
-                    uniqueStudies.push(study);
-                }
-            });
-
-            return uniqueStudies;
-        }
-
-        function createStudyKey(study) {
-            const title = (study.title || '').toLowerCase().trim();
-            const year = study.year || '';
-            const firstAuthor = (study.firstAuthor || '').toLowerCase().trim();
-            
-            return `${title}_${year}_${firstAuthor}`;
-        }
+        // Note: Deduplication functions removed since we now use the pre-deduplicated clean CSV file
 
         /**
          * Hide loading state and show content
@@ -955,11 +933,19 @@
             
             // Safely update statistics with fallback values
             document.getElementById('totalStudies').textContent = (stats.totalStudies || 0).toLocaleString();
-            document.getElementById('uniqueTitles').textContent = (stats.uniqueTitles || 0).toLocaleString();
+            document.getElementById('additionalResources').textContent = (window.additionalResourcesCount || 0).toLocaleString();
             document.getElementById('uniqueAuthors').textContent = (stats.uniqueAuthors || 0).toLocaleString();
             document.getElementById('withHyperlinks').textContent = (stats.withHyperlinks || 0).toLocaleString();
             document.getElementById('topicsCount').textContent = stats.topicsCount || 0;
             document.getElementById('countriesCount').textContent = stats.countriesCount || 0;
+            
+            // Update hero description with dynamic counts
+            const heroDescription = document.querySelector('.hero p');
+            if (heroDescription) {
+                const primaryCount = window.primaryStudiesCount || stats.totalStudies || 0;
+                const additionalCount = window.additionalResourcesCount || 0;
+                heroDescription.textContent = `Updated with New Protocols on Names - Primary Research Studies: ${primaryCount.toLocaleString()} studies | Additional Resources: ${additionalCount.toLocaleString()} materials`;
+            }
         }
 
         /**

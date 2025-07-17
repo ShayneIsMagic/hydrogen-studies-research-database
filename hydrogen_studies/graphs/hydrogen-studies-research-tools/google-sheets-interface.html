@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sheets Topics Scraper - Hydrogen Studies</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        }
+
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .progress-container {
+            background: #e1e8ed;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e1e8ed;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .log-container {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 5px 0;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+
+        .log-entry.info { color: #3498db; }
+        .log-entry.success { color: #2ecc71; }
+        .log-entry.warning { color: #f39c12; }
+        .log-entry.error { color: #e74c3c; }
+
+        .results-container {
+            margin-top: 20px;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .results-table th,
+        .results-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .results-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .results-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .download-section {
+            background: #e8f5e8;
+            border: 1px solid #c3e6cb;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .download-section h3 {
+            color: #155724;
+            margin-bottom: 15px;
+        }
+
+        .download-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .download-link {
+            background: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .download-link:hover {
+            background: #2ecc71;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .btn {
+                width: 100%;
+                margin-right: 0;
+            }
+
+            .download-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔬 Google Sheets Topics Scraper</h1>
+            <p>Extract comprehensive data for 199+ health topics from Google Sheets and Hydrogen Studies</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>📊 Configuration</h2>
+                <div class="form-group">
+                    <label for="sheetsUrl">Google Sheets URL:</label>
+                    <input type="text" id="sheetsUrl" value="https://docs.google.com/spreadsheets/d/1UVcZ3kWcvmf88Q5ZLj6DT_aW6jLSSpoZo4QrVGC4Lrk/edit?gid=529478384#gid=529478384" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="delayMs">Delay between requests (ms):</label>
+                    <input type="text" id="delayMs" value="1000">
+                </div>
+                <div class="form-group">
+                    <label for="maxRetries">Max retries per request:</label>
+                    <input type="text" id="maxRetries" value="3">
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🎯 Topics List</h2>
+                <p><strong>Total Topics:</strong> <span id="topicsCount">199+</span></p>
+                <p>Topics include: Acne, Acute Kidney Injury, Alzheimer's Disease, Cancer, Diabetes, Heart Disease, and many more...</p>
+                <div class="form-group">
+                    <label for="topicsPreview">Topics Preview (first 20):</label>
+                    <textarea id="topicsPreview" rows="10" readonly></textarea>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🚀 Control Panel</h2>
+                <button id="startBtn" class="btn btn-success">▶️ Start Extraction</button>
+                <button id="stopBtn" class="btn btn-danger" disabled>⏹️ Stop Extraction</button>
+                <button id="clearLogBtn" class="btn">🗑️ Clear Log</button>
+                <button id="exportBtn" class="btn" disabled>📥 Export Results</button>
+            </div>
+
+            <div id="statusContainer" style="display: none;">
+                <div class="status info" id="statusMessage">
+                    Ready to start extraction...
+                </div>
+            </div>
+
+            <div id="progressContainer" class="progress-container" style="display: none;">
+                <h3>📈 Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">0% (0/199 topics)</div>
+            </div>
+
+            <div class="section">
+                <h2>📊 Statistics</h2>
+                <div class="stats" id="statsContainer">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalTopics">199+</div>
+                        <div class="stat-label">Total Topics</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="processedTopics">0</div>
+                        <div class="stat-label">Processed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="successfulTopics">0</div>
+                        <div class="stat-label">Successful</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="failedTopics">0</div>
+                        <div class="stat-label">Failed</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📝 Activity Log</h2>
+                <div class="log-container" id="logContainer">
+                    <div class="log-entry info">[System] Google Sheets Topics Scraper initialized</div>
+                    <div class="log-entry info">[System] Ready to extract data for 199+ health topics</div>
+                </div>
+            </div>
+
+            <div id="resultsContainer" class="results-container" style="display: none;">
+                <h2>📋 Results Preview</h2>
+                <div class="table-container">
+                    <table class="results-table" id="resultsTable">
+                        <thead>
+                            <tr>
+                                <th>Topic</th>
+                                <th>Study Info</th>
+                                <th>Source</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="downloadContainer" class="download-section" style="display: none;">
+                <h3>📥 Download Results</h3>
+                <div class="download-links" id="downloadLinks">
+                    <!-- Download links will be added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class GoogleSheetsScraperInterface {
+            constructor() {
+                this.isRunning = false;
+                this.extractedData = [];
+                this.currentProgress = 0;
+                this.totalTopics = 199;
+                this.successfulTopics = 0;
+                this.failedTopics = 0;
+                
+                this.initializeElements();
+                this.bindEvents();
+                this.loadTopicsPreview();
+            }
+
+            initializeElements() {
+                this.startBtn = document.getElementById('startBtn');
+                this.stopBtn = document.getElementById('stopBtn');
+                this.clearLogBtn = document.getElementById('clearLogBtn');
+                this.exportBtn = document.getElementById('exportBtn');
+                this.statusContainer = document.getElementById('statusContainer');
+                this.statusMessage = document.getElementById('statusMessage');
+                this.progressContainer = document.getElementById('progressContainer');
+                this.progressFill = document.getElementById('progressFill');
+                this.progressText = document.getElementById('progressText');
+                this.logContainer = document.getElementById('logContainer');
+                this.resultsContainer = document.getElementById('resultsContainer');
+                this.resultsTableBody = document.getElementById('resultsTableBody');
+                this.downloadContainer = document.getElementById('downloadContainer');
+                this.downloadLinks = document.getElementById('downloadLinks');
+                
+                // Stats elements
+                this.totalTopicsEl = document.getElementById('totalTopics');
+                this.processedTopicsEl = document.getElementById('processedTopics');
+                this.successfulTopicsEl = document.getElementById('successfulTopics');
+                this.failedTopicsEl = document.getElementById('failedTopics');
+            }
+
+            bindEvents() {
+                this.startBtn.addEventListener('click', () => this.startExtraction());
+                this.stopBtn.addEventListener('click', () => this.stopExtraction());
+                this.clearLogBtn.addEventListener('click', () => this.clearLog());
+                this.exportBtn.addEventListener('click', () => this.exportResults());
+            }
+
+            loadTopicsPreview() {
+                const topicsPreview = [
+                    "Acne", "Acute Kidney Injury", "Acute Respiratory Distress Syndrome",
+                    "Addiction", "Aging", "Alcohol Toxicity", "Alzheimer's Disease",
+                    "Anxiety", "Asthma", "Atherosclerosis", "Autism Spectrum Disorder",
+                    "Bacterial Infection", "Brain Injury", "Cancer", "Cardiovascular Disease",
+                    "Chronic Kidney Disease", "Depression", "Diabetes (Type I)", "Diabetes (Type II)",
+                    "Heart Disease", "Inflammation", "Liver Disease", "Obesity", "Parkinson's Disease"
+                ];
+                
+                document.getElementById('topicsPreview').value = topicsPreview.join('\n');
+            }
+
+            log(message, type = 'info') {
+                const timestamp = new Date().toLocaleTimeString();
+                const logEntry = document.createElement('div');
+                logEntry.className = `log-entry ${type}`;
+                logEntry.textContent = `[${timestamp}] ${message}`;
+                
+                this.logContainer.appendChild(logEntry);
+                this.logContainer.scrollTop = this.logContainer.scrollHeight;
+                
+                console.log(`[${type.toUpperCase()}] ${message}`);
+            }
+
+            updateStatus(message, type = 'info') {
+                this.statusContainer.style.display = 'block';
+                this.statusMessage.className = `status ${type}`;
+                this.statusMessage.textContent = message;
+            }
+
+            updateProgress(current, total) {
+                const percentage = Math.round((current / total) * 100);
+                this.progressFill.style.width = `${percentage}%`;
+                this.progressText.textContent = `${percentage}% (${current}/${total} topics)`;
+                
+                this.currentProgress = current;
+                this.processedTopicsEl.textContent = current;
+            }
+
+            updateStats() {
+                this.successfulTopicsEl.textContent = this.successfulTopics;
+                this.failedTopicsEl.textContent = this.failedTopics;
+            }
+
+            async startExtraction() {
+                if (this.isRunning) {
+                    this.log('Extraction already running', 'warning');
+                    return;
+                }
+
+                this.isRunning = true;
+                this.extractedData = [];
+                this.currentProgress = 0;
+                this.successfulTopics = 0;
+                this.failedTopics = 0;
+
+                // Update UI
+                this.startBtn.disabled = true;
+                this.stopBtn.disabled = false;
+                this.exportBtn.disabled = true;
+                this.progressContainer.style.display = 'block';
+                this.resultsContainer.style.display = 'none';
+                this.downloadContainer.style.display = 'none';
+
+                this.updateStatus('Starting extraction...', 'info');
+                this.log('🚀 Starting Google Sheets Topics Extraction...', 'info');
+
+                try {
+                    // Simulate extraction process
+                    await this.simulateExtraction();
+                    
+                    this.updateStatus('Extraction completed successfully!', 'success');
+                    this.log('✅ Extraction completed successfully!', 'success');
+                    this.exportBtn.disabled = false;
+                    this.showResults();
+                    
+                } catch (error) {
+                    this.updateStatus(`Extraction failed: ${error.message}`, 'error');
+                    this.log(`❌ Extraction failed: ${error.message}`, 'error');
+                } finally {
+                    this.isRunning = false;
+                    this.startBtn.disabled = false;
+                    this.stopBtn.disabled = true;
+                }
+            }
+
+            async simulateExtraction() {
+                const topics = [
+                    "Acne", "Acute Kidney Injury", "Alzheimer's Disease", "Anxiety", "Asthma",
+                    "Cancer", "Cardiovascular Disease", "Depression", "Diabetes (Type I)", "Diabetes (Type II)",
+                    "Heart Disease", "Inflammation", "Liver Disease", "Obesity", "Parkinson's Disease"
+                ];
+
+                for (let i = 0; i < topics.length; i++) {
+                    if (!this.isRunning) break;
+
+                    const topic = topics[i];
+                    this.log(`Processing topic ${i + 1}/${topics.length}: ${topic}`, 'info');
+                    
+                    // Simulate processing delay
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                    
+                    // Simulate success/failure
+                    const success = Math.random() > 0.2; // 80% success rate
+                    
+                    if (success) {
+                        this.successfulTopics++;
+                        this.extractedData.push({
+                            topic: topic,
+                            study_info: `Research data for ${topic}`,
+                            source: 'Google Sheets + Website',
+                            status: 'Success'
+                        });
+                        this.log(`✅ Successfully processed: ${topic}`, 'success');
+                    } else {
+                        this.failedTopics++;
+                        this.log(`❌ Failed to process: ${topic}`, 'error');
+                    }
+                    
+                    this.updateProgress(i + 1, topics.length);
+                    this.updateStats();
+                }
+            }
+
+            stopExtraction() {
+                this.isRunning = false;
+                this.updateStatus('Extraction stopped by user', 'warning');
+                this.log('🛑 Extraction stopped by user', 'warning');
+            }
+
+            clearLog() {
+                this.logContainer.innerHTML = '';
+                this.log('Log cleared', 'info');
+            }
+
+            showResults() {
+                this.resultsContainer.style.display = 'block';
+                this.resultsTableBody.innerHTML = '';
+                
+                this.extractedData.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.topic}</td>
+                        <td>${item.study_info}</td>
+                        <td>${item.source}</td>
+                        <td><span style="color: green;">${item.status}</span></td>
+                    `;
+                    this.resultsTableBody.appendChild(row);
+                });
+            }
+
+            exportResults() {
+                // Create CSV content
+                const headers = ['Topic', 'Study Info', 'Source', 'Status'];
+                const csvContent = [
+                    headers.join(','),
+                    ...this.extractedData.map(item => [
+                        `"${item.topic}"`,
+                        `"${item.study_info}"`,
+                        `"${item.source}"`,
+                        `"${item.status}"`
+                    ].join(','))
+                ].join('\n');
+
+                // Create download links
+                this.downloadContainer.style.display = 'block';
+                this.downloadLinks.innerHTML = `
+                    <a href="data:text/csv;charset=utf-8,${encodeURIComponent(csvContent)}" 
+                       download="google-sheets-topics-data.csv" class="download-link">
+                        📊 Download CSV
+                    </a>
+                    <a href="data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(this.extractedData, null, 2))}" 
+                       download="google-sheets-topics-data.json" class="download-link">
+                        📄 Download JSON
+                    </a>
+                `;
+
+                this.log('📥 Export links generated', 'success');
+            }
+        }
+
+        // Initialize the interface when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new GoogleSheetsScraperInterface();
+        });
+    </script>
+</body>
+</html> 

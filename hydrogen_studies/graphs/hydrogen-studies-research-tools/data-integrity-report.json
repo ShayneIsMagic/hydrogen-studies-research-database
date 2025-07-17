@@ -1,0 +1,9 @@
+{
+  "originalTotal": 1908,
+  "cleanTotal": 1903,
+  "duplicatesFound": 0,
+  "dataLoss": false,
+  "issues": [
+    "Link count mismatch: 1908 vs 1903"
+  ]
+}

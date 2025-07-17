@@ -1,0 +1,21 @@
+Hydrogen Studies Topic Extraction Summary
+==================================================
+
+Extraction Date: 2025-07-17 14:08:56
+Total Topics: 5
+
+Topics with Content:
+--------------------
+Acne: 1848 characters
+Acute Kidney Injury: 4669 characters
+Acute Respiratory Distress Syndrome: 1499 characters
+Acute Tubuluar Necrosis: 1357 characters
+Addiction: 2596 characters
+
+Topics with Studies:
+--------------------
+Acne: 3 studies
+Acute Kidney Injury: 10 studies
+Acute Respiratory Distress Syndrome: 2 studies
+Acute Tubuluar Necrosis: 1 studies
+Addiction: 4 studies

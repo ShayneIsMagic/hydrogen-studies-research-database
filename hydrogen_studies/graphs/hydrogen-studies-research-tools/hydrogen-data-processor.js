@@ -101,7 +101,7 @@ class HydrogenDataProcessor {
             doi: (row['DOI/PMID/Link'] || row.doi || '').trim(),
             abstract: (row.Abstract || row.abstract || '').trim(),
             designation: (row.Designation || row.designation || '').trim(),
-            topic: (row.Topic || row.topic || '').trim(),
+            topic: (row['Primary Topic'] || row['Topic'] || row.topic || '').trim(),
             country: (row.Country || row.country || '').trim(),
             firstAuthor: (row['First Author'] || row.firstAuthor || '').trim(),
             otherAuthors: this.parseAuthors(row['Other Authors'] || row.otherAuthors || ''),

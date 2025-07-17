@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Updated Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.4.1/papaparse.min.js"></script>
+    <script src="hydrogen-data-processor.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .result { margin: 10px 0; padding: 10px; background: #f0f0f0; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>Test Updated Dashboard Database Loading</h1>
+    <div id="results"></div>
+
+    <script>
+        async function testDatabaseLoading() {
+            const resultsDiv = document.getElementById('results');
+            
+            try {
+                // Test loading the updated database
+                const dataProcessor = new HydrogenDataProcessor();
+                const csvFile = 'Hydrogen Research Database - Primary.csv';
+                
+                resultsDiv.innerHTML += `<div class="result">Loading database: ${csvFile}</div>`;
+                
+                const response = await fetch(csvFile);
+                if (!response.ok) {
+                    throw new Error(`Failed to load database: ${response.status}`);
+                }
+                
+                const csvData = await response.text();
+                const result = await dataProcessor.loadDataFromCSV(csvData);
+                
+                if (!result.success) {
+                    throw new Error(`Failed to process database: ${result.error}`);
+                }
+                
+                resultsDiv.innerHTML += `<div class="result success">
+                    ✅ Successfully loaded ${result.studiesCount} studies from updated database
+                </div>`;
+                
+                // Check for new 2025 studies
+                const studies2025 = dataProcessor.studies.filter(study => study.year === 2025);
+                resultsDiv.innerHTML += `<div class="result success">
+                    ✅ Found ${studies2025.length} studies from 2025 (new protocols)
+                </div>`;
+                
+                // Show some 2025 study titles
+                if (studies2025.length > 0) {
+                    resultsDiv.innerHTML += `<div class="result">
+                        <strong>Sample 2025 Studies:</strong><br>
+                        ${studies2025.slice(0, 3).map(study => 
+                            `• ${study.title} (${study.firstAuthor})`
+                        ).join('<br>')}
+                    </div>`;
+                }
+                
+                // Show statistics
+                const stats = dataProcessor.exportStatistics();
+                resultsDiv.innerHTML += `<div class="result success">
+                    <strong>Database Statistics:</strong><br>
+                    • Total Studies: ${stats.totalStudies}<br>
+                    • Year Range: ${stats.yearRange?.earliest} - ${stats.yearRange?.latest}<br>
+                    • Countries: ${stats.countriesCount}<br>
+                    • Topics: ${stats.topicsCount}
+                </div>`;
+                
+            } catch (error) {
+                resultsDiv.innerHTML += `<div class="result error">
+                    ❌ Error: ${error.message}
+                </div>`;
+            }
+        }
+        
+        // Run test when page loads
+        document.addEventListener('DOMContentLoaded', testDatabaseLoading);
+    </script>
+</body>
+</html> 
